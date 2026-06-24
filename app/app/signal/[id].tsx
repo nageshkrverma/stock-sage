@@ -44,6 +44,7 @@ export default function SignalDetailScreen() {
 
   const isBuy = signal.signal_type === 'BUY'
   const entryMid = (signal.entry.low + signal.entry.high) / 2
+  const [tradeType, setTradeType] = useState<'BUY' | 'SHORT'>(isBuy ? 'BUY' : 'SHORT')
 
   async function handleAddTrade() {
     const price = parseFloat(entryPrice)
@@ -64,6 +65,7 @@ export default function SignalDetailScreen() {
       targets: signal.targets,
       holding_period: signal.holding_period,
       notes,
+      trade_type: tradeType,
     })
     setShowAddTrade(false)
     Alert.alert('Trade Added', `${signal.symbol} added to My Trades`)
@@ -212,8 +214,28 @@ export default function SignalDetailScreen() {
         >
           <View style={styles.bottomSheet} onStartShouldSetResponder={() => true}>
             <View style={styles.sheetHandle} />
-            <Text style={styles.sheetTitle}>Add to My Trades</Text>
+            <Text style={styles.sheetTitle}>Add to Paper Trades</Text>
             <Text style={styles.sheetSubtitle}>{signal.symbol} · {signal.name}</Text>
+
+            {/* BUY / SHORT toggle */}
+            <View style={styles.tradeTypeRow}>
+              <TouchableOpacity
+                style={[styles.tradeTypeBtn, tradeType === 'BUY' && styles.tradeTypeBuyActive]}
+                onPress={() => setTradeType('BUY')}
+              >
+                <Text style={[styles.tradeTypeTxt, tradeType === 'BUY' && { color: '#00C896', fontWeight: '800' }]}>
+                  📈  BUY / LONG
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.tradeTypeBtn, tradeType === 'SHORT' && styles.tradeTypeShortActive]}
+                onPress={() => setTradeType('SHORT')}
+              >
+                <Text style={[styles.tradeTypeTxt, tradeType === 'SHORT' && { color: '#FF4757', fontWeight: '800' }]}>
+                  📉  SELL / SHORT
+                </Text>
+              </TouchableOpacity>
+            </View>
 
             <Text style={styles.inputLabel}>Entry Price (₹)</Text>
             <TextInput
@@ -496,6 +518,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 16,
   },
+  tradeTypeRow: {
+    flexDirection: 'row', gap: 8, marginBottom: 16,
+  },
+  tradeTypeBtn: {
+    flex: 1, paddingVertical: 10, borderRadius: 10, alignItems: 'center',
+    backgroundColor: '#0A0A0F', borderWidth: 1, borderColor: '#1E1E2E',
+  },
+  tradeTypeBuyActive: { borderColor: '#00C896', backgroundColor: '#00C89615' },
+  tradeTypeShortActive: { borderColor: '#FF4757', backgroundColor: '#FF475715' },
+  tradeTypeTxt: { color: '#8B8FA8', fontSize: 13 },
   inputLabel: {
     color: '#8B8FA8',
     fontSize: 11,

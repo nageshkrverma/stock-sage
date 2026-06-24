@@ -17,14 +17,10 @@ export function formatDate(iso: string): string {
 }
 
 export function formatRelativeTime(iso: string): string {
-  const diff = Date.now() - new Date(iso).getTime()
-  const mins = Math.floor(diff / 60000)
-  if (mins < 1) return 'just now'
-  if (mins < 60) return `${mins}m ago`
-  const hrs = Math.floor(mins / 60)
-  if (hrs < 24) return `${hrs}h ago`
-  const days = Math.floor(hrs / 24)
-  return `${days}d ago`
+  const d = new Date(iso)
+  const date = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })
+  const time = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
+  return `${date}, ${time}`
 }
 
 export function formatDaysHeld(entryDate: string): string {

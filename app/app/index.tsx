@@ -71,7 +71,7 @@ export default function HomeScreen() {
         <SummaryChip label="BUY"   value={buyCount}        color="#00C896" />
         <SummaryChip label="SHORT" value={sellCount}       color="#FF4757" />
         {lastUpdated && (
-          <Text style={styles.updated}>Updated {formatRelativeTime(lastUpdated)}</Text>
+          <Text style={styles.updated}>🕐 {formatRelativeTime(lastUpdated)}</Text>
         )}
       </View>
 

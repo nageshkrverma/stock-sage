@@ -88,6 +88,7 @@ export interface TradeEntry {
   stopLoss: number
   targets: Target[]
   holding_period: string
+  trade_type?: 'BUY' | 'SHORT'
   status: 'OPEN' | 'CLOSED' | 'SL_HIT'
   exitPrice?: number
   exitDate?: string
