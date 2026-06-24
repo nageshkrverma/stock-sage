@@ -225,6 +225,12 @@ def build_signal_dict(
     trend, pattern, volume_conf, sentiment, fear_greed, rsi,
     current_price=0, day_change_pct=0,
 ):
+    def _b(v): return bool(v)  # convert numpy bool to Python bool
+    def _f(v, n=2): return round(float(v), n)  # convert numpy float to Python float
+
+    vc = volume_conf or {}
+    cp = pattern or {}
+
     return {
         "id": signal_id,
         "symbol": symbol,
@@ -236,35 +242,35 @@ def build_signal_dict(
         "holding_period": holding,
         "holding_label": holding_label,
         "entry": {
-            "low": round(entry_low, 2),
-            "high": round(entry_high, 2),
+            "low": _f(entry_low),
+            "high": _f(entry_high),
         },
-        "stop_loss": round(stop_loss, 2),
-        "stop_loss_pct": round(sl_pct, 2),
+        "stop_loss": _f(stop_loss),
+        "stop_loss_pct": _f(sl_pct),
         "targets": [
-            {"price": round(t1, 2), "pct": round(t1_pct, 2), "label": "Target 1"},
-            {"price": round(t2, 2), "pct": round(t2_pct, 2), "label": "Target 2"},
+            {"price": _f(t1), "pct": _f(t1_pct), "label": "Target 1"},
+            {"price": _f(t2), "pct": _f(t2_pct), "label": "Target 2"},
         ],
         "expected_profit": expected_profit,
-        "risk_reward": rr,
-        "confidence": confidence,
+        "risk_reward": _f(rr),
+        "confidence": int(confidence),
         "zone": {
             "type": zone["type"],
-            "top": round(zone["top"], 2),
-            "bottom": round(zone["bottom"], 2),
-            "strength_score": round(zone.get("strength_score", 0), 1),
-            "fresh": zone.get("fresh", False),
-            "origin_date": zone.get("origin_date", ""),
-            "touches": zone.get("touches", 0),
+            "top": _f(zone["top"]),
+            "bottom": _f(zone["bottom"]),
+            "strength_score": _f(zone.get("strength_score", 0), 1),
+            "fresh": _b(zone.get("fresh", False)),
+            "origin_date": str(zone.get("origin_date", "")),
+            "touches": int(zone.get("touches", 0)),
         },
         "trend_bias": trend,
-        "candlestick_pattern": pattern,
-        "volume_confirmation": volume_conf,
+        "candlestick_pattern": {k: (bool(v) if isinstance(v, (bool,)) else (float(v) if hasattr(v, '__float__') else v)) for k, v in cp.items()} if cp else None,
+        "volume_confirmation": {"ratio": _f(vc.get("ratio", 0)), "confirmed": _b(vc.get("confirmed", False))} if vc else {},
         "psychology": psychology,
         "sentiment": sentiment,
-        "fear_greed_position": fear_greed,
+        "fear_greed_position": _f(fear_greed),
         "disqualifiers": disqualifiers,
-        "rsi": round(rsi, 2),
-        "current_price": round(current_price, 2),
-        "day_change_pct": round(day_change_pct, 2),
+        "rsi": _f(rsi),
+        "current_price": _f(current_price),
+        "day_change_pct": _f(day_change_pct),
     }
