@@ -99,8 +99,9 @@ def _build_signal_for_zone(
     structure = check_structure_break(daily_df)
     psychology_signals, disqualifiers = analyze_psychology(daily_df, zone, rsi)
 
-    # Skip if any disqualifier present
-    if disqualifiers:
+    # Skip only hard disqualifiers (FOMO + EUPHORIA together)
+    hard_disqualified = len(disqualifiers) >= 2
+    if hard_disqualified:
         return None
 
     # Entry zone
