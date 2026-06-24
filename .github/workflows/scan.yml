@@ -32,8 +32,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          cp data/signals.json /tmp/signals.json
+          cp data/signals_history.json /tmp/signals_history.json
           git fetch origin main
-          git rebase origin/main
+          git reset --hard origin/main
+          cp /tmp/signals.json data/signals.json
+          cp /tmp/signals_history.json data/signals_history.json
           git add data/signals.json data/signals_history.json
           git diff --cached --quiet || git commit -m "signals: $(date +'%Y-%m-%d')"
           git push origin main
