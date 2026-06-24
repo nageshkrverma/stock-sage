@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "StockSage",
+    "slug": "stocksage",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0A0A0F"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.stocksage.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0A0F"
+      },
+      "package": "com.stocksage.app"
+    },
+    "scheme": "stocksage",
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}

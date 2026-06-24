@@ -1,0 +1,524 @@
+SYMBOL,NAME,SECTOR,MARKET_CAP
+RELIANCE,Reliance Industries Ltd,Energy,Large
+TCS,Tata Consultancy Services Ltd,IT,Large
+HDFCBANK,HDFC Bank Ltd,Banking,Large
+INFY,Infosys Ltd,IT,Large
+ICICIBANK,ICICI Bank Ltd,Banking,Large
+HINDUNILVR,Hindustan Unilever Ltd,FMCG,Large
+ITC,ITC Ltd,FMCG,Large
+SBIN,State Bank of India,Banking,Large
+BHARTIARTL,Bharti Airtel Ltd,Telecom,Large
+KOTAKBANK,Kotak Mahindra Bank Ltd,Banking,Large
+LT,Larsen & Toubro Ltd,Infrastructure,Large
+AXISBANK,Axis Bank Ltd,Banking,Large
+ASIANPAINT,Asian Paints Ltd,Paints,Large
+MARUTI,Maruti Suzuki India Ltd,Automobile,Large
+TITAN,Titan Company Ltd,Consumer Durables,Large
+SUNPHARMA,Sun Pharmaceutical Industries Ltd,Pharma,Large
+ULTRACEMCO,UltraTech Cement Ltd,Cement,Large
+NESTLEIND,Nestle India Ltd,FMCG,Large
+POWERGRID,Power Grid Corporation of India Ltd,Power,Large
+NTPC,NTPC Ltd,Power,Large
+BAJFINANCE,Bajaj Finance Ltd,NBFC,Large
+WIPRO,Wipro Ltd,IT,Large
+HCLTECH,HCL Technologies Ltd,IT,Large
+ONGC,Oil and Natural Gas Corporation Ltd,Oil & Gas,Large
+COALINDIA,Coal India Ltd,Mining,Large
+ADANIENT,Adani Enterprises Ltd,Conglomerate,Large
+ADANIPORTS,Adani Ports and Special Economic Zone Ltd,Infrastructure,Large
+JSWSTEEL,JSW Steel Ltd,Metals,Large
+TATASTEEL,Tata Steel Ltd,Metals,Large
+HINDALCO,Hindalco Industries Ltd,Metals,Large
+BAJAJFINSV,Bajaj Finserv Ltd,Financial Services,Large
+TECHM,Tech Mahindra Ltd,IT,Large
+GRASIM,Grasim Industries Ltd,Cement,Large
+DIVISLAB,Divi's Laboratories Ltd,Pharma,Large
+DRREDDY,Dr. Reddy's Laboratories Ltd,Pharma,Large
+CIPLA,Cipla Ltd,Pharma,Large
+BRITANNIA,Britannia Industries Ltd,FMCG,Large
+DABUR,Dabur India Ltd,FMCG,Large
+MARICO,Marico Ltd,FMCG,Large
+PIDILITIND,Pidilite Industries Ltd,Chemicals,Large
+BERGERPAINTS,Berger Paints India Ltd,Paints,Mid
+HAVELLS,Havells India Ltd,Consumer Durables,Mid
+VOLTAS,Voltas Ltd,Consumer Durables,Mid
+POLYCAB,Polycab India Ltd,Electricals,Mid
+APLAPOLLO,APL Apollo Tubes Ltd,Metals,Mid
+TATAMOTORS,Tata Motors Ltd,Automobile,Large
+M&M,Mahindra & Mahindra Ltd,Automobile,Large
+BAJAJ-AUTO,Bajaj Auto Ltd,Automobile,Large
+HEROMOTOCO,Hero MotoCorp Ltd,Automobile,Large
+EICHERMOT,Eicher Motors Ltd,Automobile,Large
+TVSMOTORS,TVS Motor Company Ltd,Automobile,Mid
+ASHOKLEY,Ashok Leyland Ltd,Automobile,Mid
+MOTHERSON,Samvardhana Motherson International Ltd,Auto Ancillary,Mid
+BOSCHLTD,Bosch Ltd,Auto Ancillary,Mid
+MINDAIND,Minda Industries Ltd,Auto Ancillary,Mid
+BHEL,Bharat Heavy Electricals Ltd,Capital Goods,Mid
+SIEMENS,Siemens Ltd,Capital Goods,Mid
+ABB,ABB India Ltd,Capital Goods,Mid
+CUMMINSIND,Cummins India Ltd,Capital Goods,Mid
+THERMAX,Thermax Ltd,Capital Goods,Mid
+BPCL,Bharat Petroleum Corporation Ltd,Oil & Gas,Large
+IOC,Indian Oil Corporation Ltd,Oil & Gas,Large
+HINDPETRO,Hindustan Petroleum Corporation Ltd,Oil & Gas,Mid
+CASTROLIND,Castrol India Ltd,Oil & Gas,Mid
+GAIL,GAIL (India) Ltd,Gas,Large
+PETRONET,Petronet LNG Ltd,Gas,Mid
+MGL,Mahanagar Gas Ltd,Gas,Mid
+IGL,Indraprastha Gas Ltd,Gas,Mid
+ATGL,Adani Total Gas Ltd,Gas,Mid
+GUJGASLTD,Gujarat Gas Ltd,Gas,Mid
+TATAPOWER,Tata Power Company Ltd,Power,Mid
+ADANIGREEN,Adani Green Energy Ltd,Renewable Energy,Large
+TORNTPOWER,Torrent Power Ltd,Power,Mid
+CESC,CESC Ltd,Power,Mid
+INDIGO,InterGlobe Aviation Ltd,Aviation,Large
+IRCTC,Indian Railway Catering and Tourism Corporation Ltd,Travel,Mid
+CONCOR,Container Corporation of India Ltd,Logistics,Mid
+ZOMATO,Zomato Ltd,Consumer Internet,Large
+NYKAA,FSN E-Commerce Ventures Ltd,Consumer Internet,Mid
+PAYTM,One97 Communications Ltd,Fintech,Mid
+POLICYBZR,PB Fintech Ltd,Fintech,Mid
+DELHIVERY,Delhivery Ltd,Logistics,Mid
+HDFCLIFE,HDFC Life Insurance Company Ltd,Insurance,Large
+SBILIFE,SBI Life Insurance Company Ltd,Insurance,Large
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Insurance,Large
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Insurance,Mid
+SBICARD,SBI Cards and Payment Services Ltd,NBFC,Mid
+CHOLAFIN,Cholamandalam Investment and Finance Company Ltd,NBFC,Mid
+MUTHOOTFIN,Muthoot Finance Ltd,NBFC,Mid
+MANAPPURAM,Manappuram Finance Ltd,NBFC,Mid
+BAJAJHLDNG,Bajaj Holdings & Investment Ltd,Financial Services,Large
+PNBHOUSING,PNB Housing Finance Ltd,NBFC,Mid
+LICHSGFIN,LIC Housing Finance Ltd,NBFC,Mid
+CANFINHOME,Can Fin Homes Ltd,NBFC,Small
+HOMEFIRST,Home First Finance Company India Ltd,NBFC,Small
+AAVAS,Aavas Financiers Ltd,NBFC,Small
+BANKBARODA,Bank of Baroda,Banking,Large
+PNB,Punjab National Bank,Banking,Mid
+CANBK,Canara Bank,Banking,Mid
+UNIONBANK,Union Bank of India,Banking,Mid
+IDFCFIRSTB,IDFC First Bank Ltd,Banking,Mid
+FEDERALBNK,Federal Bank Ltd,Banking,Mid
+KARURVYSYA,Karur Vysya Bank Ltd,Banking,Small
+CITYUNIONB,City Union Bank Ltd,Banking,Small
+DCBBANK,DCB Bank Ltd,Banking,Small
+BANDHANBNK,Bandhan Bank Ltd,Banking,Mid
+RBLBANK,RBL Bank Ltd,Banking,Mid
+AUBANK,AU Small Finance Bank Ltd,Banking,Mid
+INDUSIND,IndusInd Bank Ltd,Banking,Large
+YESBANK,Yes Bank Ltd,Banking,Mid
+HDFCAMC,HDFC Asset Management Company Ltd,Financial Services,Mid
+NIPPONLIFE,Nippon Life India Asset Management Ltd,Financial Services,Mid
+UTIAMC,UTI Asset Management Company Ltd,Financial Services,Mid
+ABSLAMC,Aditya Birla Sun Life AMC Ltd,Financial Services,Mid
+360ONE,360 ONE WAM Ltd,Financial Services,Mid
+ISEC,ICICI Securities Ltd,Financial Services,Mid
+ANGELONE,Angel One Ltd,Financial Services,Mid
+MOTILALOFS,Motilal Oswal Financial Services Ltd,Financial Services,Mid
+CDSL,Central Depository Services (India) Ltd,Financial Services,Mid
+BSE,BSE Ltd,Financial Services,Mid
+MCX,Multi Commodity Exchange of India Ltd,Financial Services,Mid
+IEX,Indian Energy Exchange Ltd,Financial Services,Mid
+AUROPHARMA,Aurobindo Pharma Ltd,Pharma,Mid
+ALKEM,Alkem Laboratories Ltd,Pharma,Mid
+BIOCON,Biocon Ltd,Pharma,Mid
+GLAND,Gland Pharma Ltd,Pharma,Mid
+LAURUSLABS,Laurus Labs Ltd,Pharma,Mid
+GRANULES,Granules India Ltd,Pharma,Small
+ABBOTINDIA,Abbott India Ltd,Pharma,Mid
+PFIZER,Pfizer Ltd,Pharma,Mid
+GLAXO,GlaxoSmithKline Pharmaceuticals Ltd,Pharma,Mid
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Pharma,Mid
+AJANTPHARM,Ajanta Pharma Ltd,Pharma,Small
+IPCALAB,IPCA Laboratories Ltd,Pharma,Mid
+NATCOPHARMA,Natco Pharma Ltd,Pharma,Small
+INFOEDGE,Info Edge (India) Ltd,Consumer Internet,Mid
+MPHASIS,Mphasis Ltd,IT,Mid
+LTTS,L&T Technology Services Ltd,IT,Mid
+COFORGE,Coforge Ltd,IT,Mid
+PERSISTENT,Persistent Systems Ltd,IT,Mid
+KPITTECH,KPIT Technologies Ltd,IT,Mid
+TANLA,Tanla Platforms Ltd,IT,Small
+INTELLECT,Intellect Design Arena Ltd,IT,Small
+MASTEK,Mastek Ltd,IT,Small
+ZENSAR,Zensar Technologies Ltd,IT,Small
+TRENT,Trent Ltd,Retail,Mid
+SHOPERSTOP,Shoppers Stop Ltd,Retail,Small
+DMART,Avenue Supermarts Ltd,Retail,Large
+PAGEIND,Page Industries Ltd,Textile,Mid
+MANYAVAR,Vedant Fashions Ltd,Retail,Mid
+VEDL,Vedanta Ltd,Metals,Large
+NMDC,NMDC Ltd,Mining,Mid
+NATIONALUM,National Aluminium Company Ltd,Metals,Mid
+JSWENERGY,JSW Energy Ltd,Power,Mid
+GSPL,Gujarat State Petronet Ltd,Gas,Mid
+RAMCOCEM,Ramco Cements Ltd,Cement,Mid
+AMBUJACEM,Ambuja Cements Ltd,Cement,Large
+ACC,ACC Ltd,Cement,Mid
+SHREECEM,Shree Cement Ltd,Cement,Large
+JKCEMENT,JK Cement Ltd,Cement,Mid
+HEIDELBERG,HeidelbergCement India Ltd,Cement,Small
+BIRLACORPN,Birla Corporation Ltd,Cement,Small
+PRISMCEM,Prism Johnson Ltd,Cement,Small
+RATNAMANI,Ratnamani Metals & Tubes Ltd,Metals,Small
+CROMPTON,Crompton Greaves Consumer Electricals Ltd,Consumer Durables,Mid
+BLUESTAR,Blue Star Ltd,Consumer Durables,Mid
+WHIRLPOOL,Whirlpool of India Ltd,Consumer Durables,Mid
+KAJARIACER,Kajaria Ceramics Ltd,Building Materials,Mid
+CERA,Cera Sanitaryware Ltd,Building Materials,Small
+ASTRAL,Astral Ltd,Building Materials,Mid
+SUPREMEIND,Supreme Industries Ltd,Plastics,Mid
+FINOLEX,Finolex Industries Ltd,Plastics,Small
+ORIENTCEM,Orient Cement Ltd,Cement,Small
+BATAINDIA,Bata India Ltd,Retail,Mid
+VIPIND,VIP Industries Ltd,Consumer Durables,Small
+RELAXO,Relaxo Footwears Ltd,Consumer Durables,Small
+SYMPHONY,Symphony Ltd,Consumer Durables,Small
+AMBER,Amber Enterprises India Ltd,Consumer Durables,Small
+DIXON,Dixon Technologies (India) Ltd,Consumer Durables,Mid
+PGHH,Procter & Gamble Hygiene and Health Care Ltd,FMCG,Mid
+COLPAL,Colgate-Palmolive (India) Ltd,FMCG,Mid
+EMAMILTD,Emami Ltd,FMCG,Mid
+GODREJCP,Godrej Consumer Products Ltd,FMCG,Large
+GODREJIND,Godrej Industries Ltd,Conglomerate,Mid
+TATACONSUM,Tata Consumer Products Ltd,FMCG,Large
+VARUNBEV,Varun Beverages Ltd,FMCG,Mid
+JUBLFOOD,Jubilant FoodWorks Ltd,QSR,Mid
+WESTLIFE,Westlife Foodworld Ltd,QSR,Small
+DEVYANI,Devyani International Ltd,QSR,Small
+BARBEQUE,Barbeque Nation Hospitality Ltd,QSR,Small
+ZYDUSLIFE,Zydus Lifesciences Ltd,Pharma,Mid
+MANKIND,Mankind Pharma Ltd,Pharma,Mid
+ERIS,Eris Lifesciences Ltd,Pharma,Small
+INDOCO,Indoco Remedies Ltd,Pharma,Small
+LUPIN,Lupin Ltd,Pharma,Large
+JBCHEPHARM,J.B. Chemicals & Pharmaceuticals Ltd,Pharma,Small
+GLENMARK,Glenmark Pharmaceuticals Ltd,Pharma,Mid
+TORNTGAS,Torrent Gas Ltd,Gas,Small
+ATGL,Adani Total Gas Ltd,Gas,Mid
+TATAELXSI,Tata Elxsi Ltd,IT,Mid
+LTIM,LTIMindtree Ltd,IT,Large
+OFSS,Oracle Financial Services Software Ltd,IT,Mid
+HEXAWARE,Hexaware Technologies Ltd,IT,Mid
+NIITLTD,NIIT Ltd,Education,Small
+CAREER,Career Point Ltd,Education,Small
+MT_EDU,MT Educare Ltd,Education,Small
+NAVNETEDUL,Navneet Education Ltd,Education,Small
+PVR,PVR Inox Ltd,Entertainment,Mid
+INOXLEISUR,INOX Leisure Ltd,Entertainment,Small
+BALRAMCHIN,Balrampur Chini Mills Ltd,Sugar,Small
+RENUKA,Shree Renuka Sugars Ltd,Sugar,Small
+DWARIKESH,Dwarikesh Sugar Industries Ltd,Sugar,Small
+TRIVENI,Triveni Engineering & Industries Ltd,Sugar,Small
+EIDPARRY,EID Parry (India) Ltd,Sugar,Small
+KRBL,KRBL Ltd,Agriculture,Small
+LIJJAT,Lijjat Papad,FMCG,Small
+AVANTIFEED,Avanti Feeds Ltd,Agriculture,Small
+WATERBASE,Waterbase Ltd,Agriculture,Small
+APEX,Apex Frozen Foods Ltd,Agriculture,Small
+VENKYS,Venky's (India) Ltd,Agriculture,Small
+TVSMOTOR,TVS Motor Company Ltd,Automobile,Mid
+FORCEMOT,Force Motors Ltd,Automobile,Small
+ESAB,Esab India Ltd,Capital Goods,Small
+ELGI,Elgi Equipments Ltd,Capital Goods,Small
+GRINDWELL,Grindwell Norton Ltd,Capital Goods,Small
+TIMKEN,Timken India Ltd,Capital Goods,Small
+SCHAEFFLER,Schaeffler India Ltd,Auto Ancillary,Mid
+SKFINDIA,SKF India Ltd,Auto Ancillary,Mid
+NSLNISP,NMDC Steel Ltd,Metals,Small
+WELCORP,Welspun Corp Ltd,Metals,Small
+SAIL,Steel Authority of India Ltd,Metals,Large
+HINDZINC,Hindustan Zinc Ltd,Metals,Large
+MOIL,MOIL Ltd,Mining,Small
+GMRINFRA,GMR Airports Infrastructure Ltd,Infrastructure,Mid
+IRB,IRB Infrastructure Developers Ltd,Infrastructure,Small
+KNRCON,KNR Constructions Ltd,Infrastructure,Small
+PNC,PNC Infratech Ltd,Infrastructure,Small
+HGINFRA,H.G. Infra Engineering Ltd,Infrastructure,Small
+PRAJIND,Praj Industries Ltd,Capital Goods,Small
+KIRL,Kirloskar Industries Ltd,Capital Goods,Small
+GREENPANEL,Greenpanel Industries Ltd,Wood Panels,Small
+CENTURYPLY,Century Plyboards (India) Ltd,Wood Panels,Small
+PLYBOARD,Greenply Industries Ltd,Wood Panels,Small
+ACRYSIL,Acrysil Ltd,Building Materials,Small
+HINDWARE,Hindware Home Innovation Ltd,Building Materials,Small
+CIGNITITEC,Cigniti Technologies Ltd,IT,Small
+ROUTE,Route Mobile Ltd,IT,Small
+NAZARA,Nazara Technologies Ltd,Gaming,Small
+ZEEL,Zee Entertainment Enterprises Ltd,Media,Mid
+SUNTV,Sun TV Network Ltd,Media,Mid
+TVTODAY,TV Today Network Ltd,Media,Small
+SAREGAMA,Saregama India Ltd,Media,Small
+BALAJITELE,Balaji Telefilms Ltd,Media,Small
+NETWORK18,Network18 Media & Investments Ltd,Media,Mid
+TV18BRDCST,TV18 Broadcast Ltd,Media,Small
+DELTACORP,Delta Corp Ltd,Gaming,Small
+LEMERITE,Le Merite Exports Ltd,Textile,Small
+VARDHMAN,Vardhman Textiles Ltd,Textile,Small
+WELSPUNIND,Welspun India Ltd,Textile,Small
+TRIDENT,Trident Ltd,Textile,Small
+RSWM,RSWM Ltd,Textile,Small
+NIITTECH,NIIT Technologies Ltd,IT,Small
+TATACOMM,Tata Communications Ltd,Telecom,Mid
+IDEA,Vodafone Idea Ltd,Telecom,Mid
+TATATECH,Tata Technologies Ltd,IT,Mid
+MAHLIFE,Mahindra Lifespace Developers Ltd,Real Estate,Small
+GODREJPROP,Godrej Properties Ltd,Real Estate,Mid
+PRESTIGE,Prestige Estates Projects Ltd,Real Estate,Mid
+OBEROI,Oberoi Realty Ltd,Real Estate,Mid
+DLF,DLF Ltd,Real Estate,Large
+BRIGADE,Brigade Enterprises Ltd,Real Estate,Small
+SOBHA,Sobha Ltd,Real Estate,Small
+PHOENIXLTD,The Phoenix Mills Ltd,Real Estate,Mid
+NESCO,NESCO Ltd,Real Estate,Small
+CAPACITE,Capacite Infraprojects Ltd,Infrastructure,Small
+PNBGILTS,PNB Gilts Ltd,Financial Services,Small
+SMCGLOBAL,SMC Global Securities Ltd,Financial Services,Small
+GEOJITFSL,Geojit Financial Services Ltd,Financial Services,Small
+5PAISA,5paisa Capital Ltd,Financial Services,Small
+IIFLWAM,IIFL Wealth Management Ltd,Financial Services,Mid
+JMFINANCIL,JM Financial Ltd,Financial Services,Small
+MFSL,Max Financial Services Ltd,Insurance,Mid
+STARHEAL,Star Health and Allied Insurance Company Ltd,Insurance,Mid
+GODIGIT,Go Digit General Insurance Ltd,Insurance,Mid
+BAJAJHFL,Bajaj Housing Finance Ltd,NBFC,Large
+IIFL,IIFL Finance Ltd,NBFC,Small
+ARMAN,Arman Financial Services Ltd,NBFC,Small
+SPANDANA,Spandana Sphoorty Financial Ltd,NBFC,Small
+CREDITACC,CreditAccess Grameen Ltd,NBFC,Small
+UJJIVAN,Ujjivan Financial Services Ltd,Banking,Small
+EQUITAS,Equitas Small Finance Bank Ltd,Banking,Small
+SURYODAY,Suryoday Small Finance Bank Ltd,Banking,Small
+ESAFSFB,ESAF Small Finance Bank Ltd,Banking,Small
+UTKARSH,Utkarsh Small Finance Bank Ltd,Banking,Small
+FINCARE,Fincare Small Finance Bank Ltd,Banking,Small
+NORTHARC,Northern Arc Capital Ltd,NBFC,Small
+SBFC,SBFC Finance Ltd,NBFC,Small
+UGROCAP,Ugro Capital Ltd,NBFC,Small
+VIRINCHI,Virinchi Ltd,IT,Small
+RAMKRISHNA,Ramkrishna Forgings Ltd,Auto Ancillary,Small
+ENDURANCE,Endurance Technologies Ltd,Auto Ancillary,Mid
+SUPRAJIT,Suprajit Engineering Ltd,Auto Ancillary,Small
+MINDA,Minda Corporation Ltd,Auto Ancillary,Small
+GABRIEL,Gabriel India Ltd,Auto Ancillary,Small
+SUNDRARAM,Sundram Fasteners Ltd,Auto Ancillary,Mid
+CRAFTSMAN,Craftsman Automation Ltd,Auto Ancillary,Small
+TIINDIA,Tube Investments of India Ltd,Auto Ancillary,Mid
+BHARATFORG,Bharat Forge Ltd,Auto Ancillary,Mid
+EXIDEIND,Exide Industries Ltd,Auto Ancillary,Mid
+AMARAJABAT,Amara Raja Energy & Mobility Ltd,Auto Ancillary,Mid
+CEATLTD,CEAT Ltd,Auto Ancillary,Mid
+MRF,MRF Ltd,Auto Ancillary,Large
+APOLLOTYRE,Apollo Tyres Ltd,Auto Ancillary,Mid
+BALKRISIND,Balkrishna Industries Ltd,Auto Ancillary,Mid
+INGERRAND,Ingersoll-Rand (India) Ltd,Capital Goods,Small
+ISGEC,ISGEC Heavy Engineering Ltd,Capital Goods,Small
+KALPATPOWR,KalpatarU Power Transmission Ltd,Capital Goods,Small
+KEC,KEC International Ltd,Capital Goods,Mid
+APAR,Apar Industries Ltd,Capital Goods,Small
+VOLTAMP,Voltamp Transformers Ltd,Capital Goods,Small
+TRANSFORMERS,Transformers and Rectifiers (India) Ltd,Capital Goods,Small
+TDPOWERSYS,TD Power Systems Ltd,Capital Goods,Small
+KAYNES,Kaynes Technology India Ltd,Capital Goods,Small
+SYRMA,Syrma SGS Technology Ltd,Capital Goods,Small
+IDEAFORGE,ideaForge Technology Ltd,Aerospace,Small
+SOLARINDS,Solar Industries India Ltd,Defence,Mid
+BHEL,Bharat Heavy Electricals Ltd,Capital Goods,Mid
+HAL,Hindustan Aeronautics Ltd,Defence,Large
+BEL,Bharat Electronics Ltd,Defence,Large
+BEML,BEML Ltd,Defence,Mid
+MAZAGON,Mazagon Dock Shipbuilders Ltd,Defence,Mid
+GRSE,Garden Reach Shipbuilders & Engineers Ltd,Defence,Small
+COCHINSHIP,Cochin Shipyard Ltd,Defence,Small
+MIDHANI,Mishra Dhatu Nigam Ltd,Defence,Small
+PARAS,Paras Defence and Space Technologies Ltd,Defence,Small
+DATAPATTNS,Data Patterns (India) Ltd,Defence,Small
+ZENTEC,Zen Technologies Ltd,Defence,Small
+HSCL,Hindustan Sanitaryware & Industries Ltd,Building Materials,Small
+SUNFLAG,Sunflag Iron and Steel Company Ltd,Metals,Small
+STEELCAS,Steel Cast Ltd,Metals,Small
+MAHSCOOTER,Maharashtra Scooters Ltd,Automobile,Small
+SWARAJENG,Swaraj Engines Ltd,Automobile,Small
+GREAVES,Greaves Cotton Ltd,Capital Goods,Small
+ESCORTS,Escorts Kubota Ltd,Automobile,Mid
+VSTTILLERS,VST Tillers Tractors Ltd,Automobile,Small
+JKTYRE,JK Tyre & Industries Ltd,Auto Ancillary,Small
+GOODYEAR,Goodyear India Ltd,Auto Ancillary,Small
+INFIBEAM,Infibeam Avenues Ltd,Fintech,Small
+FINEORG,Fine Organic Industries Ltd,Chemicals,Small
+NAVINFLUOR,Navin Fluorine International Ltd,Chemicals,Mid
+SRF,SRF Ltd,Chemicals,Mid
+AARTI,Aarti Industries Ltd,Chemicals,Mid
+VINATI,Vinati Organics Ltd,Chemicals,Small
+ALKYLAMINE,Alkyl Amines Chemicals Ltd,Chemicals,Small
+BALCHEM,Balaji Amines Ltd,Chemicals,Small
+NEOGEN,Neogen Chemicals Ltd,Chemicals,Small
+CLEAN,Clean Science and Technology Ltd,Chemicals,Small
+FLUOROCHEM,Gujarat Fluorochemicals Ltd,Chemicals,Small
+PCBL,PCBL Ltd,Chemicals,Small
+NOCIL,NOCIL Ltd,Chemicals,Small
+SUDARSCHEM,Sudarshan Chemical Industries Ltd,Chemicals,Small
+ROSSARI,Rossari Biotech Ltd,Chemicals,Small
+GALAXY,Galaxy Surfactants Ltd,Chemicals,Small
+TATACHEM,Tata Chemicals Ltd,Chemicals,Mid
+DEEPAKNTR,Deepak Nitrite Ltd,Chemicals,Mid
+ATUL,Atul Ltd,Chemicals,Mid
+BASF,BASF India Ltd,Chemicals,Small
+AKZOINDIA,Akzo Nobel India Ltd,Paints,Small
+KANSAINER,Kansai Nerolac Paints Ltd,Paints,Mid
+INDIACEM,The India Cements Ltd,Cement,Small
+MANGCEMEXT,Mangalam Cement Ltd,Cement,Small
+NUVOCO,Nuvoco Vistas Corporation Ltd,Cement,Small
+JKLAKSHMI,JK Lakshmi Cement Ltd,Cement,Small
+STARCEMENT,Star Cement Ltd,Cement,Small
+HEIDELBERG,HeidelbergCement India Ltd,Cement,Small
+ORIENT,Orient Paper & Industries Ltd,Paper,Small
+TNPL,Tamil Nadu Newsprint and Papers Ltd,Paper,Small
+ANDHRAPER,Andhra Paper Ltd,Paper,Small
+MTNL,Mahanagar Telephone Nigam Ltd,Telecom,Small
+RAILTEL,RailTel Corporation of India Ltd,IT,Small
+RECLTD,REC Ltd,Financial Services,Mid
+PFC,Power Finance Corporation Ltd,Financial Services,Mid
+IRFC,Indian Railway Finance Corporation Ltd,Financial Services,Mid
+HUDCO,Housing and Urban Development Corporation Ltd,Financial Services,Mid
+NBCC,NBCC (India) Ltd,Infrastructure,Small
+RVNL,Rail Vikas Nigam Ltd,Infrastructure,Small
+IRCON,Ircon International Ltd,Infrastructure,Small
+RITES,RITES Ltd,Infrastructure,Small
+HFCL,HFCL Ltd,Telecom,Small
+STLTECH,Sterlite Technologies Ltd,Telecom,Small
+TEJAS,Tejas Networks Ltd,Telecom,Small
+TATAELXSI,Tata Elxsi Ltd,IT,Mid
+CYIENT,Cyient Ltd,IT,Mid
+HEXAWARE,Hexaware Technologies Ltd,IT,Mid
+NEWGEN,Newgen Software Technologies Ltd,IT,Small
+SUBROS,Subros Ltd,Auto Ancillary,Small
+WABCO,WABCO India Ltd,Auto Ancillary,Small
+SUNDARMFIN,Sundaram Finance Ltd,NBFC,Mid
+MAHINDCIE,Mahindra CIE Automotive Ltd,Auto Ancillary,Small
+UCALFUEL,Ucal Fuel Systems Ltd,Auto Ancillary,Small
+SETCO,Setco Automotive Ltd,Auto Ancillary,Small
+BOMDYEING,Bombay Dyeing & Manufacturing Company Ltd,Textile,Small
+RAYMOND,Raymond Ltd,Textile,Mid
+ARVIND,Arvind Ltd,Textile,Small
+KTIL,Kothari Products Ltd,FMCG,Small
+VGUARD,V-Guard Industries Ltd,Consumer Durables,Small
+ORIENTEL,Orient Electric Ltd,Consumer Durables,Small
+BAJAJEL,Bajaj Electricals Ltd,Consumer Durables,Small
+FINOLEX,Finolex Cables Ltd,Electricals,Mid
+KEI,KEI Industries Ltd,Electricals,Mid
+HLEGLAS,HLE Glascoat Ltd,Capital Goods,Small
+THERMAX,Thermax Ltd,Capital Goods,Mid
+BHARAT,Bharat Bijlee Ltd,Capital Goods,Small
+ELGIEQUIP,Elgi Equipments Ltd,Capital Goods,Small
+GESHIP,Great Eastern Shipping Company Ltd,Shipping,Small
+SCI,Shipping Corporation of India Ltd,Shipping,Small
+VSTIND,VST Industries Ltd,FMCG,Small
+GODFRYPHLP,Godfrey Phillips India Ltd,FMCG,Small
+SUVENPHAR,Suven Pharmaceuticals Ltd,Pharma,Small
+SOLARA,Solara Active Pharma Sciences Ltd,Pharma,Small
+SEQUENT,SeQuent Scientific Ltd,Pharma,Small
+MARKSANS,Marksans Pharma Ltd,Pharma,Small
+WOCKPHARMA,Wockhardt Ltd,Pharma,Small
+ALEMBICPHM,Alembic Pharmaceuticals Ltd,Pharma,Small
+ASTERDM,Aster DM Healthcare Ltd,Healthcare,Small
+NH,Narayana Hrudayalaya Ltd,Healthcare,Mid
+MAXHEALTH,Max Healthcare Institute Ltd,Healthcare,Mid
+APOLLOHOSP,Apollo Hospitals Enterprise Ltd,Healthcare,Large
+FORTIS,Fortis Healthcare Ltd,Healthcare,Mid
+METROPOLIS,Metropolis Healthcare Ltd,Healthcare,Small
+DRPATH,Dr. Lal PathLabs Ltd,Healthcare,Mid
+THYROCARE,Thyrocare Technologies Ltd,Healthcare,Small
+KRSNAA,Krsnaa Diagnostics Ltd,Healthcare,Small
+VIJAYA,Vijaya Diagnostic Centre Ltd,Healthcare,Small
+AARTIIND,Aarti Industries Ltd,Chemicals,Mid
+TATAINVEST,Tata Investment Corporation Ltd,Financial Services,Mid
+HDFC,HDFC Ltd,NBFC,Large
+SHRIRAMFIN,Shriram Finance Ltd,NBFC,Large
+MUTHOOTFIN,Muthoot Finance Ltd,NBFC,Mid
+CAPRIGLOBA,CAPRI GLOBAL CAPITAL Ltd,NBFC,Small
+APTUS,Aptus Value Housing Finance India Ltd,NBFC,Small
+REPCO,Repco Home Finance Ltd,NBFC,Small
+INDIABULL,Indiabulls Housing Finance Ltd,NBFC,Mid
+GRUH,Gruh Finance Ltd,NBFC,Small
+EDELWEISS,Edelweiss Financial Services Ltd,Financial Services,Small
+APLAPOLLO,APL Apollo Tubes Ltd,Metals,Mid
+SEAMECLTD,Seamec Ltd,Services,Small
+MAHLOG,Mahindra Logistics Ltd,Logistics,Small
+BLUEDART,Blue Dart Express Ltd,Logistics,Mid
+GICHSGFIN,GIC Housing Finance Ltd,NBFC,Small
+MANINFRA,Man Infraconstruction Ltd,Infrastructure,Small
+KOLTEPATIL,Kolte-Patil Developers Ltd,Real Estate,Small
+LODHA,Macrotech Developers Ltd,Real Estate,Large
+SIGNATUREG,Signature Global (India) Ltd,Real Estate,Small
+KEYFINSERV,Keynote Financial Services Ltd,Financial Services,Small
+ZENTALIS,Zentalis Pharmaceuticals,Pharma,Small
+INDIGOPNTS,Indigo Paints Ltd,Paints,Small
+LXCHEM,Laxmi Organic Industries Ltd,Chemicals,Small
+CHEMPLASTS,Chemplast Sanmar Ltd,Chemicals,Small
+KOKUYO,Kokuyo Camlin Ltd,Consumer,Small
+NIACL,New India Assurance Company Ltd,Insurance,Mid
+UIIC,United India Insurance Company Ltd,Insurance,Mid
+ORIENTINS,Oriental Insurance Company Ltd,Insurance,Small
+GICRE,General Insurance Corporation of India,Insurance,Large
+LICI,Life Insurance Corporation of India,Insurance,Large
+CGPOWER,CG Power and Industrial Solutions Ltd,Capital Goods,Mid
+VOLTAMP,Voltamp Transformers Ltd,Capital Goods,Small
+SUZLON,Suzlon Energy Ltd,Renewable Energy,Mid
+INOXWIND,Inox Wind Ltd,Renewable Energy,Small
+BOROSCI,Borosil Renewables Ltd,Renewable Energy,Small
+RENEUKA,Renew Energy Global Plc,Renewable Energy,Mid
+NTPCGREEN,NTPC Green Energy Ltd,Renewable Energy,Large
+TORNTPOWER,Torrent Power Ltd,Power,Mid
+JPPOWER,Jaiprakash Power Ventures Ltd,Power,Small
+GFLTD,GFL Ltd,Chemicals,Small
+ALKYL,Alkyl Amines Chemicals Ltd,Chemicals,Small
+DELTACORP,Delta Corp Ltd,Gaming,Small
+GAMESCRAFT,Games24x7,Gaming,Small
+NAZARA,Nazara Technologies Ltd,Gaming,Small
+RATEGAIN,RateGain Travel Technologies Ltd,IT,Small
+BIKAJI,Bikaji Foods International Ltd,FMCG,Small
+DELHIVERY,Delhivery Ltd,Logistics,Mid
+MAHKTECH,Mahanagar Gas Ltd,Gas,Mid
+OBEROIRLTY,Oberoi Realty Ltd,Real Estate,Mid
+MANGLORE,Mangalore Refinery and Petrochemicals Ltd,Oil & Gas,Mid
+MRPL,Mangalore Refinery and Petrochemicals Ltd,Oil & Gas,Mid
+CHENNPETRO,Chennai Petroleum Corporation Ltd,Oil & Gas,Small
+BPCL,Bharat Petroleum Corporation Ltd,Oil & Gas,Large
+HPL,HPL Electric & Power Ltd,Electricals,Small
+KPIL,Kalpataru Projects International Ltd,Infrastructure,Small
+ASHIANA,Ashiana Housing Ltd,Real Estate,Small
+AJMERA,Ajmera Realty & Infra India Ltd,Real Estate,Small
+NILA,Nila Infrastructures Ltd,Real Estate,Small
+ANANTRAJ,Anant Raj Ltd,Real Estate,Small
+IBREALEST,Indiabulls Real Estate Ltd,Real Estate,Small
+PURVA,Puravankara Ltd,Real Estate,Small
+SOBHA,Sobha Ltd,Real Estate,Small
+SUNTECK,Sunteck Realty Ltd,Real Estate,Small
+ARIHANTCAP,Arihant Capital Markets Ltd,Financial Services,Small
+IIFLSEC,IIFL Securities Ltd,Financial Services,Small
+SHARE,Share India Securities Ltd,Financial Services,Small
+SBIVENGE,SBI Ventures,Financial Services,Small
+KFINTECH,KFin Technologies Ltd,Financial Services,Small
+CAMS,Computer Age Management Services Ltd,Financial Services,Mid
+VAIBHAV,Vaibhav Global Ltd,Retail,Small
+VSMART,Videocon Industries Ltd,Consumer Durables,Small
+HINDOILEXP,Hinduja Oil Exploration,Oil & Gas,Small
+TALBROAUTO,Talbros Automotive Components Ltd,Auto Ancillary,Small
+SUPRAJIT,Suprajit Engineering Ltd,Auto Ancillary,Small
+GHCL,GHCL Ltd,Chemicals,Small
+NAHARINDUS,Nahar Industrial Enterprises Ltd,Textile,Small
+SOMANYCERA,Somany Ceramics Ltd,Building Materials,Small
+MURUDCERA,Murudeshwar Ceramics Ltd,Building Materials,Small
+ORIENTBELL,Orient Bell Ltd,Building Materials,Small
+WONDERLA,Wonderla Holidays Ltd,Tourism,Small
+MHRIL,Mahindra Holidays and Resorts India Ltd,Tourism,Small
+THOMASCOOK,Thomas Cook (India) Ltd,Tourism,Small
+MAHSEAMLES,Maharashtra Seamless Ltd,Metals,Small
+MOGSEC,MOSt Shares Mirae Asset Large Cap Fund,ETF,Large
+NIFTYBEES,Nippon India ETF Nifty 50,ETF,Large
+BANKBEES,Nippon India ETF Bank Nifty,ETF,Large
+ITBEES,Nippon India ETF Nifty IT,ETF,Large
+PHARMBEES,Nippon India ETF Nifty Pharma,ETF,Mid
