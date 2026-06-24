@@ -64,7 +64,7 @@ def generate_signals_for_stock(symbol):
 
     # Check demand zones (BUY signals)
     for zone in demand_zones:
-        if not is_price_at_zone(current_price, zone, buffer_pct=3.0):
+        if not is_price_at_zone(current_price, zone, buffer_pct=10.0):
             continue
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
@@ -76,7 +76,7 @@ def generate_signals_for_stock(symbol):
 
     # Check supply zones (SELL/SHORT signals)
     for zone in supply_zones:
-        if not is_price_at_zone(current_price, zone, buffer_pct=3.0):
+        if not is_price_at_zone(current_price, zone, buffer_pct=10.0):
             continue
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
