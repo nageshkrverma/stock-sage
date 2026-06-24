@@ -14,6 +14,7 @@ export default function SignalCard({ signal }: Props) {
   const router = useRouter()
   const isBuy = signal.signal_type === 'BUY'
   const entryMid = (signal.entry.low + signal.entry.high) / 2
+  const dayUp = (signal.day_change_pct ?? 0) >= 0
 
   return (
     <TouchableOpacity
@@ -36,6 +37,16 @@ export default function SignalCard({ signal }: Props) {
           </View>
         </View>
         <ConfidenceRing confidence={signal.confidence} size={56} />
+      </View>
+
+      {/* LTP row */}
+      <View style={styles.ltpRow}>
+        <Text style={styles.ltpPrice}>{formatINR(signal.current_price ?? 0)}</Text>
+        <View style={[styles.dayChangeBadge, { backgroundColor: dayUp ? '#00C89620' : '#FF475720' }]}>
+          <Text style={[styles.dayChangeText, { color: dayUp ? '#00C896' : '#FF4757' }]}>
+            {dayUp ? '▲' : '▼'} {Math.abs(signal.day_change_pct ?? 0).toFixed(2)}%
+          </Text>
+        </View>
       </View>
 
       <Text style={styles.name} numberOfLines={1}>{signal.name}</Text>
@@ -134,6 +145,27 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
     letterSpacing: 0.5,
+  },
+  ltpRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 6,
+    marginBottom: 2,
+  },
+  ltpPrice: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  dayChangeBadge: {
+    borderRadius: 6,
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+  },
+  dayChangeText: {
+    fontSize: 12,
+    fontWeight: '700',
   },
   name: {
     color: '#8B8FA8',

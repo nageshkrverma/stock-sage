@@ -57,6 +57,9 @@ def generate_signals_for_stock(symbol):
     rsi = get_rsi(daily_df)
     trend = get_trend_bias(daily_df)
 
+    prev_close = float(daily_df["Close"].iloc[-2]) if len(daily_df) >= 2 else current_price
+    day_change_pct = round((current_price - prev_close) / prev_close * 100, 2) if prev_close else 0.0
+
     demand_zones = detect_demand_zones(daily_df, atr)
     supply_zones = detect_supply_zones(daily_df, atr)
 
@@ -69,7 +72,7 @@ def generate_signals_for_stock(symbol):
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
             daily_df, weekly_df, monthly_df,
-            zone, current_price, rsi, trend, "BUY", atr
+            zone, current_price, day_change_pct, rsi, trend, "BUY", atr
         )
         if signal:
             signals.append(signal)
@@ -81,7 +84,7 @@ def generate_signals_for_stock(symbol):
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
             daily_df, weekly_df, monthly_df,
-            zone, current_price, rsi, trend, "SELL", atr
+            zone, current_price, day_change_pct, rsi, trend, "SELL", atr
         )
         if signal:
             signals.append(signal)
@@ -92,7 +95,7 @@ def generate_signals_for_stock(symbol):
 def _build_signal_for_zone(
     symbol, ticker_clean, name, sector,
     daily_df, weekly_df, monthly_df,
-    zone, current_price, rsi, trend, signal_type, atr
+    zone, current_price, day_change_pct, rsi, trend, signal_type, atr
 ):
     pattern = detect_candlestick_pattern(daily_df)
     volume_conf = check_volume_confirmation(daily_df)
@@ -172,6 +175,8 @@ def _build_signal_for_zone(
         sentiment=sentiment,
         fear_greed=fear_greed,
         rsi=rsi,
+        current_price=current_price,
+        day_change_pct=day_change_pct,
     )
 
 
@@ -218,6 +223,7 @@ def build_signal_dict(
     t1, t1_pct, t2, t2_pct, expected_profit, rr,
     confidence, holding, holding_label, psychology, disqualifiers,
     trend, pattern, volume_conf, sentiment, fear_greed, rsi,
+    current_price=0, day_change_pct=0,
 ):
     return {
         "id": signal_id,
@@ -259,4 +265,6 @@ def build_signal_dict(
         "fear_greed_position": fear_greed,
         "disqualifiers": disqualifiers,
         "rsi": round(rsi, 2),
+        "current_price": round(current_price, 2),
+        "day_change_pct": round(day_change_pct, 2),
     }

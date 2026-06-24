@@ -64,6 +64,8 @@ export interface Signal {
   fear_greed_position: number
   disqualifiers: Psychology[]
   rsi: number
+  current_price: number
+  day_change_pct: number
 }
 
 export interface SignalsResponse {
