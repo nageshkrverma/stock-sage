@@ -5,6 +5,10 @@ on:
     - cron: '15 10 * * 1-5'  # 3:45 PM IST = 10:15 UTC, weekdays only
   workflow_dispatch:           # manual trigger
 
+concurrency:
+  group: stock-scanner
+  cancel-in-progress: true
+
 jobs:
   scan:
     runs-on: ubuntu-latest
