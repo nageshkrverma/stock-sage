@@ -46,7 +46,7 @@ export interface Signal {
   exchange: string
   signal_type: 'BUY' | 'SELL'
   generated_at: string
-  holding_period: '15D' | '30D' | '3M' | '6M' | '1Y'
+  holding_period: '7D' | '15D' | '30D' | '3M' | '6M' | '1Y'
   holding_label: string
   entry: { low: number; high: number }
   stop_loss: number

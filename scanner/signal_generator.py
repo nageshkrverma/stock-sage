@@ -66,25 +66,25 @@ def generate_signals_for_stock(symbol):
     signals = []
 
     # Check demand zones (BUY signals)
-    for zone in demand_zones:
+    for idx, zone in enumerate(demand_zones):
         if not is_price_at_zone(current_price, zone, buffer_pct=15.0):
             continue
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
             daily_df, weekly_df, monthly_df,
-            zone, current_price, day_change_pct, rsi, trend, "BUY", atr
+            zone, current_price, day_change_pct, rsi, trend, "BUY", atr, zone_idx=idx
         )
         if signal:
             signals.append(signal)
 
     # Check supply zones (SELL/SHORT signals)
-    for zone in supply_zones:
+    for idx, zone in enumerate(supply_zones):
         if not is_price_at_zone(current_price, zone, buffer_pct=15.0):
             continue
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
             daily_df, weekly_df, monthly_df,
-            zone, current_price, day_change_pct, rsi, trend, "SELL", atr
+            zone, current_price, day_change_pct, rsi, trend, "SELL", atr, zone_idx=idx
         )
         if signal:
             signals.append(signal)
@@ -95,7 +95,7 @@ def generate_signals_for_stock(symbol):
 def _build_signal_for_zone(
     symbol, ticker_clean, name, sector,
     daily_df, weekly_df, monthly_df,
-    zone, current_price, day_change_pct, rsi, trend, signal_type, atr
+    zone, current_price, day_change_pct, rsi, trend, signal_type, atr, zone_idx=0
 ):
     pattern = detect_candlestick_pattern(daily_df)
     volume_conf = check_volume_confirmation(daily_df)
@@ -144,7 +144,7 @@ def _build_signal_for_zone(
 
     now = datetime.now(timezone.utc)
     date_str = now.strftime("%Y%m%d")
-    signal_id = f"{ticker_clean}_{date_str}_{zone['type']}"
+    signal_id = f"{ticker_clean}_{date_str}_{zone['type']}_{zone_idx}"
 
     return build_signal_dict(
         symbol=ticker_clean,

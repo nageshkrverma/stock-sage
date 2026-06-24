@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import {
   View,
   Text,
@@ -13,16 +13,47 @@ import { Signal } from '../types/signal'
 import SignalCard from '../components/SignalCard'
 import { formatRelativeTime } from '../utils/formatters'
 
-const HOLDING_FILTERS = ['ALL', '15D', '30D', '3M', '6M', '1Y']
+const HOLDING_FILTERS = ['ALL', '7D', '15D', '30D', '3M', '6M', '1Y']
+
+type SortKey = 'confidence' | 'day_change' | 'price_asc' | 'price_desc'
+
+const SORT_OPTIONS: { key: SortKey; label: string }[] = [
+  { key: 'confidence', label: '% Probability' },
+  { key: 'day_change', label: '% Day Change' },
+  { key: 'price_asc', label: 'Price ↑' },
+  { key: 'price_desc', label: 'Price ↓' },
+]
+
+function sortSignals(signals: Signal[], sortKey: SortKey): Signal[] {
+  return [...signals].sort((a, b) => {
+    switch (sortKey) {
+      case 'confidence':
+        return b.confidence - a.confidence
+      case 'day_change':
+        return Math.abs(b.day_change_pct ?? 0) - Math.abs(a.day_change_pct ?? 0)
+      case 'price_asc':
+        return (a.current_price ?? 0) - (b.current_price ?? 0)
+      case 'price_desc':
+        return (b.current_price ?? 0) - (a.current_price ?? 0)
+      default:
+        return 0
+    }
+  })
+}
 
 export default function HomeScreen() {
   const { signals, isLoading, error, refetch, lastUpdated } = useSignals()
   const [activeHolding, setActiveHolding] = useState('ALL')
+  const [activeSort, setActiveSort] = useState<SortKey>('confidence')
   const [refreshing, setRefreshing] = useState(false)
+  const [showSort, setShowSort] = useState(false)
 
-  const filtered = filterSignals(signals, {
-    holding: activeHolding === 'ALL' ? undefined : [activeHolding],
-  })
+  const filtered = useMemo(() => {
+    const f = filterSignals(signals, {
+      holding: activeHolding === 'ALL' ? undefined : [activeHolding],
+    })
+    return sortSignals(f, activeSort)
+  }, [signals, activeHolding, activeSort])
 
   const buyCount = filtered.filter((s) => s.signal_type === 'BUY').length
   const sellCount = filtered.filter((s) => s.signal_type === 'SELL').length
@@ -40,13 +71,15 @@ export default function HomeScreen() {
 
   const keyExtractor = useCallback((item: Signal) => item.id, [])
 
+  const activeSortLabel = SORT_OPTIONS.find((s) => s.key === activeSort)?.label ?? 'Sort'
+
   return (
     <View style={styles.container}>
       {/* Summary bar */}
       <View style={styles.summaryBar}>
         <SummaryChip label="Total" value={filtered.length} color="#6C63FF" />
         <SummaryChip label="BUY" value={buyCount} color="#00C896" />
-        <SummaryChip label="SELL" value={sellCount} color="#FF4757" />
+        <SummaryChip label="SHORT" value={sellCount} color="#FF4757" />
         {lastUpdated && (
           <Text style={styles.updated}>Updated {formatRelativeTime(lastUpdated)}</Text>
         )}
@@ -65,12 +98,37 @@ export default function HomeScreen() {
             onPress={() => setActiveHolding(item)}
           >
             <Text style={[styles.filterChipText, activeHolding === item && styles.filterChipTextActive]}>
-              {item}
+              {item === '7D' ? '⚡ 1-7D' : item}
             </Text>
           </TouchableOpacity>
         )}
         style={styles.filterList}
       />
+
+      {/* Sort row */}
+      <View style={styles.sortRow}>
+        <Text style={styles.sortLabel}>Sort by:</Text>
+        <TouchableOpacity style={styles.sortBtn} onPress={() => setShowSort(!showSort)}>
+          <Text style={styles.sortBtnText}>{activeSortLabel} ▾</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Sort dropdown */}
+      {showSort && (
+        <View style={styles.sortDropdown}>
+          {SORT_OPTIONS.map((opt) => (
+            <TouchableOpacity
+              key={opt.key}
+              style={[styles.sortOption, activeSort === opt.key && styles.sortOptionActive]}
+              onPress={() => { setActiveSort(opt.key); setShowSort(false) }}
+            >
+              <Text style={[styles.sortOptionText, activeSort === opt.key && styles.sortOptionTextActive]}>
+                {opt.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
 
       {isLoading && !refreshing ? (
         <View style={styles.center}>
@@ -186,6 +244,56 @@ const styles = StyleSheet.create({
   },
   filterChipTextActive: {
     color: '#6C63FF',
+  },
+  sortRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingBottom: 6,
+    gap: 8,
+  },
+  sortLabel: {
+    color: '#8B8FA8',
+    fontSize: 12,
+  },
+  sortBtn: {
+    backgroundColor: '#1E1E2E',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderColor: '#6C63FF40',
+  },
+  sortBtnText: {
+    color: '#6C63FF',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  sortDropdown: {
+    marginHorizontal: 16,
+    backgroundColor: '#13131A',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#1E1E2E',
+    marginBottom: 6,
+    overflow: 'hidden',
+  },
+  sortOption: {
+    paddingHorizontal: 16,
+    paddingVertical: 11,
+    borderBottomWidth: 1,
+    borderBottomColor: '#1E1E2E',
+  },
+  sortOptionActive: {
+    backgroundColor: '#6C63FF15',
+  },
+  sortOptionText: {
+    color: '#8B8FA8',
+    fontSize: 13,
+  },
+  sortOptionTextActive: {
+    color: '#6C63FF',
+    fontWeight: '700',
   },
   list: {
     paddingTop: 8,

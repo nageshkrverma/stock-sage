@@ -45,11 +45,14 @@ def classify_holding_period(zone, weekly_df, monthly_df):
         return "3M"
     if impulse > 4:
         return "30D"
+    if zone.get("fresh", False) and impulse <= 2:
+        return "7D"
     return "15D"
 
 
 def get_holding_label(holding_code):
     mapping = {
+        "7D": "1-7 Days",
         "15D": "15 Days",
         "30D": "30 Days",
         "3M": "3 Months",
