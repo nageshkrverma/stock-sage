@@ -9,11 +9,11 @@ import SignalCard from '../components/SignalCard'
 import { formatRelativeTime } from '../utils/formatters'
 
 const HOLDING_FILTERS = [
-  { key: 'ALL',    label: 'All',        periods: [] },
-  { key: '7D',     label: '⚡ 1-7D',   periods: ['7D'] },
-  { key: '15-30D', label: '15-30D',     periods: ['15D', '30D'] },
-  { key: '1-3M',   label: '1-3 Months', periods: ['3M'] },
-  { key: '6M-1Y',  label: '6M – 1Y',   periods: ['6M', '1Y'] },
+  { key: 'ALL',    label: 'All',     periods: [] },
+  { key: '7D',     label: '⚡ 1-7D', periods: ['7D'] },
+  { key: '15-30D', label: '15-30D',  periods: ['15D', '30D'] },
+  { key: '1-3M',   label: '1-3M',    periods: ['3M'] },
+  { key: '6M-1Y',  label: '6M-1Y',   periods: ['6M', '1Y'] },
 ]
 
 type SortKey = 'confidence' | 'day_change' | 'price_asc' | 'price_desc'
@@ -75,15 +75,11 @@ export default function HomeScreen() {
         )}
       </View>
 
-      {/* Holding filter chips */}
-      <FlatList
-        horizontal
-        data={HOLDING_FILTERS}
-        keyExtractor={(f) => f.key}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filterRow}
-        renderItem={({ item }) => (
+      {/* Holding filter chips — all 5 fit in one row */}
+      <View style={styles.filterRow}>
+        {HOLDING_FILTERS.map((item) => (
           <TouchableOpacity
+            key={item.key}
             style={[styles.filterChip, activeFilter === item.key && styles.filterChipActive]}
             onPress={() => setActiveFilter(item.key)}
           >
@@ -91,9 +87,8 @@ export default function HomeScreen() {
               {item.label}
             </Text>
           </TouchableOpacity>
-        )}
-        style={styles.filterList}
-      />
+        ))}
+      </View>
 
       {/* Sort row */}
       <View style={styles.sortRow}>
@@ -176,14 +171,17 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0A0A0F' },
   summaryBar: { flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 12, paddingBottom: 8, alignItems: 'center' },
   updated: { flex: 1, color: '#8B8FA8', fontSize: 10, textAlign: 'right' },
-  filterList: { maxHeight: 48, marginBottom: 2 },
-  filterRow: { paddingHorizontal: 16, gap: 8, alignItems: 'center', paddingVertical: 6 },
+  filterRow: {
+    flexDirection: 'row', paddingHorizontal: 12, gap: 6,
+    alignItems: 'center', paddingVertical: 6, marginBottom: 2,
+  },
   filterChip: {
-    backgroundColor: '#13131A', borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8,
-    borderWidth: 1, borderColor: '#1E1E2E',
+    flex: 1, backgroundColor: '#13131A', borderRadius: 18,
+    paddingVertical: 7, borderWidth: 1, borderColor: '#1E1E2E',
+    alignItems: 'center',
   },
   filterChipActive: { borderColor: '#6C63FF', backgroundColor: '#6C63FF20' },
-  filterChipText: { color: '#8B8FA8', fontSize: 12, fontWeight: '600' },
+  filterChipText: { color: '#8B8FA8', fontSize: 11, fontWeight: '600' },
   filterChipTextActive: { color: '#6C63FF' },
   sortRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingBottom: 6, gap: 8 },
   sortLabel: { color: '#8B8FA8', fontSize: 12 },
