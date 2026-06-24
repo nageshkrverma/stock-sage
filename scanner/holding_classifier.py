@@ -45,7 +45,7 @@ def classify_holding_period(zone, weekly_df, monthly_df):
         return "3M"
     if impulse > 4:
         return "30D"
-    if zone.get("fresh", False) and impulse <= 2:
+    if zone.get("fresh", False):
         return "7D"
     return "15D"
 
