@@ -55,7 +55,11 @@ export default function RootLayout() {
         />
         <Tabs.Screen
           name="mytrades"
-          options={{ href: null }}
+          options={{
+            title: 'Paper Trades',
+            tabBarLabel: 'Trades',
+            tabBarIcon: ({ color, focused }) => <TabIcon icon="💼" color={color} focused={focused} />,
+          }}
         />
         <Tabs.Screen
           name="signal/[id]"
