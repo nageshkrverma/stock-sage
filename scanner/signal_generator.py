@@ -64,7 +64,7 @@ def generate_signals_for_stock(symbol):
 
     # Check demand zones (BUY signals)
     for zone in demand_zones:
-        if not is_price_at_zone(current_price, zone, buffer_pct=10.0):
+        if not is_price_at_zone(current_price, zone, buffer_pct=15.0):
             continue
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
@@ -76,7 +76,7 @@ def generate_signals_for_stock(symbol):
 
     # Check supply zones (SELL/SHORT signals)
     for zone in supply_zones:
-        if not is_price_at_zone(current_price, zone, buffer_pct=10.0):
+        if not is_price_at_zone(current_price, zone, buffer_pct=15.0):
             continue
         signal = _build_signal_for_zone(
             symbol, ticker_clean, name, sector,
@@ -99,10 +99,7 @@ def _build_signal_for_zone(
     structure = check_structure_break(daily_df)
     psychology_signals, disqualifiers = analyze_psychology(daily_df, zone, rsi)
 
-    # Skip only hard disqualifiers (FOMO + EUPHORIA together)
-    hard_disqualified = len(disqualifiers) >= 2
-    if hard_disqualified:
-        return None
+    # Never block — disqualifiers are shown as warnings, not filters
 
     # Entry zone
     entry_low = zone["bottom"]
@@ -139,7 +136,7 @@ def _build_signal_for_zone(
         zone, psychology_signals, pattern, volume_conf, trend, rr
     )
 
-    if confidence < 50:
+    if confidence < 25:
         return None
 
     now = datetime.now(timezone.utc)
