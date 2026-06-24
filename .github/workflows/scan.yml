@@ -34,7 +34,6 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add data/signals.json data/signals_history.json
           git diff --cached --quiet || git commit -m "signals: $(date +'%Y-%m-%d')"
-          git pull --rebase origin main
-          git push origin main
+          git push origin HEAD:main --force-with-lease || git push origin HEAD:main --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
