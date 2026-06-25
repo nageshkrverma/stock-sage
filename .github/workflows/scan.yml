@@ -71,7 +71,14 @@ jobs:
           cp /tmp/signals.json data/signals.json
           cp /tmp/signals_history.json data/signals_history.json
           git add data/signals.json data/signals_history.json
-          git diff --cached --quiet || git commit -m "signals: $(date +'%Y-%m-%d %H:%M IST')"
+          git diff --cached --quiet || (git commit -m "signals: $(date +'%Y-%m-%d %H:%M IST')" && echo "SIGNALS_UPDATED=true" >> $GITHUB_ENV)
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send push notification to users
+        if: env.SIGNALS_UPDATED == 'true'
+        run: |
+          TOTAL=$(python -c "import json; d=json.load(open('data/signals.json')); print(len(d.get('signals', [])))")
+          DATE=$(date +'%d %b %Y')
+          curl -s "${{ secrets.GAS_URL }}&action=sendSignalAlert&totalSignals=${TOTAL}&marketDate=${DATE}"
