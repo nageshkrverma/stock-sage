@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T10:15:52.085115+00:00",
+  "generated_at": "2026-06-25T10:45:47.909135+00:00",
   "market_date": "2026-06-25",
   "total_signals": 40,
   "total_scanned": 523,
@@ -12,7 +12,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:17:04.279553+00:00",
+      "generated_at": "2026-06-25T10:47:10.282098+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -74,7 +74,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:17:04.281741+00:00",
+      "generated_at": "2026-06-25T10:47:10.285238+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -136,7 +136,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:17:04.283865+00:00",
+      "generated_at": "2026-06-25T10:47:10.288287+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -198,7 +198,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:17:04.285940+00:00",
+      "generated_at": "2026-06-25T10:47:10.291302+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -260,7 +260,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:16:55.131080+00:00",
+      "generated_at": "2026-06-25T10:46:59.903767+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -322,7 +322,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:16:51.674449+00:00",
+      "generated_at": "2026-06-25T10:46:55.958623+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -384,7 +384,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:18:35.392325+00:00",
+      "generated_at": "2026-06-25T10:48:59.290848+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -446,7 +446,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:43.504546+00:00",
+      "generated_at": "2026-06-25T10:50:22.825023+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -508,7 +508,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:18:35.388013+00:00",
+      "generated_at": "2026-06-25T10:48:59.284752+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -570,7 +570,7 @@
       "sector": "Textile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:18:43.108364+00:00",
+      "generated_at": "2026-06-25T10:49:08.333223+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -632,7 +632,7 @@
       "sector": "Textile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:18:43.110449+00:00",
+      "generated_at": "2026-06-25T10:49:08.336149+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -694,7 +694,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:19:02.990529+00:00",
+      "generated_at": "2026-06-25T10:49:33.500851+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -759,7 +759,7 @@
       "sector": "Aerospace",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:19:23.476480+00:00",
+      "generated_at": "2026-06-25T10:49:58.389393+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -821,7 +821,7 @@
       "sector": "Defence",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:26.198563+00:00",
+      "generated_at": "2026-06-25T10:50:01.791319+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -879,7 +879,7 @@
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:20:24.863222+00:00",
+      "generated_at": "2026-06-25T10:51:11.725781+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -944,7 +944,7 @@
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:20:26.098429+00:00",
+      "generated_at": "2026-06-25T10:51:13.243457+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1009,7 +1009,7 @@
       "sector": "Capital Goods",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:18:20.209092+00:00",
+      "generated_at": "2026-06-25T10:48:40.816566+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1074,7 +1074,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:18:35.390269+00:00",
+      "generated_at": "2026-06-25T10:48:59.287868+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1136,7 +1136,7 @@
       "sector": "Infrastructure",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:18:51.968729+00:00",
+      "generated_at": "2026-06-25T10:49:19.701151+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -1198,7 +1198,7 @@
       "sector": "Automobile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:16:28.924328+00:00",
+      "generated_at": "2026-06-25T10:46:29.840562+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -1256,7 +1256,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:16:57.663340+00:00",
+      "generated_at": "2026-06-25T10:47:02.855276+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1318,7 +1318,7 @@
       "sector": "Electricals",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:20:18.365613+00:00",
+      "generated_at": "2026-06-25T10:51:03.907896+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1376,7 +1376,7 @@
       "sector": "Auto Ancillary",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:16:29.637954+00:00",
+      "generated_at": "2026-06-25T10:46:30.615134+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1434,7 +1434,7 @@
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:17:49.386610+00:00",
+      "generated_at": "2026-06-25T10:48:04.983722+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1492,7 +1492,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:04.746641+00:00",
+      "generated_at": "2026-06-25T10:49:35.978303+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1550,7 +1550,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:04.748789+00:00",
+      "generated_at": "2026-06-25T10:49:35.981279+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1608,7 +1608,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:42.265352+00:00",
+      "generated_at": "2026-06-25T10:50:21.156632+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1670,7 +1670,7 @@
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:33.486220+00:00",
+      "generated_at": "2026-06-25T10:50:10.757193+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1728,7 +1728,7 @@
       "sector": "Building Materials",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:17:45.552970+00:00",
+      "generated_at": "2026-06-25T10:48:00.233411+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1786,7 +1786,7 @@
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:33.484138+00:00",
+      "generated_at": "2026-06-25T10:50:10.754262+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1844,7 +1844,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:49.437533+00:00",
+      "generated_at": "2026-06-25T10:50:30.070886+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1906,7 +1906,7 @@
       "sector": "Auto Ancillary",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:19:11.523080+00:00",
+      "generated_at": "2026-06-25T10:49:44.625037+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1964,7 +1964,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:16:53.100284+00:00",
+      "generated_at": "2026-06-25T10:46:57.374405+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -2022,7 +2022,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:20:36.749197+00:00",
+      "generated_at": "2026-06-25T10:51:26.042032+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -2080,7 +2080,7 @@
       "sector": "Automobile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:16:01.917477+00:00",
+      "generated_at": "2026-06-25T10:45:59.174215+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -2138,7 +2138,7 @@
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:17:50.600788+00:00",
+      "generated_at": "2026-06-25T10:48:06.328951+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -2196,7 +2196,7 @@
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:18:22.912981+00:00",
+      "generated_at": "2026-06-25T10:48:44.114446+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2254,7 +2254,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T10:18:36.807528+00:00",
+      "generated_at": "2026-06-25T10:49:00.838243+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2312,7 +2312,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:19:00.057034+00:00",
+      "generated_at": "2026-06-25T10:49:29.861600+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -2370,7 +2370,7 @@
       "sector": "Financial Services",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T10:20:40.224368+00:00",
+      "generated_at": "2026-06-25T10:51:30.058860+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
