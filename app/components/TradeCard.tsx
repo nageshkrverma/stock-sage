@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert, ActivityIndicator } from 'react-native'
 import { useRouter } from 'expo-router'
 import { TradeEntry } from '../types/signal'
 import { formatINR, formatPct, formatDaysHeld } from '../utils/formatters'
 import { calcProgress } from '../utils/tradeCalculator'
+
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbzuE5GCyg9PYBcRyOuN3nY-TRXRfWAEWMjYKx8j5AuXk3yoAcukHo5vqBVQZhQuRpIW_A/exec'
 
 interface Props {
   trade: TradeEntry
@@ -15,9 +17,22 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
   const router = useRouter()
   const [showCloseForm, setShowCloseForm] = useState(false)
   const [exitPriceInput, setExitPriceInput] = useState('')
+  const [livePrice, setLivePrice] = useState<number | null>(null)
+  const [loadingPrice, setLoadingPrice] = useState(false)
 
   const isOpen = trade.status === 'OPEN'
-  const currentPrice = trade.exitPrice ?? trade.entryPrice
+
+  useEffect(() => {
+    if (!isOpen) return
+    setLoadingPrice(true)
+    fetch(`${GAS_URL}?action=quote&symbol=${trade.symbol}.NS`)
+      .then(r => r.json())
+      .then(d => { if (d.regularMarketPrice) setLivePrice(d.regularMarketPrice) })
+      .catch(() => {})
+      .finally(() => setLoadingPrice(false))
+  }, [trade.symbol, isOpen])
+
+  const currentPrice = isOpen ? (livePrice ?? trade.entryPrice) : (trade.exitPrice ?? trade.entryPrice)
   const pnl = trade.pnl ?? ((currentPrice - trade.entryPrice) * trade.quantity)
   const pnlPct = trade.pnlPct ?? ((currentPrice - trade.entryPrice) / trade.entryPrice * 100)
   const invested = trade.entryPrice * trade.quantity
@@ -67,10 +82,16 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
           <Text style={styles.priceValue}>{formatINR(trade.entryPrice)}</Text>
         </View>
         <View style={styles.priceItem}>
-          <Text style={styles.priceLabel}>{isOpen ? 'Current' : 'Exit'}</Text>
-          <Text style={[styles.priceValue, { color: pnl >= 0 ? '#00C896' : '#FF4757' }]}>
-            {formatINR(currentPrice)}
+          <Text style={styles.priceLabel}>
+            {isOpen ? (loadingPrice ? 'Fetching...' : 'Live Price') : 'Exit'}
           </Text>
+          {loadingPrice ? (
+            <ActivityIndicator size="small" color="#6C63FF" style={{ marginTop: 4 }} />
+          ) : (
+            <Text style={[styles.priceValue, { color: pnl >= 0 ? '#00C896' : '#FF4757' }]}>
+              {formatINR(currentPrice)}
+            </Text>
+          )}
         </View>
         <View style={styles.priceItem}>
           <Text style={styles.priceLabel}>P&L</Text>
