@@ -29,7 +29,7 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
     fetch(`${GAS_URL}?action=quote&symbol=${sym}`)
       .then(r => r.json())
       .then(d => {
-        const price = d.regularMarketPrice ?? d.price ?? d.currentPrice
+        const price = d.price ?? d.regularMarketPrice ?? d.currentPrice
         if (price && price > 0) setLivePrice(Number(price))
       })
       .catch(() => {})
