@@ -25,7 +25,7 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
   useEffect(() => {
     if (!isOpen) return
     setLoadingPrice(true)
-    const sym = trade.symbol.includes('.') ? trade.symbol : `${trade.symbol}.NS`
+    const sym = trade.symbol.replace(/\.(NS|BO)$/i, '')
     fetch(`${GAS_URL}?action=quote&symbol=${sym}`)
       .then(r => r.json())
       .then(d => {
