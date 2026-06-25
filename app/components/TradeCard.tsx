@@ -37,8 +37,9 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
   }, [trade.symbol, isOpen])
 
   const currentPrice = isOpen ? (livePrice ?? trade.entryPrice) : (trade.exitPrice ?? trade.entryPrice)
-  const pnl = trade.pnl ?? ((currentPrice - trade.entryPrice) * trade.quantity)
-  const pnlPct = trade.pnlPct ?? ((currentPrice - trade.entryPrice) / trade.entryPrice * 100)
+  const direction = trade.trade_type === 'SHORT' ? -1 : 1
+  const pnl = trade.pnl ?? (direction * (currentPrice - trade.entryPrice) * trade.quantity)
+  const pnlPct = trade.pnlPct ?? (direction * (currentPrice - trade.entryPrice) / trade.entryPrice * 100)
   const invested = trade.entryPrice * trade.quantity
   const progress = calcProgress(trade.entryPrice, currentPrice, trade.stopLoss, trade.targets)
 

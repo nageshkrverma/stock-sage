@@ -40,9 +40,9 @@ export default function MyTradesScreen() {
             <Text style={styles.summaryValue}>{formatINR(portfolioSummary.totalInvested)}</Text>
           </View>
           <View style={styles.summaryItem}>
-            <Text style={styles.summaryLabel}>Closed P&L</Text>
+            <Text style={styles.summaryLabel}>Open P&L</Text>
             <Text style={[styles.summaryValue, { color: pnlPositive ? '#00C896' : '#FF4757' }]}>
-              {formatINR(Math.abs(portfolioSummary.totalPnl))}
+              {pnlPositive ? '+' : '-'}{formatINR(Math.abs(portfolioSummary.totalPnl))}
             </Text>
           </View>
           <View style={styles.summaryItem}>
