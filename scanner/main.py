@@ -66,6 +66,16 @@ def main():
 
     all_signals.sort(key=lambda s: s["confidence"], reverse=True)
 
+    # Deduplicate: keep only the highest-confidence signal per symbol+type
+    seen = set()
+    deduped = []
+    for sig in all_signals:
+        key = (sig["symbol"], sig["signal_type"])
+        if key not in seen:
+            seen.add(key)
+            deduped.append(sig)
+    all_signals = deduped
+
     output = {
         "generated_at": now.isoformat(),
         "market_date": market_date,
