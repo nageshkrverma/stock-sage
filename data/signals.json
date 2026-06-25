@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-25T07:15:53.372369+00:00",
+  "generated_at": "2026-06-25T07:45:51.123565+00:00",
   "market_date": "2026-06-25",
-  "total_signals": 44,
+  "total_signals": 45,
   "total_scanned": 523,
   "errors": 0,
   "signals": [
@@ -12,7 +12,7 @@
       "sector": "Aerospace",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:19:49.683541+00:00",
+      "generated_at": "2026-06-25T07:49:24.445306+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -56,7 +56,7 @@
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.54,
+        "ratio": 0.56,
         "confirmed": false
       },
       "psychology": [
@@ -70,9 +70,9 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.59,
       "disqualifiers": [],
-      "rsi": 35.28,
-      "current_price": 823.45,
-      "day_change_pct": 0.73
+      "rsi": 35.81,
+      "current_price": 825.0,
+      "day_change_pct": 0.92
     },
     {
       "id": "SOLARA_20260625_SUPPLY_0",
@@ -81,7 +81,7 @@
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:20:58.410382+00:00",
+      "generated_at": "2026-06-25T07:50:26.339207+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -125,7 +125,7 @@
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.4,
+        "ratio": 0.45,
         "confirmed": false
       },
       "psychology": [
@@ -139,9 +139,9 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.57,
       "disqualifiers": [],
-      "rsi": 52.1,
-      "current_price": 576.0,
-      "day_change_pct": 0.65
+      "rsi": 51.54,
+      "current_price": 575.05,
+      "day_change_pct": 0.48
     },
     {
       "id": "BANDHANBNK_20260625_SUPPLY_0",
@@ -150,7 +150,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:17:14.397318+00:00",
+      "generated_at": "2026-06-25T07:47:04.589242+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -194,16 +194,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 2.74,
+        "ratio": 2.97,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.5,
+      "fear_greed_position": 0.52,
       "disqualifiers": [],
-      "rsi": 39.28,
-      "current_price": 200.52,
-      "day_change_pct": -5.31
+      "rsi": 41.72,
+      "current_price": 202.55,
+      "day_change_pct": -4.35
     },
     {
       "id": "BANDHANBNK_20260625_SUPPLY_1",
@@ -212,7 +212,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:17:14.401283+00:00",
+      "generated_at": "2026-06-25T07:47:04.592070+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -256,16 +256,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 2.74,
+        "ratio": 2.97,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.5,
+      "fear_greed_position": 0.52,
       "disqualifiers": [],
-      "rsi": 39.28,
-      "current_price": 200.52,
-      "day_change_pct": -5.31
+      "rsi": 41.72,
+      "current_price": 202.55,
+      "day_change_pct": -4.35
     },
     {
       "id": "BANDHANBNK_20260625_SUPPLY_2",
@@ -274,7 +274,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:17:14.404834+00:00",
+      "generated_at": "2026-06-25T07:47:04.594818+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -318,78 +318,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 2.74,
+        "ratio": 2.97,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.5,
+      "fear_greed_position": 0.52,
       "disqualifiers": [],
-      "rsi": 39.28,
-      "current_price": 200.52,
-      "day_change_pct": -5.31
-    },
-    {
-      "id": "BANDHANBNK_20260625_SUPPLY_3",
-      "symbol": "BANDHANBNK",
-      "name": "Bandhan Bank Ltd",
-      "sector": "Banking",
-      "exchange": "NSE",
-      "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:17:14.408418+00:00",
-      "holding_period": "30D",
-      "holding_label": "30 Days",
-      "entry": {
-        "low": 169.72,
-        "high": 175.95
-      },
-      "stop_loss": 181.23,
-      "stop_loss_pct": 4.86,
-      "targets": [
-        {
-          "price": 159.01,
-          "pct": 8.0,
-          "label": "Target 1"
-        },
-        {
-          "price": 145.18,
-          "pct": 16.0,
-          "label": "Target 2"
-        }
-      ],
-      "expected_profit": {
-        "min_pct": -8.0,
-        "max_pct": -16.0,
-        "label": "-8.0\u2013-16.0%"
-      },
-      "risk_reward": 1.65,
-      "confidence": 58,
-      "zone": {
-        "type": "SUPPLY",
-        "top": 175.95,
-        "bottom": 169.72,
-        "strength_score": 40.0,
-        "fresh": false,
-        "origin_date": "2025-10-24",
-        "touches": 75
-      },
-      "trend_bias": "BULLISH",
-      "candlestick_pattern": {
-        "pattern": "Bearish Engulfing",
-        "score": 25.0,
-        "bullish": false
-      },
-      "volume_confirmation": {
-        "ratio": 2.74,
-        "confirmed": true
-      },
-      "psychology": [],
-      "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.5,
-      "disqualifiers": [],
-      "rsi": 39.28,
-      "current_price": 200.52,
-      "day_change_pct": -5.31
+      "rsi": 41.72,
+      "current_price": 202.55,
+      "day_change_pct": -4.35
     },
     {
       "id": "ESAFSFB_20260625_SUPPLY_2",
@@ -398,7 +336,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:19:26.614215+00:00",
+      "generated_at": "2026-06-25T07:49:04.048590+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -442,7 +380,7 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.12,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [
@@ -454,11 +392,11 @@
         }
       ],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.66,
+      "fear_greed_position": 0.67,
       "disqualifiers": [],
-      "rsi": 57.47,
-      "current_price": 32.63,
-      "day_change_pct": -0.73
+      "rsi": 57.76,
+      "current_price": 32.67,
+      "day_change_pct": -0.61
     },
     {
       "id": "SBICARD_20260625_SUPPLY_0",
@@ -467,7 +405,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:16:59.966300+00:00",
+      "generated_at": "2026-06-25T07:46:51.745623+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -511,16 +449,16 @@
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 1.84,
+        "ratio": 2.05,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.41,
+      "fear_greed_position": 0.42,
       "disqualifiers": [],
-      "rsi": 63.23,
-      "current_price": 632.05,
-      "day_change_pct": 4.02
+      "rsi": 63.72,
+      "current_price": 633.2,
+      "day_change_pct": 4.21
     },
     {
       "id": "NEOGEN_20260625_DEMAND_0",
@@ -529,7 +467,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:12.289906+00:00",
+      "generated_at": "2026-06-25T07:49:44.693272+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -573,16 +511,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.27,
+        "ratio": 0.28,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.54,
       "disqualifiers": [],
-      "rsi": 38.09,
-      "current_price": 1876.9,
-      "day_change_pct": -3.45
+      "rsi": 37.64,
+      "current_price": 1873.9,
+      "day_change_pct": -3.61
     },
     {
       "id": "SOLARA_20260625_DEMAND_0",
@@ -591,7 +529,7 @@
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:58.402946+00:00",
+      "generated_at": "2026-06-25T07:50:26.333768+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -635,16 +573,16 @@
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.4,
+        "ratio": 0.45,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.51,
       "disqualifiers": [],
-      "rsi": 52.1,
-      "current_price": 576.0,
-      "day_change_pct": 0.65
+      "rsi": 51.54,
+      "current_price": 575.05,
+      "day_change_pct": 0.48
     },
     {
       "id": "SOLARA_20260625_DEMAND_1",
@@ -653,7 +591,7 @@
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:58.406728+00:00",
+      "generated_at": "2026-06-25T07:50:26.336531+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -697,16 +635,78 @@
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.4,
+        "ratio": 0.45,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.51,
       "disqualifiers": [],
-      "rsi": 52.1,
-      "current_price": 576.0,
-      "day_change_pct": 0.65
+      "rsi": 51.54,
+      "current_price": 575.05,
+      "day_change_pct": 0.48
+    },
+    {
+      "id": "AMBER_20260625_SUPPLY_1",
+      "symbol": "AMBER",
+      "name": "Amber Enterprises India Ltd",
+      "sector": "Consumer Durables",
+      "exchange": "NSE",
+      "signal_type": "SELL",
+      "generated_at": "2026-06-25T07:47:51.309210+00:00",
+      "holding_period": "30D",
+      "holding_label": "30 Days",
+      "entry": {
+        "low": 7320.0,
+        "high": 7450.0
+      },
+      "stop_loss": 7673.5,
+      "stop_loss_pct": 3.91,
+      "targets": [
+        {
+          "price": 6794.2,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 6203.4,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": -8.0,
+        "max_pct": -16.0,
+        "label": "-8.0\u2013-16.0%"
+      },
+      "risk_reward": 2.05,
+      "confidence": 42,
+      "zone": {
+        "type": "SUPPLY",
+        "top": 7450.0,
+        "bottom": 7320.0,
+        "strength_score": 30.0,
+        "fresh": false,
+        "origin_date": "2025-11-18",
+        "touches": 75
+      },
+      "trend_bias": "BULLISH",
+      "candlestick_pattern": {
+        "pattern": "Shooting Star",
+        "score": 20.0,
+        "bullish": false
+      },
+      "volume_confirmation": {
+        "ratio": 0.39,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.51,
+      "disqualifiers": [],
+      "rsi": 52.04,
+      "current_price": 7794.0,
+      "day_change_pct": -0.63
     },
     {
       "id": "NIITLTD_20260625_DEMAND_0",
@@ -715,7 +715,7 @@
       "sector": "Education",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:24.937263+00:00",
+      "generated_at": "2026-06-25T07:48:08.123802+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -759,16 +759,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.1,
+        "ratio": 0.11,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.59,
+      "fear_greed_position": 0.58,
       "disqualifiers": [],
-      "rsi": 56.55,
-      "current_price": 99.98,
-      "day_change_pct": -3.35
+      "rsi": 55.84,
+      "current_price": 99.55,
+      "day_change_pct": -3.77
     },
     {
       "id": "ZEEL_20260625_DEMAND_0",
@@ -777,7 +777,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:55.577036+00:00",
+      "generated_at": "2026-06-25T07:48:36.169694+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -821,16 +821,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.22,
+        "ratio": 0.23,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.59,
+      "fear_greed_position": 0.6,
       "disqualifiers": [],
-      "rsi": 55.29,
-      "current_price": 111.8,
-      "day_change_pct": -3.19
+      "rsi": 56.33,
+      "current_price": 112.15,
+      "day_change_pct": -2.88
     },
     {
       "id": "MARKSANS_20260625_SUPPLY_1",
@@ -839,7 +839,7 @@
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:20:59.749507+00:00",
+      "generated_at": "2026-06-25T07:50:27.552063+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -879,7 +879,7 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.24,
+        "ratio": 0.26,
         "confirmed": false
       },
       "psychology": [
@@ -893,9 +893,9 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.67,
       "disqualifiers": [],
-      "rsi": 52.74,
-      "current_price": 255.03,
-      "day_change_pct": -3.04
+      "rsi": 52.49,
+      "current_price": 254.83,
+      "day_change_pct": -3.11
     },
     {
       "id": "HINDOILEXP_20260625_DEMAND_0",
@@ -904,7 +904,7 @@
       "sector": "Oil & Gas",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:21:57.749775+00:00",
+      "generated_at": "2026-06-25T07:51:20.264407+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -948,16 +948,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.19,
+        "ratio": 0.2,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.4,
       "disqualifiers": [],
-      "rsi": 40.18,
-      "current_price": 158.84,
-      "day_change_pct": -1.05
+      "rsi": 40.39,
+      "current_price": 158.97,
+      "day_change_pct": -0.97
     },
     {
       "id": "HINDOILEXP_20260625_DEMAND_1",
@@ -966,7 +966,7 @@
       "sector": "Oil & Gas",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:21:57.753406+00:00",
+      "generated_at": "2026-06-25T07:51:20.267190+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -1010,16 +1010,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.19,
+        "ratio": 0.2,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.4,
       "disqualifiers": [],
-      "rsi": 40.18,
-      "current_price": 158.84,
-      "day_change_pct": -1.05
+      "rsi": 40.39,
+      "current_price": 158.97,
+      "day_change_pct": -0.97
     },
     {
       "id": "HINDOILEXP_20260625_SUPPLY_0",
@@ -1028,7 +1028,7 @@
       "sector": "Oil & Gas",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:21:57.756958+00:00",
+      "generated_at": "2026-06-25T07:51:20.269847+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1072,16 +1072,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.19,
+        "ratio": 0.2,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.4,
       "disqualifiers": [],
-      "rsi": 40.18,
-      "current_price": 158.84,
-      "day_change_pct": -1.05
+      "rsi": 40.39,
+      "current_price": 158.97,
+      "day_change_pct": -0.97
     },
     {
       "id": "NIITLTD_20260625_DEMAND_1",
@@ -1090,7 +1090,7 @@
       "sector": "Education",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:24.940878+00:00",
+      "generated_at": "2026-06-25T07:48:08.126562+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -1134,16 +1134,78 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.1,
+        "ratio": 0.11,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.59,
+      "fear_greed_position": 0.58,
       "disqualifiers": [],
-      "rsi": 56.55,
-      "current_price": 99.98,
-      "day_change_pct": -3.35
+      "rsi": 55.84,
+      "current_price": 99.55,
+      "day_change_pct": -3.77
+    },
+    {
+      "id": "CAPACITE_20260625_DEMAND_0",
+      "symbol": "CAPACITE",
+      "name": "Capacite Infraprojects Ltd",
+      "sector": "Infrastructure",
+      "exchange": "NSE",
+      "signal_type": "BUY",
+      "generated_at": "2026-06-25T07:48:52.817864+00:00",
+      "holding_period": "6M",
+      "holding_label": "6 Months",
+      "entry": {
+        "low": 276.0,
+        "high": 285.1
+      },
+      "stop_loss": 267.72,
+      "stop_loss_pct": 4.57,
+      "targets": [
+        {
+          "price": 302.99,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 325.44,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": 8.0,
+        "max_pct": 16.0,
+        "label": "8.0\u201316.0%"
+      },
+      "risk_reward": 1.75,
+      "confidence": 38,
+      "zone": {
+        "type": "DEMAND",
+        "top": 285.1,
+        "bottom": 276.0,
+        "strength_score": 40.0,
+        "fresh": false,
+        "origin_date": "2025-08-13",
+        "touches": 181
+      },
+      "trend_bias": "NEUTRAL",
+      "candlestick_pattern": {
+        "pattern": "Pin Bar / Hammer",
+        "score": 20.0,
+        "bullish": true
+      },
+      "volume_confirmation": {
+        "ratio": 0.43,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.58,
+      "disqualifiers": [],
+      "rsi": 71.84,
+      "current_price": 261.83,
+      "day_change_pct": -0.2
     },
     {
       "id": "STEELCAS_20260625_DEMAND_10",
@@ -1152,7 +1214,7 @@
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:01.224531+00:00",
+      "generated_at": "2026-06-25T07:49:34.668008+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1196,16 +1258,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 1.04,
+        "ratio": 1.09,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.7,
+      "fear_greed_position": 0.68,
       "disqualifiers": [],
-      "rsi": 70.9,
-      "current_price": 307.5,
-      "day_change_pct": 0.1
+      "rsi": 64.92,
+      "current_price": 304.3,
+      "day_change_pct": -0.94
     },
     {
       "id": "RELAXO_20260625_DEMAND_0",
@@ -1214,7 +1276,7 @@
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:04.909695+00:00",
+      "generated_at": "2026-06-25T07:47:50.063461+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1254,16 +1316,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 17.04,
+        "ratio": 17.45,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.69,
       "disqualifiers": [],
-      "rsi": 83.14,
-      "current_price": 405.65,
-      "day_change_pct": 9.95
+      "rsi": 83.4,
+      "current_price": 406.95,
+      "day_change_pct": 10.3
     },
     {
       "id": "NIITLTD_20260625_SUPPLY_2",
@@ -1272,7 +1334,7 @@
       "sector": "Education",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:18:24.944396+00:00",
+      "generated_at": "2026-06-25T07:48:08.129247+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1316,16 +1378,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.1,
+        "ratio": 0.11,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.59,
+      "fear_greed_position": 0.58,
       "disqualifiers": [],
-      "rsi": 56.55,
-      "current_price": 99.98,
-      "day_change_pct": -3.35
+      "rsi": 55.84,
+      "current_price": 99.55,
+      "day_change_pct": -3.77
     },
     {
       "id": "NIITLTD_20260625_SUPPLY_3",
@@ -1334,7 +1396,7 @@
       "sector": "Education",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:18:24.947843+00:00",
+      "generated_at": "2026-06-25T07:48:08.131832+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1378,16 +1440,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.1,
+        "ratio": 0.11,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.59,
+      "fear_greed_position": 0.58,
       "disqualifiers": [],
-      "rsi": 56.55,
-      "current_price": 99.98,
-      "day_change_pct": -3.35
+      "rsi": 55.84,
+      "current_price": 99.55,
+      "day_change_pct": -3.77
     },
     {
       "id": "ALKYLAMINE_20260625_DEMAND_0",
@@ -1396,7 +1458,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:11.013507+00:00",
+      "generated_at": "2026-06-25T07:49:43.522532+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1437,7 +1499,7 @@
       "candlestick_pattern": {
         "pattern": "Inside Bar",
         "score": 10.0,
-        "bullish": 1.0
+        "bullish": 0.0
       },
       "volume_confirmation": {
         "ratio": 0.07,
@@ -1445,11 +1507,11 @@
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.5,
+      "fear_greed_position": 0.49,
       "disqualifiers": [],
-      "rsi": 49.5,
-      "current_price": 1785.4,
-      "day_change_pct": 0.78
+      "rsi": 48.21,
+      "current_price": 1780.0,
+      "day_change_pct": 0.48
     },
     {
       "id": "CLEAN_20260625_DEMAND_0",
@@ -1458,7 +1520,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:12.996350+00:00",
+      "generated_at": "2026-06-25T07:49:45.336554+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1502,16 +1564,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.3,
+        "ratio": 0.31,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.37,
       "disqualifiers": [],
-      "rsi": 51.42,
-      "current_price": 788.65,
-      "day_change_pct": 0.01
+      "rsi": 51.55,
+      "current_price": 788.9,
+      "day_change_pct": 0.04
     },
     {
       "id": "ESAFSFB_20260625_SUPPLY_0",
@@ -1520,7 +1582,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:19:26.606933+00:00",
+      "generated_at": "2026-06-25T07:49:04.043099+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1564,16 +1626,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.12,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.6,
       "disqualifiers": [],
-      "rsi": 57.47,
-      "current_price": 32.63,
-      "day_change_pct": -0.73
+      "rsi": 57.76,
+      "current_price": 32.67,
+      "day_change_pct": -0.61
     },
     {
       "id": "ESAFSFB_20260625_SUPPLY_1",
@@ -1582,7 +1644,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:19:26.610613+00:00",
+      "generated_at": "2026-06-25T07:49:04.045900+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1626,16 +1688,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.12,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.6,
       "disqualifiers": [],
-      "rsi": 57.47,
-      "current_price": 32.63,
-      "day_change_pct": -0.73
+      "rsi": 57.76,
+      "current_price": 32.67,
+      "day_change_pct": -0.61
     },
     {
       "id": "DEEPAKNTR_20260625_DEMAND_0",
@@ -1644,7 +1706,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:20:18.804630+00:00",
+      "generated_at": "2026-06-25T07:49:50.700062+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1688,16 +1750,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.29,
+        "ratio": 0.32,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.36,
       "disqualifiers": [],
-      "rsi": 38.95,
-      "current_price": 1619.9,
-      "day_change_pct": -1.54
+      "rsi": 38.97,
+      "current_price": 1620.0,
+      "day_change_pct": -1.53
     },
     {
       "id": "BATAINDIA_20260625_DEMAND_0",
@@ -1706,7 +1768,7 @@
       "sector": "Retail",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:03.325957+00:00",
+      "generated_at": "2026-06-25T07:47:48.722153+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1757,9 +1819,9 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.35,
       "disqualifiers": [],
-      "rsi": 54.57,
-      "current_price": 719.2,
-      "day_change_pct": 0.59
+      "rsi": 54.37,
+      "current_price": 718.65,
+      "day_change_pct": 0.51
     },
     {
       "id": "TVTODAY_20260625_SUPPLY_0",
@@ -1768,7 +1830,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:18:57.140518+00:00",
+      "generated_at": "2026-06-25T07:48:37.586322+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1808,16 +1870,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 9.69,
+        "ratio": 9.98,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.64,
       "disqualifiers": [],
-      "rsi": 86.85,
-      "current_price": 128.43,
-      "day_change_pct": 9.12
+      "rsi": 86.75,
+      "current_price": 128.24,
+      "day_change_pct": 8.95
     },
     {
       "id": "PNBGILTS_20260625_SUPPLY_1",
@@ -1826,7 +1888,7 @@
       "sector": "Financial Services",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:19:15.342133+00:00",
+      "generated_at": "2026-06-25T07:48:53.548217+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1870,16 +1932,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.08,
+        "ratio": 0.09,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.52,
+      "fear_greed_position": 0.53,
       "disqualifiers": [],
-      "rsi": 51.99,
-      "current_price": 90.21,
-      "day_change_pct": -1.66
+      "rsi": 53.2,
+      "current_price": 90.55,
+      "day_change_pct": -1.29
     },
     {
       "id": "ESAFSFB_20260625_DEMAND_4",
@@ -1888,7 +1950,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:19:26.595602+00:00",
+      "generated_at": "2026-06-25T07:49:04.034855+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1932,16 +1994,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.12,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.6,
       "disqualifiers": [],
-      "rsi": 57.47,
-      "current_price": 32.63,
-      "day_change_pct": -0.73
+      "rsi": 57.76,
+      "current_price": 32.67,
+      "day_change_pct": -0.61
     },
     {
       "id": "ASHOKLEY_20260625_SUPPLY_0",
@@ -1950,7 +2012,7 @@
       "sector": "Automobile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:16:34.210323+00:00",
+      "generated_at": "2026-06-25T07:46:28.645669+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -1990,16 +2052,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 1.4,
+        "ratio": 1.45,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.54,
       "disqualifiers": [],
-      "rsi": 63.73,
-      "current_price": 160.56,
-      "day_change_pct": 3.65
+      "rsi": 63.56,
+      "current_price": 160.44,
+      "day_change_pct": 3.57
     },
     {
       "id": "KEI_20260625_SUPPLY_1",
@@ -2008,7 +2070,7 @@
       "sector": "Electricals",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:20:51.157031+00:00",
+      "generated_at": "2026-06-25T07:50:19.712999+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -2048,16 +2110,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 1.4,
+        "ratio": 1.47,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.55,
       "disqualifiers": [],
-      "rsi": 43.74,
-      "current_price": 5371.5,
-      "day_change_pct": -0.88
+      "rsi": 44.12,
+      "current_price": 5377.0,
+      "day_change_pct": -0.78
     },
     {
       "id": "TVTODAY_20260625_DEMAND_2",
@@ -2066,7 +2128,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:57.129646+00:00",
+      "generated_at": "2026-06-25T07:48:37.578262+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -2106,16 +2168,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 9.69,
+        "ratio": 9.98,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.64,
       "disqualifiers": [],
-      "rsi": 86.85,
-      "current_price": 128.43,
-      "day_change_pct": 9.12
+      "rsi": 86.75,
+      "current_price": 128.24,
+      "day_change_pct": 8.95
     },
     {
       "id": "TVTODAY_20260625_DEMAND_3",
@@ -2124,7 +2186,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:57.133338+00:00",
+      "generated_at": "2026-06-25T07:48:37.580992+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -2164,16 +2226,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 9.69,
+        "ratio": 9.98,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.64,
       "disqualifiers": [],
-      "rsi": 86.85,
-      "current_price": 128.43,
-      "day_change_pct": 9.12
+      "rsi": 86.75,
+      "current_price": 128.24,
+      "day_change_pct": 8.95
     },
     {
       "id": "TVTODAY_20260625_DEMAND_4",
@@ -2182,7 +2244,7 @@
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:57.136910+00:00",
+      "generated_at": "2026-06-25T07:48:37.583655+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -2222,16 +2284,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 9.69,
+        "ratio": 9.98,
         "confirmed": true
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.64,
       "disqualifiers": [],
-      "rsi": 86.85,
-      "current_price": 128.43,
-      "day_change_pct": 9.12
+      "rsi": 86.75,
+      "current_price": 128.24,
+      "day_change_pct": 8.95
     },
     {
       "id": "PNBGILTS_20260625_SUPPLY_0",
@@ -2240,7 +2302,7 @@
       "sector": "Financial Services",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:19:15.338531+00:00",
+      "generated_at": "2026-06-25T07:48:53.545470+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -2284,16 +2346,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.08,
+        "ratio": 0.09,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.52,
+      "fear_greed_position": 0.53,
       "disqualifiers": [],
-      "rsi": 51.99,
-      "current_price": 90.21,
-      "day_change_pct": -1.66
+      "rsi": 53.2,
+      "current_price": 90.55,
+      "day_change_pct": -1.29
     },
     {
       "id": "ESAFSFB_20260625_DEMAND_5",
@@ -2302,7 +2364,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:19:26.599447+00:00",
+      "generated_at": "2026-06-25T07:49:04.037579+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2346,16 +2408,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.12,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.6,
       "disqualifiers": [],
-      "rsi": 57.47,
-      "current_price": 32.63,
-      "day_change_pct": -0.73
+      "rsi": 57.76,
+      "current_price": 32.67,
+      "day_change_pct": -0.61
     },
     {
       "id": "ESAFSFB_20260625_DEMAND_6",
@@ -2364,7 +2426,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:19:26.603271+00:00",
+      "generated_at": "2026-06-25T07:49:04.040325+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2408,16 +2470,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.12,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.6,
       "disqualifiers": [],
-      "rsi": 57.47,
-      "current_price": 32.63,
-      "day_change_pct": -0.73
+      "rsi": 57.76,
+      "current_price": 32.67,
+      "day_change_pct": -0.61
     },
     {
       "id": "MURUDCERA_20260625_SUPPLY_0",
@@ -2426,7 +2488,7 @@
       "sector": "Building Materials",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T07:22:02.289163+00:00",
+      "generated_at": "2026-06-25T07:51:24.353874+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2470,16 +2532,16 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.34,
+        "ratio": 0.36,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.42,
+      "fear_greed_position": 0.4,
       "disqualifiers": [],
-      "rsi": 54.36,
-      "current_price": 32.6,
-      "day_change_pct": 1.91
+      "rsi": 51.27,
+      "current_price": 32.33,
+      "day_change_pct": 1.06
     },
     {
       "id": "MGL_20260625_DEMAND_0",
@@ -2488,7 +2550,7 @@
       "sector": "Gas",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:16:45.991001+00:00",
+      "generated_at": "2026-06-25T07:46:39.120025+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -2532,16 +2594,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.32,
+        "ratio": 0.36,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.52,
+      "fear_greed_position": 0.51,
       "disqualifiers": [],
-      "rsi": 58.14,
-      "current_price": 1190.7,
-      "day_change_pct": -0.44
+      "rsi": 56.33,
+      "current_price": 1185.9,
+      "day_change_pct": -0.84
     },
     {
       "id": "NSLNISP_20260625_DEMAND_0",
@@ -2550,7 +2612,7 @@
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:18:41.881472+00:00",
+      "generated_at": "2026-06-25T07:48:23.627641+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2590,16 +2652,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.18,
+        "ratio": 0.19,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.36,
+      "fear_greed_position": 0.35,
       "disqualifiers": [],
-      "rsi": 27.18,
-      "current_price": 43.8,
-      "day_change_pct": -1.9
+      "rsi": 26.88,
+      "current_price": 43.73,
+      "day_change_pct": -2.06
     },
     {
       "id": "BEL_20260625_DEMAND_0",
@@ -2608,7 +2670,7 @@
       "sector": "Defence",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:19:52.623694+00:00",
+      "generated_at": "2026-06-25T07:49:27.075025+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2648,16 +2710,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.73,
+        "ratio": 0.81,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.41,
       "disqualifiers": [],
-      "rsi": 41.52,
-      "current_price": 410.75,
-      "day_change_pct": -0.68
+      "rsi": 41.62,
+      "current_price": 410.85,
+      "day_change_pct": -0.65
     },
     {
       "id": "EDELWEISS_20260625_DEMAND_0",
@@ -2666,7 +2728,7 @@
       "sector": "Financial Services",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T07:21:15.293726+00:00",
+      "generated_at": "2026-06-25T07:50:41.867586+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -2706,16 +2768,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.28,
+        "ratio": 0.3,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.56,
       "disqualifiers": [],
-      "rsi": 56.98,
-      "current_price": 122.82,
-      "day_change_pct": -2.03
+      "rsi": 57.19,
+      "current_price": 122.9,
+      "day_change_pct": -1.97
     }
   ]
 }
