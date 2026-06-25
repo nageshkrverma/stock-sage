@@ -42,7 +42,16 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
     <View style={styles.card}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.symbol}>{trade.symbol}</Text>
+          <View style={styles.symbolRow}>
+            <Text style={styles.symbol}>{trade.symbol}</Text>
+            {trade.trade_type && (
+              <View style={[styles.typeBadge, { backgroundColor: trade.trade_type === 'BUY' ? '#00C89620' : '#FF475720', borderColor: trade.trade_type === 'BUY' ? '#00C896' : '#FF4757' }]}>
+                <Text style={[styles.typeText, { color: trade.trade_type === 'BUY' ? '#00C896' : '#FF4757' }]}>
+                  {trade.trade_type === 'BUY' ? '▲ BUY' : '▼ SHORT'}
+                </Text>
+              </View>
+            )}
+          </View>
           <Text style={styles.meta}>
             {trade.quantity} shares · Entered {formatDaysHeld(trade.entryDate)}
           </Text>
@@ -146,10 +155,26 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 12,
   },
+  symbolRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   symbol: {
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '800',
+  },
+  typeBadge: {
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  typeText: {
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 0.3,
   },
   meta: {
     color: '#8B8FA8',
