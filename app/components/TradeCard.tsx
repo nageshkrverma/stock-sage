@@ -11,9 +11,10 @@ interface Props {
   trade: TradeEntry
   onClose: (id: string, exitPrice: number) => void
   onDelete: (id: string) => void
+  onLivePnl?: (id: string, pnl: number) => void
 }
 
-export default function TradeCard({ trade, onClose, onDelete }: Props) {
+export default function TradeCard({ trade, onClose, onDelete, onLivePnl }: Props) {
   const router = useRouter()
   const [showCloseForm, setShowCloseForm] = useState(false)
   const [exitPriceInput, setExitPriceInput] = useState('')
@@ -30,7 +31,13 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
       .then(r => r.json())
       .then(d => {
         const price = d.price ?? d.regularMarketPrice ?? d.currentPrice
-        if (price && price > 0) setLivePrice(Number(price))
+        if (price && price > 0) {
+          const p = Number(price)
+          setLivePrice(p)
+          const dir = trade.trade_type === 'SHORT' ? -1 : 1
+          const livePnl = dir * (p - trade.entryPrice) * trade.quantity
+          onLivePnl?.(trade.id, livePnl)
+        }
       })
       .catch(() => {})
       .finally(() => setLoadingPrice(false))

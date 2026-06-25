@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import {
   View,
   Text,
@@ -17,6 +17,15 @@ type Tab = 'OPEN' | 'CLOSED'
 export default function MyTradesScreen() {
   const { openTrades, closedTrades, loading, portfolioSummary, closeTrade, deleteTrade } = useTrades()
   const [activeTab, setActiveTab] = useState<Tab>('OPEN')
+  const [livePnlMap, setLivePnlMap] = useState<Record<string, number>>({})
+
+  const onLivePnl = useCallback((id: string, pnl: number) => {
+    setLivePnlMap(prev => ({ ...prev, [id]: pnl }))
+  }, [])
+
+  const totalLivePnl = Object.values(livePnlMap).reduce((s, v) => s + v, 0)
+  const totalInvested = portfolioSummary.totalInvested
+  const livePnlPct = totalInvested > 0 ? (totalLivePnl / totalInvested) * 100 : 0
 
   const displayTrades = activeTab === 'OPEN' ? openTrades : closedTrades
 
@@ -28,7 +37,9 @@ export default function MyTradesScreen() {
     )
   }
 
-  const pnlPositive = portfolioSummary.totalPnl >= 0
+  const displayPnl = Object.keys(livePnlMap).length > 0 ? totalLivePnl : portfolioSummary.totalPnl
+  const displayPnlPct = Object.keys(livePnlMap).length > 0 ? livePnlPct : portfolioSummary.totalPnlPct
+  const pnlPositive = displayPnl >= 0
 
   return (
     <View style={styles.container}>
@@ -42,13 +53,13 @@ export default function MyTradesScreen() {
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Open P&L</Text>
             <Text style={[styles.summaryValue, { color: pnlPositive ? '#00C896' : '#FF4757' }]}>
-              {pnlPositive ? '+' : '-'}{formatINR(Math.abs(portfolioSummary.totalPnl))}
+              {pnlPositive ? '+' : '-'}{formatINR(Math.abs(displayPnl))}
             </Text>
           </View>
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Return</Text>
             <Text style={[styles.summaryValue, { color: pnlPositive ? '#00C896' : '#FF4757' }]}>
-              {formatPct(portfolioSummary.totalPnlPct)}
+              {formatPct(displayPnlPct)}
             </Text>
           </View>
         </View>
@@ -105,6 +116,7 @@ export default function MyTradesScreen() {
               trade={item}
               onClose={closeTrade}
               onDelete={deleteTrade}
+              onLivePnl={onLivePnl}
             />
           )}
           contentContainerStyle={styles.list}
