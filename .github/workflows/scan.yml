@@ -77,8 +77,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send push notification to users
-        if: env.SIGNALS_UPDATED == 'true'
+        if: env.SIGNALS_UPDATED == 'true' && secrets.GAS_URL != ''
+        continue-on-error: true
         run: |
           TOTAL=$(python -c "import json; d=json.load(open('data/signals.json')); print(len(d.get('signals', [])))")
           DATE=$(date +'%d %b %Y')
-          curl -s "${{ secrets.GAS_URL }}&action=sendSignalAlert&totalSignals=${TOTAL}&marketDate=${DATE}"
+          curl -s "${{ secrets.GAS_URL }}&action=sendSignalAlert&totalSignals=${TOTAL}&marketDate=${DATE}" || true
