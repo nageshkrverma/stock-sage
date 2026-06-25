@@ -25,9 +25,13 @@ export default function TradeCard({ trade, onClose, onDelete }: Props) {
   useEffect(() => {
     if (!isOpen) return
     setLoadingPrice(true)
-    fetch(`${GAS_URL}?action=quote&symbol=${trade.symbol}.NS`)
+    const sym = trade.symbol.includes('.') ? trade.symbol : `${trade.symbol}.NS`
+    fetch(`${GAS_URL}?action=quote&symbol=${sym}`)
       .then(r => r.json())
-      .then(d => { if (d.regularMarketPrice) setLivePrice(d.regularMarketPrice) })
+      .then(d => {
+        const price = d.regularMarketPrice ?? d.price ?? d.currentPrice
+        if (price && price > 0) setLivePrice(Number(price))
+      })
       .catch(() => {})
       .finally(() => setLoadingPrice(false))
   }, [trade.symbol, isOpen])
