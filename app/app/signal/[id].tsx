@@ -197,7 +197,7 @@ export default function SignalDetailScreen() {
         <TouchableOpacity
           style={styles.addTradeBtn}
           onPress={() => {
-            setEntryPrice(entryMid.toFixed(2))
+            setEntryPrice(signal.current_price.toFixed(2))
             setShowAddTrade(true)
           }}
         >
