@@ -66,13 +66,12 @@ def main():
 
     all_signals.sort(key=lambda s: s["confidence"], reverse=True)
 
-    # Deduplicate: keep only the highest-confidence signal per symbol+type
+    # Deduplicate: keep only the highest-confidence signal per symbol
     seen = set()
     deduped = []
     for sig in all_signals:
-        key = (sig["symbol"], sig["signal_type"])
-        if key not in seen:
-            seen.add(key)
+        if sig["symbol"] not in seen:
+            seen.add(sig["symbol"])
             deduped.append(sig)
     all_signals = deduped
 
