@@ -59,6 +59,7 @@ function AppTabs() {
   const insets = useSafeAreaInsets()
   return (
     <Tabs
+      backBehavior="history"
       screenOptions={{
         headerStyle: { backgroundColor: '#0A0A0F', shadowColor: 'transparent', elevation: 0 },
         headerTintColor: '#FFFFFF',
@@ -95,6 +96,14 @@ function AppTabs() {
               }}
             />
             <Tabs.Screen
+              name="mytrades"
+              options={{
+                title: 'My Trades',
+                tabBarLabel: 'Trades',
+                tabBarIcon: ({ color, focused }) => <TabIcon icon="💼" color={color} focused={focused} />,
+              }}
+            />
+            <Tabs.Screen
               name="learn"
               options={{
                 title: 'Psychology Guide',
@@ -102,21 +111,13 @@ function AppTabs() {
                 tabBarIcon: ({ color, focused }) => <TabIcon icon="🧠" color={color} focused={focused} />,
               }}
             />
-            <Tabs.Screen
-              name="mytrades"
-              options={{
-                title: 'Paper Trades',
-                tabBarLabel: 'Trades',
-                tabBarIcon: ({ color, focused }) => <TabIcon icon="💼" color={color} focused={focused} />,
-              }}
-            />
-            <Tabs.Screen name="signal/[id]" options={{ href: null, headerShown: true, title: 'Signal Detail' }} />
-            <Tabs.Screen name="stock/[symbol]" options={{ href: null, headerShown: true, title: 'Stock Analysis' }} />
-            <Tabs.Screen name="nse_stocks" options={{ href: null }} />
-            <Tabs.Screen name="login" options={{ href: null, headerShown: false }} />
-            <Tabs.Screen name="register" options={{ href: null, headerShown: false }} />
-            <Tabs.Screen name="profile" options={{ href: null, headerShown: false, title: 'My Profile' }} />
-            <Tabs.Screen name="paywall" options={{ href: null, headerShown: false }} />
+            <Tabs.Screen name="signal/[id]" options={{ href: null, headerShown: true, title: 'Signal Detail', tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="stock/[symbol]" options={{ href: null, headerShown: true, title: 'Stock Analysis', tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="nse_stocks" options={{ href: null, tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="login" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="register" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="profile" options={{ href: null, headerShown: false, title: 'My Profile', tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="paywall" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
     </Tabs>
   )
 }
