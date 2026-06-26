@@ -10,6 +10,7 @@ import { useAlerts } from '../../context/AlertsContext'
 import { StockAnalysis, VerdictResult, VerdictType } from '../../types/analysis'
 import { formatINR, formatPct } from '../../utils/formatters'
 import ConfidenceRing from '../../components/ConfidenceRing'
+import { usePortfolio } from '../../hooks/usePortfolio'
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzuE5GCyg9PYBcRyOuN3nY-TRXRfWAEWMjYKx8j5AuXk3yoAcukHo5vqBVQZhQuRpIW_A/exec'
 
@@ -85,6 +86,7 @@ export default function StockDetailScreen() {
   const { signals } = useSignals()
   const { addTrade } = useTrades()
   const { addAlert, alerts, checkAlerts } = useAlerts()
+  const { addPosition, positions } = usePortfolio()
 
   const [liveQuote, setLiveQuote] = useState<LiveQuote | null>(null)
   const [liveLoading, setLiveLoading] = useState(true)
@@ -109,6 +111,20 @@ export default function StockDetailScreen() {
 
   const sym = symbol?.toUpperCase() ?? ''
   const existingSignal = signals.find((s) => s.symbol === sym) ?? null
+  const alreadyInPortfolio = positions.some((p) => p.symbol === sym)
+
+  // Reset all analysis state when switching to a different stock
+  useEffect(() => {
+    setAnalysis(null)
+    setVerdict(null)
+    setAnalysisError(null)
+    setAnalysisLoading(true)
+    setLiveQuote(null)
+    setLiveLoading(true)
+    setEntryPrice(entry ?? '')
+    setQuantity(qty ?? '')
+    verdictAnim.setValue(0)
+  }, [sym])
 
   // Fetch live quote from GAS
   useEffect(() => {
@@ -424,6 +440,20 @@ export default function StockDetailScreen() {
         </View>
 
         {/* ACTION BUTTONS */}
+        <TouchableOpacity
+          style={[styles.portfolioBtn, alreadyInPortfolio && styles.portfolioBtnDone]}
+          onPress={async () => {
+            if (alreadyInPortfolio) { Alert.alert('Already added', `${sym} is already in your portfolio.`); return }
+            const ep = liveQuote?.price ?? 0
+            await addPosition({ symbol: sym, name: displayName, entryPrice: ep, quantity: 1, entryDate: new Date().toISOString() })
+            Alert.alert('Added to Portfolio ✅', `${sym} added at ₹${ep.toFixed(2)}. Go to Trades → My Portfolio to update quantity.`)
+          }}
+        >
+          <Text style={styles.portfolioBtnText}>
+            {alreadyInPortfolio ? '✅ In My Portfolio' : '📈 Add to My Portfolio'}
+          </Text>
+        </TouchableOpacity>
+
         <View style={styles.actionRow}>
           <TouchableOpacity style={styles.tradeBtn} onPress={() => setShowAddTrade(true)}>
             <Text style={styles.tradeBtnText}>+ Paper Trade</Text>
@@ -493,6 +523,24 @@ export default function StockDetailScreen() {
                 <Text style={styles.changeText}>{w}</Text>
               </View>
             ))}
+
+            {!alreadyInPortfolio && entryPrice && quantity && (
+              <TouchableOpacity
+                style={styles.savePortfolioBtn}
+                onPress={async () => {
+                  const ep = parseFloat(entryPrice), q = parseInt(quantity)
+                  if (ep > 0 && q > 0) {
+                    await addPosition({ symbol: sym, name: displayName, entryPrice: ep, quantity: q, entryDate: new Date().toISOString() })
+                    Alert.alert('Saved to Portfolio ✅', `${sym} — ${q} shares at ₹${ep.toFixed(2)} added to My Portfolio.`)
+                  }
+                }}
+              >
+                <Text style={styles.savePortfolioBtnText}>📈 Save this position to My Portfolio</Text>
+              </TouchableOpacity>
+            )}
+            {alreadyInPortfolio && (
+              <Text style={styles.inPortfolioNote}>✅ Already tracked in My Portfolio</Text>
+            )}
 
             <TouchableOpacity style={styles.reanalyseBtn} onPress={() => {
               setEntryPrice(entryPrice)
@@ -753,8 +801,14 @@ const styles = StyleSheet.create({
   changeRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
   changeBullet: { color: '#6C63FF', fontWeight: '800', fontSize: 14 },
   changeText: { flex: 1, color: '#8B8FA8', fontSize: 12, lineHeight: 18 },
-  reanalyseBtn: { marginTop: 14, alignItems: 'center' },
+  reanalyseBtn: { marginTop: 8, alignItems: 'center' },
   reanalyseTxt: { color: '#6C63FF', fontSize: 13, fontWeight: '600' },
+  savePortfolioBtn: { backgroundColor: '#00C89615', borderRadius: 12, borderWidth: 1, borderColor: '#00C896', padding: 14, alignItems: 'center', marginTop: 14 },
+  savePortfolioBtnText: { color: '#00C896', fontSize: 14, fontWeight: '800' },
+  inPortfolioNote: { color: '#00C896', fontSize: 12, textAlign: 'center', marginTop: 14 },
+  portfolioBtn: { backgroundColor: '#00C89615', borderRadius: 14, borderWidth: 1, borderColor: '#00C896', padding: 14, alignItems: 'center', marginBottom: 10 },
+  portfolioBtnDone: { backgroundColor: '#00C89608', borderColor: '#00C89640' },
+  portfolioBtnText: { color: '#00C896', fontSize: 15, fontWeight: '800' },
 
   modalOverlay: { flex: 1, backgroundColor: '#00000090', justifyContent: 'flex-end' },
   bottomSheet: { backgroundColor: '#13131A', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24 },
