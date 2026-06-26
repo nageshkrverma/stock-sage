@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react'
 import {
   View, Text, TextInput, TouchableOpacity, StyleSheet,
-  ActivityIndicator, Modal, Alert, ScrollView,
+  ActivityIndicator, Modal, Alert, ScrollView, KeyboardAvoidingView, Platform,
 } from 'react-native'
 import { useSignals } from '../hooks/useSignals'
 import { useTrades } from '../hooks/useTrades'
@@ -333,6 +333,7 @@ export default function ScannerScreen() {
 
       {/* Price Alert Modal */}
       <Modal visible={alertModal} transparent animationType="slide" onRequestClose={() => setAlertModal(false)}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <View style={styles.modalOverlay}>
           <View style={styles.alertModalBox}>
             <Text style={styles.alertModalTitle}>🔔 Set Price Alert</Text>
@@ -373,6 +374,7 @@ export default function ScannerScreen() {
             </View>
           </View>
         </View>
+        </KeyboardAvoidingView>
       </Modal>
 
       {quote && (

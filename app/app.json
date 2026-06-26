@@ -5,7 +5,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
     "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
       "backgroundColor": "#0A0A0F"
     },
     "ios": {
@@ -14,12 +17,30 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#0A0A0F"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#22C55E"
       },
       "package": "com.stocksage.app"
     },
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      "@react-native-community/datetimepicker"
+    ],
+    "updates": {
+      "url": "https://u.expo.dev/6aae6d2f-c7f5-4c1a-b0f0-ddd4ef1ecec0",
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 0
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6aae6d2f-c7f5-4c1a-b0f0-ddd4ef1ecec0"
+      }
+    },
+    "owner": "tradinbabaaji"
   }
 }
