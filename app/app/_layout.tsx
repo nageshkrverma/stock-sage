@@ -116,6 +116,7 @@ export default function RootLayout() {
               }}
             />
             <Tabs.Screen name="signal/[id]" options={{ href: null, headerShown: true, title: 'Signal Detail' }} />
+            <Tabs.Screen name="stock/[symbol]" options={{ href: null, headerShown: true, title: 'Stock Analysis' }} />
             <Tabs.Screen name="nse_stocks" options={{ href: null }} />
             <Tabs.Screen name="login" options={{ href: null, headerShown: false }} />
             <Tabs.Screen name="register" options={{ href: null, headerShown: false }} />
