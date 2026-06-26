@@ -247,29 +247,20 @@ export default function StockDetailScreen() {
 
         {/* LIVE PRICE CARD */}
         <View style={styles.priceCard}>
-          <View style={styles.priceTop}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.symText}>{sym}</Text>
-              <Text style={styles.nameText} numberOfLines={2}>{displayName}</Text>
-              {analysis?.sector ? <Text style={styles.sectorText}>{analysis.sector}</Text> : null}
+          <Text style={styles.symText}>{sym}</Text>
+          <Text style={styles.nameText} numberOfLines={2}>{displayName}</Text>
+          {liveLoading ? (
+            <ActivityIndicator color="#6C63FF" style={{ marginTop: 10 }} />
+          ) : liveQuote ? (
+            <View style={styles.priceTop}>
+              <Text style={styles.ltp}>{formatINR(liveQuote.price)}</Text>
+              <Text style={[styles.changeText, { color: isUp ? '#00C896' : '#FF4757', marginLeft: 10 }]}>
+                {isUp ? '▲' : '▼'} {Math.abs(liveQuote.change).toFixed(2)} ({Math.abs(liveQuote.changePct).toFixed(2)}%)
+              </Text>
             </View>
-            <View style={styles.priceRight}>
-              {liveLoading ? (
-                <ActivityIndicator color="#6C63FF" />
-              ) : liveQuote ? (
-                <>
-                  <Text style={styles.ltp}>{formatINR(liveQuote.price)}</Text>
-                  <View style={[styles.changePill, { backgroundColor: isUp ? 'rgba(0,200,150,0.12)' : 'rgba(255,71,87,0.12)' }]}>
-                    <Text style={[styles.changeText, { color: isUp ? '#00C896' : '#FF4757' }]}>
-                      {isUp ? '▲' : '▼'} {Math.abs(liveQuote.change).toFixed(2)}  ({Math.abs(liveQuote.changePct).toFixed(2)}%)
-                    </Text>
-                  </View>
-                </>
-              ) : (
-                <Text style={styles.noPrice}>Price unavailable</Text>
-              )}
-            </View>
-          </View>
+          ) : (
+            <Text style={styles.noPrice}>Price unavailable</Text>
+          )}
           {liveQuote && (
             <View style={styles.statsGrid}>
               {[
@@ -661,16 +652,14 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0A0A0F' },
   scroll: { padding: 16, paddingBottom: 32 },
   priceCard: { backgroundColor: '#13131A', borderRadius: 18, padding: 18, marginBottom: 14, borderWidth: 1, borderColor: '#1E1E2E' },
-  priceTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 },
+  priceTop: { flexDirection: 'row', alignItems: 'center', marginTop: 10, marginBottom: 4 },
   symText: { color: '#FFFFFF', fontSize: 26, fontWeight: '800', letterSpacing: -1 },
   nameText: { color: '#8B8FA8', fontSize: 13, marginTop: 3 },
   sectorText: { color: '#4A4A6A', fontSize: 11, marginTop: 2 },
-  priceRight: { alignItems: 'flex-end', alignSelf: 'flex-start' },
   ltp: { color: '#FFFFFF', fontSize: 28, fontWeight: '800', letterSpacing: -1 },
-  changePill: { borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4, marginTop: 6, alignSelf: 'flex-end' },
   changeText: { fontSize: 13, fontWeight: '700' },
-  noPrice: { color: '#4A4A6A', fontSize: 13 },
-  statsGrid: { flexDirection: 'row', flexWrap: 'wrap' },
+  noPrice: { color: '#4A4A6A', fontSize: 13, marginTop: 10 },
+  statsGrid: { flexDirection: 'row', flexWrap: 'wrap', marginTop: 14 },
   statBox: { width: '25%', paddingVertical: 8, paddingHorizontal: 2 },
   statLabel: { color: '#4A4A6A', fontSize: 10, marginBottom: 2 },
   statValue: { color: '#CCCCDD', fontSize: 12, fontWeight: '700' },
