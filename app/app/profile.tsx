@@ -3,9 +3,9 @@ import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView,
   Alert, TextInput, Platform, KeyboardAvoidingView,
 } from 'react-native'
-import DateTimePicker from '@react-native-community/datetimepicker'
 import { useRouter } from 'expo-router'
 import { useAuth } from '../context/AuthContext'
+import DOBPickerModal from '../components/DOBPickerModal'
 
 const INDIAN_STATES = [
   'Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat',
@@ -23,18 +23,10 @@ export default function ProfileScreen() {
   const [saving, setSaving] = useState(false)
   const [fullName, setFullName] = useState(profile?.fullName ?? '')
   const [dob, setDob] = useState(profile?.dob ?? '')
-  const [dobDate, setDobDate] = useState<Date>(() => {
-    const raw = profile?.dob ?? ''
-    if (raw) {
-      const parts = raw.split('/')
-      if (parts.length === 3) {
-        const parsed = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]))
-        if (!isNaN(parsed.getTime())) return parsed
-      }
-    }
-    return new Date(2000, 0, 1)
-  })
   const [showDobPicker, setShowDobPicker] = useState(false)
+  const [dobDay, setDobDay] = useState<number>(() => { const p = (profile?.dob ?? '').split('/'); return p.length === 3 ? Number(p[0]) || 1 : 1 })
+  const [dobMonth, setDobMonth] = useState<number>(() => { const p = (profile?.dob ?? '').split('/'); return p.length === 3 ? Number(p[1]) || 1 : 1 })
+  const [dobYear, setDobYear] = useState<number>(() => { const p = (profile?.dob ?? '').split('/'); return p.length === 3 ? Number(p[2]) || 2000 : 2000 })
   const [city, setCity] = useState(profile?.city ?? '')
   const [state, setState] = useState(profile?.state ?? '')
   const [showStates, setShowStates] = useState(false)
@@ -158,30 +150,21 @@ export default function ProfileScreen() {
 
             <Text style={styles.fieldLabel}>Date of Birth</Text>
             <TouchableOpacity style={[styles.fieldInput, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]} onPress={() => setShowDobPicker(true)}>
-              <Text style={{ color: dob ? '#FFFFFF' : '#4A4A6A', fontSize: 15 }}>
-                {dob || 'Select date of birth'}
-              </Text>
+              <Text style={{ color: dob ? '#FFFFFF' : '#4A4A6A', fontSize: 15 }}>{dob || 'Select date of birth'}</Text>
               <Text style={{ color: '#8B8FA8' }}>📅</Text>
             </TouchableOpacity>
-            {showDobPicker && (
-              <DateTimePicker
-                value={dobDate}
-                mode="date"
-                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                maximumDate={new Date()}
-                minimumDate={new Date(1940, 0, 1)}
-                onChange={(_, selected) => {
-                  setShowDobPicker(Platform.OS === 'ios')
-                  if (selected) {
-                    setDobDate(selected)
-                    const d = selected.getDate().toString().padStart(2, '0')
-                    const m = (selected.getMonth() + 1).toString().padStart(2, '0')
-                    const y = selected.getFullYear()
-                    setDob(`${d}/${m}/${y}`)
-                  }
-                }}
-              />
-            )}
+            <DOBPickerModal
+              visible={showDobPicker}
+              day={dobDay} month={dobMonth} year={dobYear}
+              onDayChange={setDobDay} onMonthChange={setDobMonth} onYearChange={setDobYear}
+              onConfirm={() => {
+                const d = String(dobDay).padStart(2, '0')
+                const m = String(dobMonth).padStart(2, '0')
+                setDob(`${d}/${m}/${dobYear}`)
+                setShowDobPicker(false)
+              }}
+              onClose={() => setShowDobPicker(false)}
+            />
 
             <Text style={styles.fieldLabel}>City</Text>
             <TextInput
