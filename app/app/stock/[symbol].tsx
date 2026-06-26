@@ -440,20 +440,6 @@ export default function StockDetailScreen() {
         </View>
 
         {/* ACTION BUTTONS */}
-        <TouchableOpacity
-          style={[styles.portfolioBtn, alreadyInPortfolio && styles.portfolioBtnDone]}
-          onPress={async () => {
-            if (alreadyInPortfolio) { Alert.alert('Already added', `${sym} is already in your portfolio.`); return }
-            const ep = liveQuote?.price ?? 0
-            await addPosition({ symbol: sym, name: displayName, entryPrice: ep, quantity: 1, entryDate: new Date().toISOString() })
-            Alert.alert('Added to Portfolio ✅', `${sym} added at ₹${ep.toFixed(2)}. Go to Trades → My Portfolio to update quantity.`)
-          }}
-        >
-          <Text style={styles.portfolioBtnText}>
-            {alreadyInPortfolio ? '✅ In My Portfolio' : '📈 Add to My Portfolio'}
-          </Text>
-        </TouchableOpacity>
-
         <View style={styles.actionRow}>
           <TouchableOpacity style={styles.tradeBtn} onPress={() => setShowAddTrade(true)}>
             <Text style={styles.tradeBtnText}>+ Paper Trade</Text>
