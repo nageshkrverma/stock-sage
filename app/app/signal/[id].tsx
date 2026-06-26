@@ -208,7 +208,7 @@ export default function SignalDetailScreen() {
       </View>
 
       {/* Add Trade Modal */}
-      <Modal visible={showAddTrade} transparent animationType="slide">
+      <Modal visible={showAddTrade} transparent animationType="slide" onRequestClose={() => setShowAddTrade(false)}>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <TouchableOpacity
           style={styles.modalOverlay}
