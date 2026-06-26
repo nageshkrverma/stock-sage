@@ -12,7 +12,6 @@ import { formatINR, formatPct } from '../../utils/formatters'
 import ConfidenceRing from '../../components/ConfidenceRing'
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzuE5GCyg9PYBcRyOuN3nY-TRXRfWAEWMjYKx8j5AuXk3yoAcukHo5vqBVQZhQuRpIW_A/exec'
-const RENDER_API = 'https://stocksage-api.onrender.com'
 
 interface LiveQuote {
   price: number
@@ -144,7 +143,7 @@ export default function StockDetailScreen() {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), 30000)
 
-    fetch(`${RENDER_API}/analyse?symbol=${sym}`, { signal: controller.signal })
+    fetch(`${GAS_URL}?action=analyse&symbol=${sym}`, { signal: controller.signal })
       .then((r) => r.json())
       .then((d) => {
         if (d.error) { setAnalysisError(d.error); return }
@@ -177,7 +176,7 @@ export default function StockDetailScreen() {
     }
     setVerdictLoading(true)
     try {
-      const r = await fetch(`${RENDER_API}/analyse?symbol=${sym}&entry_price=${ep}&quantity=${q}`)
+      const r = await fetch(`${GAS_URL}?action=analyse&symbol=${sym}&entry_price=${ep}&quantity=${q}`)
       const d = await r.json()
       if (d.verdict) {
         setVerdict(d.verdict)
@@ -333,7 +332,7 @@ export default function StockDetailScreen() {
               <TouchableOpacity style={styles.retryBtn} onPress={() => {
                 setAnalysisError(null)
                 setAnalysisLoading(true)
-                fetch(`${RENDER_API}/analyse?symbol=${sym}`)
+                fetch(`${GAS_URL}?action=analyse&symbol=${sym}`)
                   .then((r) => r.json())
                   .then((d) => { if (!d.error) setAnalysis(d.analysis); else setAnalysisError(d.error) })
                   .catch(() => setAnalysisError('Could not reach analysis server.'))

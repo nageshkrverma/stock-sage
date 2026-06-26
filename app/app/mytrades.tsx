@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import {
   View, Text, FlatList, TouchableOpacity, StyleSheet,
   ActivityIndicator, Modal, TextInput, Alert, ScrollView,
@@ -8,10 +8,9 @@ import { useTrades } from '../hooks/useTrades'
 import { usePortfolio } from '../hooks/usePortfolio'
 import TradeCard from '../components/TradeCard'
 import { formatINR, formatPct } from '../utils/formatters'
-import { PortfolioPosition, VerdictType, VerdictResult, StockAnalysis } from '../types/analysis'
+import { PortfolioPosition, VerdictType, VerdictResult } from '../types/analysis'
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzuE5GCyg9PYBcRyOuN3nY-TRXRfWAEWMjYKx8j5AuXk3yoAcukHo5vqBVQZhQuRpIW_A/exec'
-const RENDER_API = 'https://stocksage-api.onrender.com'
 
 type MainTab = 'PAPER' | 'PORTFOLIO'
 type TradeTab = 'OPEN' | 'CLOSED'
@@ -66,7 +65,7 @@ export default function MyTradesScreen() {
         .then((d) => (d.price > 0 ? d.price : null))
         .catch(() => null)
 
-      const renderPromise = fetch(`${RENDER_API}/analyse?symbol=${pos.symbol}&entry_price=${ep}&quantity=${qty}`)
+      const renderPromise = fetch(`${GAS_URL}?action=analyse&symbol=${pos.symbol}&entry_price=${ep}&quantity=${qty}`)
         .then((r) => r.json())
         .then((d) => (d.verdict ? d.verdict as VerdictResult : null))
         .catch(() => null)
