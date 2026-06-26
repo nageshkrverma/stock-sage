@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-06-25T12:34:14.903514+00:00",
-  "market_date": "2026-06-25",
-  "total_signals": 32,
+  "generated_at": "2026-06-26T03:16:01.204916+00:00",
+  "market_date": "2026-06-26",
+  "total_signals": 31,
   "total_scanned": 523,
   "errors": 0,
   "signals": [
     {
-      "id": "BANDHANBNK_20260625_SUPPLY_0",
+      "id": "BANDHANBNK_20260626_SUPPLY_0",
       "symbol": "BANDHANBNK",
       "name": "Bandhan Bank Ltd",
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:35:37.164542+00:00",
+      "generated_at": "2026-06-26T03:17:28.665660+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -68,13 +68,13 @@
       "day_change_pct": -4.72
     },
     {
-      "id": "PNBHOUSING_20260625_SUPPLY_1",
+      "id": "PNBHOUSING_20260626_SUPPLY_1",
       "symbol": "PNBHOUSING",
       "name": "PNB Housing Finance Ltd",
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:35:26.845844+00:00",
+      "generated_at": "2026-06-26T03:17:17.998270+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -130,13 +130,13 @@
       "day_change_pct": -0.16
     },
     {
-      "id": "SBICARD_20260625_SUPPLY_0",
+      "id": "SBICARD_20260626_SUPPLY_0",
       "symbol": "SBICARD",
       "name": "SBI Cards and Payment Services Ltd",
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:35:23.055600+00:00",
+      "generated_at": "2026-06-26T03:17:13.832676+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -192,13 +192,13 @@
       "day_change_pct": 2.84
     },
     {
-      "id": "ZEEL_20260625_SUPPLY_0",
+      "id": "ZEEL_20260626_SUPPLY_0",
       "symbol": "ZEEL",
       "name": "Zee Entertainment Enterprises Ltd",
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:37:19.460128+00:00",
+      "generated_at": "2026-06-26T03:19:17.218264+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -254,13 +254,13 @@
       "day_change_pct": -3.57
     },
     {
-      "id": "NEOGEN_20260625_DEMAND_0",
+      "id": "NEOGEN_20260626_DEMAND_0",
       "symbol": "NEOGEN",
       "name": "Neogen Chemicals Ltd",
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:38:37.089075+00:00",
+      "generated_at": "2026-06-26T03:20:40.902375+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -316,75 +316,13 @@
       "day_change_pct": -3.56
     },
     {
-      "id": "ZEEL_20260625_DEMAND_0",
-      "symbol": "ZEEL",
-      "name": "Zee Entertainment Enterprises Ltd",
-      "sector": "Media",
-      "exchange": "NSE",
-      "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:37:19.452954+00:00",
-      "holding_period": "1Y",
-      "holding_label": "1 Year",
-      "entry": {
-        "low": 98.05,
-        "high": 102.88
-      },
-      "stop_loss": 95.11,
-      "stop_loss_pct": 5.33,
-      "targets": [
-        {
-          "price": 108.5,
-          "pct": 8.0,
-          "label": "Target 1"
-        },
-        {
-          "price": 116.54,
-          "pct": 16.0,
-          "label": "Target 2"
-        }
-      ],
-      "expected_profit": {
-        "min_pct": 8.0,
-        "max_pct": 16.0,
-        "label": "8.0\u201316.0%"
-      },
-      "risk_reward": 1.5,
-      "confidence": 40,
-      "zone": {
-        "type": "DEMAND",
-        "top": 102.88,
-        "bottom": 98.05,
-        "strength_score": 30.0,
-        "fresh": false,
-        "origin_date": "2025-11-04",
-        "touches": 141
-      },
-      "trend_bias": "BULLISH",
-      "candlestick_pattern": {
-        "pattern": "Bearish Engulfing",
-        "score": 25.0,
-        "bullish": false
-      },
-      "volume_confirmation": {
-        "ratio": 0.35,
-        "confirmed": false
-      },
-      "psychology": [],
-      "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.58,
-      "disqualifiers": [],
-      "rsi": 54.04,
-      "current_price": 111.36,
-      "day_change_pct": -3.57
-    },
-    {
-      "id": "RSWM_20260625_SUPPLY_0",
+      "id": "RSWM_20260626_SUPPLY_0",
       "symbol": "RSWM",
       "name": "RSWM Ltd",
       "sector": "Textile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:37:28.110991+00:00",
+      "generated_at": "2026-06-26T03:19:26.594648+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -440,13 +378,13 @@
       "day_change_pct": -3.96
     },
     {
-      "id": "ESAFSFB_20260625_SUPPLY_2",
+      "id": "ESAFSFB_20260626_SUPPLY_2",
       "symbol": "ESAFSFB",
       "name": "ESAF Small Finance Bank Ltd",
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:37:50.426247+00:00",
+      "generated_at": "2026-06-26T03:19:50.563675+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -505,13 +443,13 @@
       "day_change_pct": 0.21
     },
     {
-      "id": "IDEAFORGE_20260625_SUPPLY_10",
+      "id": "IDEAFORGE_20260626_SUPPLY_10",
       "symbol": "IDEAFORGE",
       "name": "ideaForge Technology Ltd",
       "sector": "Aerospace",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:38:13.540709+00:00",
+      "generated_at": "2026-06-26T03:20:15.381584+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -555,7 +493,7 @@
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.85,
+        "ratio": 0.86,
         "confirmed": false
       },
       "psychology": [],
@@ -567,13 +505,13 @@
       "day_change_pct": 0.89
     },
     {
-      "id": "BEL_20260625_DEMAND_0",
+      "id": "BEL_20260626_DEMAND_0",
       "symbol": "BEL",
       "name": "Bharat Electronics Ltd",
       "sector": "Defence",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:38:17.243298+00:00",
+      "generated_at": "2026-06-26T03:20:18.777251+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -625,13 +563,13 @@
       "day_change_pct": -1.54
     },
     {
-      "id": "SOLARA_20260625_SUPPLY_0",
+      "id": "SOLARA_20260626_SUPPLY_0",
       "symbol": "SOLARA",
       "name": "Solara Active Pharma Sciences Ltd",
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:39:23.653103+00:00",
+      "generated_at": "2026-06-26T03:21:30.963581+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -690,13 +628,13 @@
       "day_change_pct": -0.74
     },
     {
-      "id": "MARKSANS_20260625_SUPPLY_1",
+      "id": "MARKSANS_20260626_SUPPLY_1",
       "symbol": "MARKSANS",
       "name": "Marksans Pharma Ltd",
       "sector": "Pharma",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:39:25.008525+00:00",
+      "generated_at": "2026-06-26T03:21:32.485172+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -755,13 +693,13 @@
       "day_change_pct": -2.64
     },
     {
-      "id": "GRINDWELL_20260625_SUPPLY_0",
+      "id": "GRINDWELL_20260626_SUPPLY_0",
       "symbol": "GRINDWELL",
       "name": "Grindwell Norton Ltd",
       "sector": "Capital Goods",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:37:02.522143+00:00",
+      "generated_at": "2026-06-26T03:18:59.277794+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -801,7 +739,7 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 2.68,
+        "ratio": 2.69,
         "confirmed": true
       },
       "psychology": [],
@@ -820,13 +758,13 @@
       "day_change_pct": 4.68
     },
     {
-      "id": "CAPACITE_20260625_DEMAND_0",
+      "id": "CAPACITE_20260626_DEMAND_0",
       "symbol": "CAPACITE",
       "name": "Capacite Infraprojects Ltd",
       "sector": "Infrastructure",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:37:38.133042+00:00",
+      "generated_at": "2026-06-26T03:19:37.555394+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -882,13 +820,13 @@
       "day_change_pct": 0.59
     },
     {
-      "id": "ASHOKLEY_20260625_SUPPLY_0",
+      "id": "ASHOKLEY_20260626_SUPPLY_0",
       "symbol": "ASHOKLEY",
       "name": "Ashok Leyland Ltd",
       "sector": "Automobile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:34:56.519848+00:00",
+      "generated_at": "2026-06-26T03:16:46.019863+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -940,13 +878,13 @@
       "day_change_pct": 3.72
     },
     {
-      "id": "AAVAS_20260625_DEMAND_0",
+      "id": "AAVAS_20260626_DEMAND_0",
       "symbol": "AAVAS",
       "name": "Aavas Financiers Ltd",
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:35:29.616859+00:00",
+      "generated_at": "2026-06-26T03:17:20.835814+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1002,13 +940,13 @@
       "day_change_pct": 0.49
     },
     {
-      "id": "KEI_20260625_SUPPLY_1",
+      "id": "KEI_20260626_SUPPLY_1",
       "symbol": "KEI",
       "name": "KEI Industries Ltd",
       "sector": "Electricals",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:39:16.221382+00:00",
+      "generated_at": "2026-06-26T03:21:23.518828+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1060,13 +998,13 @@
       "day_change_pct": -2.79
     },
     {
-      "id": "MOTHERSON_20260625_SUPPLY_1",
+      "id": "MOTHERSON_20260626_SUPPLY_1",
       "symbol": "MOTHERSON",
       "name": "Samvardhana Motherson International Ltd",
       "sector": "Auto Ancillary",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:34:57.332978+00:00",
+      "generated_at": "2026-06-26T03:16:46.917999+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1118,13 +1056,13 @@
       "day_change_pct": 4.93
     },
     {
-      "id": "RELAXO_20260625_DEMAND_0",
+      "id": "RELAXO_20260626_DEMAND_0",
       "symbol": "RELAXO",
       "name": "Relaxo Footwears Ltd",
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:36:28.953924+00:00",
+      "generated_at": "2026-06-26T03:18:24.195551+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1164,7 +1102,7 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 28.37,
+        "ratio": 28.38,
         "confirmed": true
       },
       "psychology": [],
@@ -1176,13 +1114,13 @@
       "day_change_pct": 12.09
     },
     {
-      "id": "NORTHARC_20260625_DEMAND_4",
+      "id": "NORTHARC_20260626_DEMAND_4",
       "symbol": "NORTHARC",
       "name": "Northern Arc Capital Ltd",
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:37:52.257758+00:00",
+      "generated_at": "2026-06-26T03:19:52.897757+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1234,13 +1172,13 @@
       "day_change_pct": -2.31
     },
     {
-      "id": "ALKYLAMINE_20260625_DEMAND_0",
+      "id": "ALKYLAMINE_20260626_DEMAND_0",
       "symbol": "ALKYLAMINE",
       "name": "Alkyl Amines Chemicals Ltd",
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:38:35.763063+00:00",
+      "generated_at": "2026-06-26T03:20:39.197194+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1296,13 +1234,13 @@
       "day_change_pct": 0.97
     },
     {
-      "id": "STEELCAS_20260625_DEMAND_11",
+      "id": "STEELCAS_20260626_DEMAND_11",
       "symbol": "STEELCAS",
       "name": "Steel Cast Ltd",
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:38:25.896046+00:00",
+      "generated_at": "2026-06-26T03:20:28.437202+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1354,13 +1292,13 @@
       "day_change_pct": -3.01
     },
     {
-      "id": "ASTRAL_20260625_SUPPLY_0",
+      "id": "ASTRAL_20260626_SUPPLY_0",
       "symbol": "ASTRAL",
       "name": "Astral Ltd",
       "sector": "Building Materials",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:36:24.076565+00:00",
+      "generated_at": "2026-06-26T03:18:19.618776+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1412,13 +1350,13 @@
       "day_change_pct": -3.24
     },
     {
-      "id": "DEEPAKNTR_20260625_DEMAND_0",
+      "id": "DEEPAKNTR_20260626_DEMAND_0",
       "symbol": "DEEPAKNTR",
       "name": "Deepak Nitrite Ltd",
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:38:43.710469+00:00",
+      "generated_at": "2026-06-26T03:20:48.256086+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1474,13 +1412,13 @@
       "day_change_pct": -1.39
     },
     {
-      "id": "TIINDIA_20260625_SUPPLY_0",
+      "id": "TIINDIA_20260626_SUPPLY_0",
       "symbol": "TIINDIA",
       "name": "Tube Investments of India Ltd",
       "sector": "Auto Ancillary",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:37:59.948967+00:00",
+      "generated_at": "2026-06-26T03:20:00.613518+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1532,13 +1470,13 @@
       "day_change_pct": -3.67
     },
     {
-      "id": "MUTHOOTFIN_20260625_SUPPLY_1",
+      "id": "MUTHOOTFIN_20260626_SUPPLY_1",
       "symbol": "MUTHOOTFIN",
       "name": "Muthoot Finance Ltd",
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:35:24.695250+00:00",
+      "generated_at": "2026-06-26T03:17:15.705983+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1590,13 +1528,13 @@
       "day_change_pct": -3.33
     },
     {
-      "id": "MARUTI_20260625_SUPPLY_0",
+      "id": "MARUTI_20260626_SUPPLY_0",
       "symbol": "MARUTI",
       "name": "Maruti Suzuki India Ltd",
       "sector": "Automobile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:34:26.684893+00:00",
+      "generated_at": "2026-06-26T03:16:13.888946+00:00",
       "holding_period": "15D",
       "holding_label": "15 Days",
       "entry": {
@@ -1648,13 +1586,13 @@
       "day_change_pct": 3.75
     },
     {
-      "id": "AMBER_20260625_SUPPLY_0",
+      "id": "AMBER_20260626_SUPPLY_0",
       "symbol": "AMBER",
       "name": "Amber Enterprises India Ltd",
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:36:30.338991+00:00",
+      "generated_at": "2026-06-26T03:18:25.664391+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -1706,13 +1644,13 @@
       "day_change_pct": -2.35
     },
     {
-      "id": "NSLNISP_20260625_DEMAND_0",
+      "id": "NSLNISP_20260626_DEMAND_0",
       "symbol": "NSLNISP",
       "name": "NMDC Steel Ltd",
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:37:05.665886+00:00",
+      "generated_at": "2026-06-26T03:19:02.263253+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1764,13 +1702,13 @@
       "day_change_pct": -2.17
     },
     {
-      "id": "TVTODAY_20260625_SUPPLY_0",
+      "id": "TVTODAY_20260626_SUPPLY_0",
       "symbol": "TVTODAY",
       "name": "TV Today Network Ltd",
       "sector": "Media",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-25T12:37:21.041859+00:00",
+      "generated_at": "2026-06-26T03:19:18.976701+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1810,7 +1748,7 @@
       "trend_bias": "BEARISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 11.65,
+        "ratio": 11.67,
         "confirmed": true
       },
       "psychology": [],
@@ -1822,13 +1760,13 @@
       "day_change_pct": 6.11
     },
     {
-      "id": "SPANDANA_20260625_DEMAND_0",
+      "id": "SPANDANA_20260626_DEMAND_0",
       "symbol": "SPANDANA",
       "name": "Spandana Sphoorty Financial Ltd",
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:37:47.086543+00:00",
+      "generated_at": "2026-06-26T03:19:47.312199+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -1880,13 +1818,13 @@
       "day_change_pct": 1.14
     },
     {
-      "id": "EDELWEISS_20260625_DEMAND_0",
+      "id": "EDELWEISS_20260626_DEMAND_0",
       "symbol": "EDELWEISS",
       "name": "Edelweiss Financial Services Ltd",
       "sector": "Financial Services",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-25T12:39:41.751994+00:00",
+      "generated_at": "2026-06-26T03:21:49.680211+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
