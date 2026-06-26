@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView,
-  Alert, TextInput, Platform,
+  Alert, TextInput, Platform, KeyboardAvoidingView,
 } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useRouter } from 'expo-router'
@@ -24,9 +24,13 @@ export default function ProfileScreen() {
   const [fullName, setFullName] = useState(profile?.fullName ?? '')
   const [dob, setDob] = useState(profile?.dob ?? '')
   const [dobDate, setDobDate] = useState<Date>(() => {
-    if (profile?.dob) {
-      const [d, m, y] = profile.dob.split('/')
-      return new Date(Number(y), Number(m) - 1, Number(d))
+    const raw = profile?.dob ?? ''
+    if (raw) {
+      const parts = raw.split('/')
+      if (parts.length === 3) {
+        const parsed = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]))
+        if (!isNaN(parsed.getTime())) return parsed
+      }
     }
     return new Date(2000, 0, 1)
   })
