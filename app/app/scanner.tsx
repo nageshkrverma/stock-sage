@@ -427,6 +427,7 @@ function AddTradeModal({ visible, symbol, name, defaultPrice, defaultType, onClo
 
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
       <View style={modal.overlay}>
         <View style={modal.sheet}>
           <View style={modal.handle} />
@@ -453,6 +454,7 @@ function AddTradeModal({ visible, symbol, name, defaultPrice, defaultType, onClo
           </View>
         </View>
       </View>
+      </KeyboardAvoidingView>
     </Modal>
   )
 }

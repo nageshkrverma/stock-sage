@@ -8,6 +8,8 @@ import {
   TextInput,
   Modal,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useSignals } from '../../hooks/useSignals'
@@ -207,6 +209,7 @@ export default function SignalDetailScreen() {
 
       {/* Add Trade Modal */}
       <Modal visible={showAddTrade} transparent animationType="slide">
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <TouchableOpacity
           style={styles.modalOverlay}
           activeOpacity={1}
@@ -272,6 +275,7 @@ export default function SignalDetailScreen() {
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
+        </KeyboardAvoidingView>
       </Modal>
     </ScrollView>
   )
