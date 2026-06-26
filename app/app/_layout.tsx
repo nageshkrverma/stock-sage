@@ -3,6 +3,7 @@ import { Tabs, useRouter, useSegments } from 'expo-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { StatusBar } from 'expo-status-bar'
 import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { AuthProvider, useAuth } from '../context/AuthContext'
 import { AlertsProvider } from '../context/AlertsContext'
 import { useOTAUpdate } from '../hooks/useOTAUpdate'
@@ -54,33 +55,27 @@ function PushNotificationRegistrar() {
   return null
 }
 
-export default function RootLayout() {
+function AppTabs() {
+  const insets = useSafeAreaInsets()
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <AlertsProvider>
-        <OTAUpdateChecker />
-        <PushNotificationRegistrar />
-        <StatusBar style="light" backgroundColor="#0A0A0F" />
-        <AuthGuard>
-          <Tabs
-            screenOptions={{
-              headerStyle: { backgroundColor: '#0A0A0F', shadowColor: 'transparent', elevation: 0 },
-              headerTintColor: '#FFFFFF',
-              headerTitleStyle: { fontWeight: '800', fontSize: 20, letterSpacing: -0.5 },
-              tabBarStyle: {
-                backgroundColor: '#0D0D14',
-                borderTopColor: '#1E1E2E',
-                borderTopWidth: 1,
-                height: 64,
-                paddingBottom: 8,
-                paddingTop: 6,
-              },
-              tabBarActiveTintColor: '#6C63FF',
-              tabBarInactiveTintColor: '#4A4A6A',
-              tabBarLabelStyle: { fontSize: 12, fontWeight: '700', marginTop: 2 },
-            }}
-          >
+    <Tabs
+      screenOptions={{
+        headerStyle: { backgroundColor: '#0A0A0F', shadowColor: 'transparent', elevation: 0 },
+        headerTintColor: '#FFFFFF',
+        headerTitleStyle: { fontWeight: '800', fontSize: 20, letterSpacing: -0.5 },
+        tabBarStyle: {
+          backgroundColor: '#0D0D14',
+          borderTopColor: '#1E1E2E',
+          borderTopWidth: 1,
+          height: 56 + insets.bottom,
+          paddingBottom: insets.bottom,
+          paddingTop: 6,
+        },
+        tabBarActiveTintColor: '#6C63FF',
+        tabBarInactiveTintColor: '#4A4A6A',
+        tabBarLabelStyle: { fontSize: 12, fontWeight: '700', marginTop: 2 },
+      }}
+    >
             <Tabs.Screen
               name="index"
               options={{
@@ -122,7 +117,20 @@ export default function RootLayout() {
             <Tabs.Screen name="register" options={{ href: null, headerShown: false }} />
             <Tabs.Screen name="profile" options={{ href: null, headerShown: false, title: 'My Profile' }} />
             <Tabs.Screen name="paywall" options={{ href: null, headerShown: false }} />
-          </Tabs>
+    </Tabs>
+  )
+}
+
+export default function RootLayout() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <AlertsProvider>
+        <OTAUpdateChecker />
+        <PushNotificationRegistrar />
+        <StatusBar style="light" backgroundColor="#0A0A0F" />
+        <AuthGuard>
+          <AppTabs />
         </AuthGuard>
         </AlertsProvider>
       </AuthProvider>

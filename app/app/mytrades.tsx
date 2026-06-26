@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import {
   View, Text, FlatList, TouchableOpacity, StyleSheet,
-  ActivityIndicator, Modal, TextInput, Alert, ScrollView,
+  ActivityIndicator, Modal, TextInput, Alert, ScrollView, KeyboardAvoidingView, Platform,
 } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useTrades } from '../hooks/useTrades'
@@ -351,6 +351,7 @@ export default function MyTradesScreen() {
 
       {/* ADD / EDIT POSITION MODAL */}
       <Modal visible={showAddModal} transparent animationType="slide" onRequestClose={resetAddForm}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <TouchableOpacity style={s.overlay} activeOpacity={1} onPress={resetAddForm}>
           <View style={s.sheet} onStartShouldSetResponder={() => true}>
             <View style={s.handle} />
@@ -392,6 +393,7 @@ export default function MyTradesScreen() {
             </View>
           </View>
         </TouchableOpacity>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   )

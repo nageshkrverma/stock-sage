@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import {
   View, Text, ScrollView, TouchableOpacity, StyleSheet,
-  TextInput, Modal, ActivityIndicator, Alert, Animated,
+  TextInput, Modal, ActivityIndicator, Alert, Animated, KeyboardAvoidingView, Platform,
 } from 'react-native'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useSignals } from '../../hooks/useSignals'
@@ -509,6 +509,7 @@ export default function StockDetailScreen() {
 
       {/* VERDICT INPUT MODAL */}
       <Modal visible={showVerdictModal} transparent animationType="slide" onRequestClose={() => setShowVerdictModal(false)}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPress={() => setShowVerdictModal(false)}>
           <View style={styles.bottomSheet} onStartShouldSetResponder={() => true}>
             <View style={styles.sheetHandle} />
@@ -556,22 +557,26 @@ export default function StockDetailScreen() {
             </View>
           </View>
         </TouchableOpacity>
+        </KeyboardAvoidingView>
       </Modal>
 
       {/* ADD PAPER TRADE MODAL */}
       <Modal visible={showAddTrade} transparent animationType="slide" onRequestClose={() => setShowAddTrade(false)}>
-        <AddTradeSheet
-          symbol={sym}
-          name={displayName}
-          defaultPrice={liveQuote?.price ?? 0}
-          defaultType={existingSignal?.signal_type === 'SELL' ? 'SHORT' : 'BUY'}
-          onClose={() => setShowAddTrade(false)}
-          onAdd={handleAddTrade}
-        />
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+          <AddTradeSheet
+            symbol={sym}
+            name={displayName}
+            defaultPrice={liveQuote?.price ?? 0}
+            defaultType={existingSignal?.signal_type === 'SELL' ? 'SHORT' : 'BUY'}
+            onClose={() => setShowAddTrade(false)}
+            onAdd={handleAddTrade}
+          />
+        </KeyboardAvoidingView>
       </Modal>
 
       {/* PRICE ALERT MODAL */}
       <Modal visible={alertModal} transparent animationType="slide" onRequestClose={() => setAlertModal(false)}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <View style={styles.modalOverlay}>
           <View style={[styles.bottomSheet, { paddingBottom: 40 }]}>
             <View style={styles.sheetHandle} />
@@ -592,6 +597,7 @@ export default function StockDetailScreen() {
             </View>
           </View>
         </View>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   )
