@@ -78,10 +78,29 @@ def get_intraday_candles(instrument_key: str, interval: str, token: str) -> list
     return resp.json().get('data', {}).get('candles', [])
 
 
+def aggregate_to_5min(candles_1min: list, ist) -> list:
+    """Aggregate 1-min candles into 5-min candles."""
+    buckets = {}
+    for c in candles_1min:
+        ts  = datetime.fromisoformat(c[0]).astimezone(ist)
+        # Round down to nearest 5-min
+        bucket_min = (ts.minute // 5) * 5
+        key = ts.replace(minute=bucket_min, second=0, microsecond=0)
+        if key not in buckets:
+            buckets[key] = {'open': float(c[1]), 'high': float(c[2]),
+                            'low': float(c[3]), 'close': float(c[4]),
+                            'volume': float(c[5]), 'ts': key}
+        else:
+            buckets[key]['high']   = max(buckets[key]['high'],   float(c[2]))
+            buckets[key]['low']    = min(buckets[key]['low'],    float(c[3]))
+            buckets[key]['close']  = float(c[4])
+            buckets[key]['volume'] += float(c[5])
+    return sorted(buckets.values(), key=lambda x: x['ts'])
+
+
 def get_orb(instrument_key: str, token: str) -> dict | None:
     """
-    Returns the Opening Range (9:15–10:15 AM IST).
-    Uses two 30-min candles: 9:15 and 9:45 AM. High = max of both, Low = min of both.
+    Returns the Opening Range (9:15–10:15 AM IST) using 5-min candles.
     Returns None if market hasn't reached 10:15 AM yet.
     """
     ist = timezone(timedelta(hours=5, minutes=30))
@@ -90,20 +109,22 @@ def get_orb(instrument_key: str, token: str) -> dict | None:
     if now < orb_end:
         return None  # ORB still forming
 
-    candles = get_intraday_candles(instrument_key, '30minute', token)
-    orb_candles = []
-    for c in candles:
-        ts_ist = datetime.fromisoformat(c[0]).astimezone(ist)
-        if ts_ist.hour == 9 and ts_ist.minute in (15, 45):
-            orb_candles.append(c)
+    raw      = get_intraday_candles(instrument_key, '1minute', token)
+    candles5 = aggregate_to_5min(raw, ist)
 
+    orb_candles = [
+        c for c in candles5
+        if (c['ts'].hour == 9 and c['ts'].minute >= 15) or
+           (c['ts'].hour == 10 and c['ts'].minute < 15)
+    ]
     if not orb_candles:
         return None
 
-    orb_high   = max(float(c[2]) for c in orb_candles)
-    orb_low    = min(float(c[3]) for c in orb_candles)
-    orb_volume = sum(float(c[5]) for c in orb_candles)
-    return {'high': orb_high, 'low': orb_low, 'volume': orb_volume}
+    return {
+        'high':   max(c['high']   for c in orb_candles),
+        'low':    min(c['low']    for c in orb_candles),
+        'volume': sum(c['volume'] for c in orb_candles),
+    }
 
 
 def check_orb_breakout(instrument_key: str, orb: dict, token: str) -> dict:
@@ -115,21 +136,14 @@ def check_orb_breakout(instrument_key: str, orb: dict, token: str) -> dict:
     Returns dict with keys: status, direction, signal_type, probability_boost
     """
     ist      = timezone(timedelta(hours=5, minutes=30))
-    candles  = get_intraday_candles(instrument_key, '30minute', token)
+    raw      = get_intraday_candles(instrument_key, '1minute', token)
+    candles5 = aggregate_to_5min(raw, ist)
 
-    # Filter candles after 10:15 AM, oldest first
-    post_orb = []
-    for c in candles:
-        ts     = datetime.fromisoformat(c[0]).astimezone(ist)
-        if ts.hour > 10 or (ts.hour == 10 and ts.minute >= 15):
-            post_orb.append({
-                'ts':     ts,
-                'open':   float(c[1]),
-                'high':   float(c[2]),
-                'low':    float(c[3]),
-                'close':  float(c[4]),
-                'volume': float(c[5]),
-            })
+    # Filter 5-min candles after 10:15 AM, oldest first
+    post_orb = [
+        c for c in candles5
+        if c['ts'].hour > 10 or (c['ts'].hour == 10 and c['ts'].minute >= 15)
+    ]
     post_orb.sort(key=lambda x: x['ts'])
 
     if not post_orb:
