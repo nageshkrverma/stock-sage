@@ -6,7 +6,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Svg, { Rect, Text as SvgText, Line } from 'react-native-svg'
 
-import { FNO_RAW_URL } from '../constants/config'
+import { FNO_RAW_URL, REFRESH_INTERVAL } from '../constants/config'
 const MAX_TRADES_PER_DAY = 2
 const TRADE_KEY = 'fno_trade_count'
 const TRADE_DATE_KEY = 'fno_trade_date'
@@ -544,6 +544,8 @@ export default function FNOScreen() {
   useEffect(() => {
     loadTradeCount()
     fetchData().finally(() => setLoading(false))
+    const id = setInterval(fetchData, REFRESH_INTERVAL)
+    return () => clearInterval(id)
   }, [])
 
   const onRefresh = useCallback(async () => {
