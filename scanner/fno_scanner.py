@@ -1,6 +1,5 @@
 """
-Fetches NIFTY/BANKNIFTY option chain from Yahoo Finance.
-Yahoo has full NSE OI + LTP data and is accessible from GitHub Actions.
+Fetches NIFTY/BANKNIFTY option chain via yfinance.
 Writes data/fno.json committed to GitHub, served to the app.
 """
 
@@ -10,61 +9,15 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-import requests
+import yfinance as yf
 
 DATA_DIR = Path(__file__).parent.parent / 'data'
 FNO_FILE = DATA_DIR / 'fno.json'
 
 SYMBOLS = {
-    'NIFTY':     {'yahoo': '^NSEI',   'lot': 75,  'step': 50},
-    'BANKNIFTY': {'yahoo': '^NSEBANK','lot': 30,  'step': 100},
+    'NIFTY':     {'yahoo': '^NSEI',    'lot': 75,  'step': 50},
+    'BANKNIFTY': {'yahoo': '^NSEBANK', 'lot': 30,  'step': 100},
 }
-
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'Accept': 'application/json',
-}
-
-
-def fetch_yahoo_options(ticker: str) -> dict:
-    """Fetch option chain from Yahoo Finance v8 API."""
-    url = f'https://query1.finance.yahoo.com/v8/finance/chart/{requests.utils.quote(ticker)}'
-    r = requests.get(url, headers=HEADERS, timeout=15)
-    r.raise_for_status()
-    chart = r.json()['chart']['result'][0]
-    quote = chart['meta']
-    price = quote.get('regularMarketPrice', 0)
-    prev  = quote.get('previousClose', price)
-    change = round(price - prev, 2)
-    change_pct = round((change / prev) * 100, 2) if prev else 0
-
-    # Fetch option chain
-    opt_url = f'https://query1.finance.yahoo.com/v8/finance/options/{requests.utils.quote(ticker)}'
-    r2 = requests.get(opt_url, headers=HEADERS, timeout=15)
-    r2.raise_for_status()
-    data = r2.json()
-    result = data.get('optionChain', {}).get('result', [])
-    if not result:
-        return {'price': price, 'change': change, 'change_pct': change_pct,
-                'expiry': 'Weekly', 'options': []}
-
-    # Use nearest expiry
-    chain   = result[0]
-    expiry_ts = chain.get('expirationDates', [None])[0]
-    expiry_str = (datetime.utcfromtimestamp(expiry_ts).strftime('%d-%b-%Y').upper()
-                  if expiry_ts else 'Weekly')
-    options = chain.get('options', [{}])[0]
-    calls   = options.get('calls', [])
-    puts    = options.get('puts',  [])
-
-    return {
-        'price':      price,
-        'change':     change,
-        'change_pct': change_pct,
-        'expiry':     expiry_str,
-        'calls':      calls,
-        'puts':       puts,
-    }
 
 
 def calc_max_pain(strike_map: dict, strikes: list) -> int:
@@ -80,36 +33,51 @@ def calc_max_pain(strike_map: dict, strikes: list) -> int:
 
 
 def analyze(symbol: str, cfg: dict) -> dict:
-    raw = fetch_yahoo_options(cfg['yahoo'])
-    price  = raw['price']
+    ticker = yf.Ticker(cfg['yahoo'])
     step   = cfg['step']
     lot    = cfg['lot']
-    expiry = raw['expiry']
 
-    calls = raw.get('calls', [])
-    puts  = raw.get('puts',  [])
+    # Current price
+    info   = ticker.fast_info
+    price  = float(info.last_price or 0)
+    prev   = float(info.previous_close or price)
+    change     = round(price - prev, 2)
+    change_pct = round((change / prev) * 100, 2) if prev else 0
+
+    # Option chain — nearest expiry
+    dates  = ticker.options
+    if not dates:
+        raise RuntimeError(f'No options dates for {symbol}')
+    expiry_str = dates[0]
+    chain  = ticker.option_chain(expiry_str)
+    calls  = chain.calls
+    puts   = chain.puts
+
+    # Friendly expiry format
+    try:
+        expiry_fmt = datetime.strptime(expiry_str, '%Y-%m-%d').strftime('%d-%b-%Y').upper()
+    except Exception:
+        expiry_fmt = expiry_str
 
     # Build strike map
     strike_map: dict[int, dict] = {}
-    for c in calls:
-        k = int(c.get('strike', 0))
-        if k not in strike_map:
-            strike_map[k] = {'calls_oi': 0, 'puts_oi': 0,
-                              'calls_ltp': 0.0, 'puts_ltp': 0.0, 'calls_iv': 0.0}
-        strike_map[k]['calls_oi']  = c.get('openInterest', 0)
-        strike_map[k]['calls_ltp'] = c.get('lastPrice', 0.0)
-        strike_map[k]['calls_iv']  = c.get('impliedVolatility', 0.0) * 100
+    for _, row in calls.iterrows():
+        k = int(row['strike'])
+        strike_map.setdefault(k, {'calls_oi': 0, 'puts_oi': 0,
+                                   'calls_ltp': 0.0, 'puts_ltp': 0.0, 'calls_iv': 0.0})
+        strike_map[k]['calls_oi']  = int(row.get('openInterest', 0) or 0)
+        strike_map[k]['calls_ltp'] = float(row.get('lastPrice', 0.0) or 0.0)
+        strike_map[k]['calls_iv']  = float(row.get('impliedVolatility', 0.0) or 0.0) * 100
 
-    for p in puts:
-        k = int(p.get('strike', 0))
-        if k not in strike_map:
-            strike_map[k] = {'calls_oi': 0, 'puts_oi': 0,
-                              'calls_ltp': 0.0, 'puts_ltp': 0.0, 'calls_iv': 0.0}
-        strike_map[k]['puts_oi']  = p.get('openInterest', 0)
-        strike_map[k]['puts_ltp'] = p.get('lastPrice', 0.0)
+    for _, row in puts.iterrows():
+        k = int(row['strike'])
+        strike_map.setdefault(k, {'calls_oi': 0, 'puts_oi': 0,
+                                   'calls_ltp': 0.0, 'puts_ltp': 0.0, 'calls_iv': 0.0})
+        strike_map[k]['puts_oi']  = int(row.get('openInterest', 0) or 0)
+        strike_map[k]['puts_ltp'] = float(row.get('lastPrice', 0.0) or 0.0)
 
     if not strike_map:
-        raise RuntimeError(f'No option data for {symbol}')
+        raise RuntimeError(f'Empty strike map for {symbol}')
 
     strikes = sorted(strike_map.keys())
     atm     = min(strikes, key=lambda k: abs(k - price))
@@ -137,9 +105,9 @@ def analyze(symbol: str, cfg: dict) -> dict:
     is_bull = direction == 'CALL'
 
     # Scores
-    nearby_oi    = sum(strike_map.get(k, {}).get('calls_oi', 0) +
-                       strike_map.get(k, {}).get('puts_oi', 0)
-                       for k in [atm - step, atm, atm + step])
+    nearby_oi     = sum(strike_map.get(k, {}).get('calls_oi', 0) +
+                        strike_map.get(k, {}).get('puts_oi', 0)
+                        for k in [atm - step, atm, atm + step])
     zone_strength = min(90, int(40 + min(30, abs(pcr - 1.0) * 30) + min(20, nearby_oi / 5000)))
     time_align    = min(90, int(zone_strength * 0.6 + abs(pcr - 1.0) * 15))
     probability   = min(85, max(45, int(zone_strength * 0.5 + time_align * 0.3 +
@@ -152,7 +120,6 @@ def analyze(symbol: str, cfg: dict) -> dict:
 
     suggested_strike = (atm + step if is_bull else atm - step) if iv_rank > 60 else atm
 
-    # Real LTP from Yahoo
     def get_ltp(strike, call=True):
         key = 'calls_ltp' if call else 'puts_ltp'
         ltp = strike_map.get(strike, {}).get(key, 0.0)
@@ -168,7 +135,6 @@ def analyze(symbol: str, cfg: dict) -> dict:
     stop_loss  = int(demand_zone['low'] - step if is_bull else supply_zone['high'] + step)
     target_lvl = int(supply_zone['low']        if is_bull else demand_zone['high'])
 
-    # OI heatmap
     oi_range = price * 0.06
     oi_data  = [
         {'strike': k, 'calls_oi': strike_map[k]['calls_oi'], 'puts_oi': strike_map[k]['puts_oi']}
@@ -198,19 +164,19 @@ def analyze(symbol: str, cfg: dict) -> dict:
         'pcr':                 pcr,
         'pcr_label':           'BULLISH' if pcr >= 1.0 else 'BEARISH',
         'max_pain':            max_pain,
-        'nearest_expiry':      expiry,
+        'nearest_expiry':      expiry_fmt,
         'time_window':         'GOOD',
         'zone_strength':       zone_strength,
         'psychology_signals':  [],
         'timeframe_alignment': time_align,
         'oi_analysis':         oi_analysis,
-        'change':              raw['change'],
-        'change_pct':          raw['change_pct'],
+        'change':              change,
+        'change_pct':          change_pct,
         'oi_data':             oi_data,
         'signal': {
             'option_name':    f'{symbol} {suggested_strike} {"CE" if is_bull else "PE"}',
             'action':         'BUY CALL' if is_bull else 'BUY PUT',
-            'expiry':         expiry,
+            'expiry':         expiry_fmt,
             'lot_size':       lot,
             'premium':        premium,
             'entry_low':      entry_low,
@@ -228,7 +194,7 @@ def run_fno_scan() -> bool:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     now_ist = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S+05:30')
 
-    print('F&O Scanner: fetching from Yahoo Finance...')
+    print('F&O Scanner: fetching via yfinance...')
     result  = {'timestamp': now_ist, 'source': 'yahoo'}
     success = False
 
@@ -237,7 +203,8 @@ def run_fno_scan() -> bool:
             data = analyze(symbol, cfg)
             result[symbol.lower()] = data
             print(f'  ✅ {symbol}: {data["current_level"]} | {data["direction"]} | '
-                  f'PCR {data["pcr"]} | {data["signal"]["option_name"]} LTP ₹{data["signal"]["premium"]}')
+                  f'PCR {data["pcr"]} | {data["signal"]["option_name"]} '
+                  f'LTP ₹{data["signal"]["premium"]} | Expiry {data["nearest_expiry"]}')
             success = True
         except Exception as e:
             print(f'  ❌ {symbol}: {e}', file=sys.stderr)

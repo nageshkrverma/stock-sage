@@ -66,7 +66,7 @@ jobs:
           cache: 'pip'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install yfinance
 
       - name: Run F&O scanner
         run: python scanner/fno_scanner.py
