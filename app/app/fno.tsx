@@ -357,10 +357,19 @@ function IndexCard({
         <Text style={[s.dirText, { color: dirColor }]}>{dirLabel}</Text>
       </View>
 
-      {/* Trade signal */}
-      {setup.signal && setup.signal.premium > 0 && (
+      {/* Trade signal or ORB status */}
+      {setup.signal && (setup.signal as any).premium > 0 ? (
         <TradeSignalCard signal={setup.signal} timeWindow={setup.time_window} />
-      )}
+      ) : (setup as any).orb_message ? (
+        <View style={s.orbBanner}>
+          <Text style={s.orbIcon}>
+            {(setup as any).orb_status === 'FORMING'       ? '⏳' :
+             (setup as any).orb_status === 'FALSE_BREAKOUT' ? '⚠️' :
+             (setup as any).orb_status === 'CHOPPY'         ? '🚫' : '📊'}
+          </Text>
+          <Text style={s.orbText}>{(setup as any).orb_message}</Text>
+        </View>
+      ) : null}
 
       {/* Time window */}
       <View style={[s.timeRow, { backgroundColor: timeColor + '15' }]}>
@@ -585,6 +594,9 @@ const s = StyleSheet.create({
   demoBanner: { backgroundColor: '#FFD32A20', borderWidth: 1, borderColor: '#FFD32A40', marginHorizontal: 16, marginBottom: 10, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8 },
   demoBannerText: { color: '#FFD32A', fontSize: 12, fontWeight: '600', textAlign: 'center' },
   timestamp: { color: '#4A4A6A', fontSize: 11, textAlign: 'center', marginBottom: 8 },
+  orbBanner: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#1A1A2E', borderRadius: 12, padding: 14, marginHorizontal: 16, marginTop: 8, borderWidth: 1, borderColor: '#2E2E4E', gap: 10 },
+  orbIcon:   { fontSize: 20 },
+  orbText:   { color: '#A0A0C0', fontSize: 13, fontWeight: '600', flex: 1 },
 
   indexCard: { backgroundColor: '#13131A', borderRadius: 16, marginHorizontal: 16, marginBottom: 16, padding: 16, borderWidth: 1, borderColor: '#1E1E2E' },
 
