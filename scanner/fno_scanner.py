@@ -80,7 +80,8 @@ def get_intraday_candles(instrument_key: str, interval: str, token: str) -> list
 
 def get_orb(instrument_key: str, token: str) -> dict | None:
     """
-    Returns the Opening Range (9:15–10:15 AM IST) as a single 60-min candle.
+    Returns the Opening Range (9:15–10:15 AM IST).
+    Uses two 30-min candles: 9:15 and 9:45 AM. High = max of both, Low = min of both.
     Returns None if market hasn't reached 10:15 AM yet.
     """
     ist = timezone(timedelta(hours=5, minutes=30))
@@ -89,15 +90,20 @@ def get_orb(instrument_key: str, token: str) -> dict | None:
     if now < orb_end:
         return None  # ORB still forming
 
-    candles = get_intraday_candles(instrument_key, '60minute', token)
-    # Each candle: [timestamp, open, high, low, close, volume, oi]
+    candles = get_intraday_candles(instrument_key, '30minute', token)
+    orb_candles = []
     for c in candles:
-        ts = datetime.fromisoformat(c[0])
-        ts_ist = ts.astimezone(ist)
-        # 9:15 AM candle is the opening range
-        if ts_ist.hour == 9 and ts_ist.minute == 15:
-            return {'high': float(c[2]), 'low': float(c[3]), 'volume': float(c[5])}
-    return None
+        ts_ist = datetime.fromisoformat(c[0]).astimezone(ist)
+        if ts_ist.hour == 9 and ts_ist.minute in (15, 45):
+            orb_candles.append(c)
+
+    if not orb_candles:
+        return None
+
+    orb_high   = max(float(c[2]) for c in orb_candles)
+    orb_low    = min(float(c[3]) for c in orb_candles)
+    orb_volume = sum(float(c[5]) for c in orb_candles)
+    return {'high': orb_high, 'low': orb_low, 'volume': orb_volume}
 
 
 def check_orb_breakout(instrument_key: str, orb: dict, token: str) -> dict:
@@ -109,7 +115,7 @@ def check_orb_breakout(instrument_key: str, orb: dict, token: str) -> dict:
     Returns dict with keys: status, direction, signal_type, probability_boost
     """
     ist      = timezone(timedelta(hours=5, minutes=30))
-    candles  = get_intraday_candles(instrument_key, '10minute', token)
+    candles  = get_intraday_candles(instrument_key, '30minute', token)
 
     # Filter candles after 10:15 AM, oldest first
     post_orb = []
