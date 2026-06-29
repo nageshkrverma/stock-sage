@@ -320,12 +320,13 @@ function ScoreBar({ label, value, color }: { label: string; value: number; color
 
 // ── Index setup card ─────────────────────────────────────────────────────────
 function IndexCard({
-  name, setup, tradesUsed, onLogTrade,
+  name, setup, tradesUsed, onLogTrade, isLive,
 }: {
   name: string
   setup: IndexSetup
   tradesUsed: number
   onLogTrade: () => void
+  isLive?: boolean
 }) {
   const isBull = setup.direction === 'CALL'
   const dirColor = isBull ? '#00C896' : '#FF4757'
@@ -338,7 +339,10 @@ function IndexCard({
       {/* Header */}
       <View style={s.indexHeader}>
         <View>
-          <Text style={s.indexName}>{name}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            <Text style={s.indexName}>{name}</Text>
+            {isLive && <View style={s.liveDot}><Text style={s.liveText}>LIVE</Text></View>}
+          </View>
           <Text style={s.indexLevel}>
             {formatNum(setup.current_level)}{' '}
             <Text style={{ color: setup.change_pct >= 0 ? '#00C896' : '#FF4757', fontSize: 13 }}>
@@ -449,6 +453,32 @@ function LevelBox({ label, value, color }: { label: string; value: string; color
   )
 }
 
+const YAHOO_SYMBOLS: Record<'NIFTY' | 'BANKNIFTY', string> = {
+  NIFTY:     '%5ENSEI',
+  BANKNIFTY: '%5ENSEBANK',
+}
+
+async function fetchLivePrice(index: 'NIFTY' | 'BANKNIFTY'): Promise<{ price: number; change: number; changePct: number } | null> {
+  try {
+    const sym = YAHOO_SYMBOLS[index]
+    const res = await fetch(
+      `https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1m&range=1d`,
+      { headers: { 'Cache-Control': 'no-cache' } }
+    )
+    if (!res.ok) return null
+    const json = await res.json()
+    const meta = json?.chart?.result?.[0]?.meta
+    if (!meta) return null
+    const price     = meta.regularMarketPrice ?? 0
+    const prevClose = meta.chartPreviousClose ?? meta.previousClose ?? price
+    const change    = +(price - prevClose).toFixed(2)
+    const changePct = prevClose ? +(change / prevClose * 100).toFixed(2) : 0
+    return { price, change, changePct }
+  } catch {
+    return null
+  }
+}
+
 // ── Main screen ───────────────────────────────────────────────────────────────
 export default function FNOScreen() {
   const [data, setData] = useState<FNOData | null>(null)
@@ -457,6 +487,7 @@ export default function FNOScreen() {
   const [error, setError] = useState<string | null>(null)
   const [tradesUsed, setTradesUsed] = useState(0)
   const [activeIndex, setActiveIndex] = useState<'NIFTY' | 'BANKNIFTY'>('NIFTY')
+  const [livePrice, setLivePrice] = useState<Record<'NIFTY' | 'BANKNIFTY', { price: number; change: number; changePct: number } | null>>({ NIFTY: null, BANKNIFTY: null })
 
   async function loadTradeCount() {
     const today = new Date().toISOString().slice(0, 10)
@@ -499,6 +530,17 @@ export default function FNOScreen() {
     }
   }
 
+  // Live price polling every 30 seconds from Yahoo Finance
+  useEffect(() => {
+    async function refreshLive() {
+      const [n, b] = await Promise.all([fetchLivePrice('NIFTY'), fetchLivePrice('BANKNIFTY')])
+      setLivePrice({ NIFTY: n, BANKNIFTY: b })
+    }
+    refreshLive()
+    const id = setInterval(refreshLive, 30_000)
+    return () => clearInterval(id)
+  }, [])
+
   useEffect(() => {
     loadTradeCount()
     fetchData().finally(() => setLoading(false))
@@ -521,7 +563,11 @@ export default function FNOScreen() {
 
   if (!data) return null
 
-  const setup = activeIndex === 'NIFTY' ? data.nifty : data.banknifty
+  const baseSetup = activeIndex === 'NIFTY' ? data.nifty : data.banknifty
+  const live = livePrice[activeIndex]
+  const setup = live
+    ? { ...baseSetup, current_level: live.price, change: live.change, change_pct: live.changePct }
+    : baseSetup
 
   return (
     <ScrollView
@@ -565,6 +611,7 @@ export default function FNOScreen() {
         setup={setup}
         tradesUsed={tradesUsed}
         onLogTrade={logTrade}
+        isLive={!!live}
       />
 
       {/* OI Heatmap */}
@@ -594,6 +641,8 @@ const s = StyleSheet.create({
   demoBanner: { backgroundColor: '#FFD32A20', borderWidth: 1, borderColor: '#FFD32A40', marginHorizontal: 16, marginBottom: 10, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8 },
   demoBannerText: { color: '#FFD32A', fontSize: 12, fontWeight: '600', textAlign: 'center' },
   timestamp: { color: '#4A4A6A', fontSize: 11, textAlign: 'center', marginBottom: 8 },
+  liveDot:  { backgroundColor: '#00C89620', borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2, borderWidth: 1, borderColor: '#00C89660' },
+  liveText: { color: '#00C896', fontSize: 9, fontWeight: '800', letterSpacing: 0.5 },
   orbBanner: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#1A1A2E', borderRadius: 12, padding: 14, marginHorizontal: 16, marginTop: 8, borderWidth: 1, borderColor: '#2E2E4E', gap: 10 },
   orbIcon:   { fontSize: 20 },
   orbText:   { color: '#A0A0C0', fontSize: 13, fontWeight: '600', flex: 1 },
