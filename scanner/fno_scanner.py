@@ -55,19 +55,19 @@ def get_option_chain(instrument_key: str, expiry: str, token: str) -> dict:
     return resp.json().get('data', [])
 
 
-def get_ltp(instrument_key: str, token: str) -> float:
+def get_quote(instrument_key: str, token: str) -> dict:
+    """Returns dict with last_price, ohlc.close (prev close)."""
     resp = requests.get(
-        f'{BASE_URL}/market-quote/ltp',
+        f'{BASE_URL}/market-quote/quotes',
         params={'instrument_key': instrument_key},
         headers=get_headers(token),
         timeout=10,
     )
     resp.raise_for_status()
     data = resp.json().get('data', {})
-    # key format varies — grab first value
     for v in data.values():
-        return float(v.get('last_price', 0))
-    return 0.0
+        return v
+    return {}
 
 
 def calc_max_pain(strike_map: dict, strikes: list) -> int:
@@ -87,10 +87,14 @@ def analyze(symbol: str, cfg: dict, token: str) -> dict:
     lot  = cfg['lot']
     key  = cfg['key']
 
-    # Real current price
-    price = get_ltp(key, token)
+    # Real current price + change
+    quote      = get_quote(key, token)
+    price      = float(quote.get('last_price', 0))
+    prev_close = float(quote.get('ohlc', {}).get('close', price) or price)
     if not price:
         raise RuntimeError(f'No LTP for {symbol}')
+    change     = round(price - prev_close, 2)
+    change_pct = round((change / prev_close) * 100, 2) if prev_close else 0
 
     # Nearest expiry
     expiry_dates = get_expiry_dates(key, token)
@@ -222,8 +226,8 @@ def analyze(symbol: str, cfg: dict, token: str) -> dict:
         'psychology_signals':  [],
         'timeframe_alignment': time_align,
         'oi_analysis':         oi_analysis,
-        'change':              0,
-        'change_pct':          0,
+        'change':              change,
+        'change_pct':          change_pct,
         'oi_data':             oi_data,
         'signal': {
             'option_name':    f'{symbol} {suggested_strike} {"CE" if is_bull else "PE"}',
