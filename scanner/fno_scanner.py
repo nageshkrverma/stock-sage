@@ -463,6 +463,11 @@ def analyze(symbol: str, cfg: dict, token: str) -> dict:
     }
 
 
+def _setup_fingerprint(data: dict) -> str:
+    """Stable key identifying a setup — changes only when direction or ORB status changes."""
+    return f'{data.get("direction","")}-{data.get("orb_status","")}'
+
+
 def run_fno_scan() -> bool:
     token = os.environ.get('UPSTOX_ACCESS_TOKEN', '')
     if not token:
@@ -473,6 +478,15 @@ def run_fno_scan() -> bool:
     ist = timezone(timedelta(hours=5, minutes=30))
     now_ist = datetime.now(ist).strftime('%Y-%m-%dT%H:%M:%S+05:30')
 
+    # Load previous fno.json to carry forward first_seen when setup hasn't changed
+    prev = {}
+    if FNO_FILE.exists():
+        try:
+            with open(FNO_FILE) as f:
+                prev = json.load(f)
+        except Exception:
+            prev = {}
+
     print('F&O Scanner: fetching real NSE data via Upstox API...')
     result  = {'timestamp': now_ist, 'source': 'upstox'}
     success = False
@@ -480,10 +494,26 @@ def run_fno_scan() -> bool:
     for symbol, cfg in SYMBOLS.items():
         try:
             data = analyze(symbol, cfg, token)
+
+            # Carry forward first_seen if the setup fingerprint hasn't changed
+            prev_sym = prev.get(symbol.lower(), {})
+            new_fp   = _setup_fingerprint(data)
+            old_fp   = _setup_fingerprint(prev_sym)
+            if prev_sym and new_fp == old_fp and prev_sym.get('first_seen'):
+                data['first_seen'] = prev_sym['first_seen']
+            else:
+                data['first_seen'] = now_ist
+
             result[symbol.lower()] = data
-            print(f'  ✅ {symbol}: ₹{data["current_level"]:,} | {data["direction"]} | '
-                  f'PCR {data["pcr"]} | {data["signal"]["option_name"]} '
-                  f'LTP ₹{data["signal"]["premium"]} | Expiry {data["nearest_expiry"]}')
+            sig = data.get('signal')
+            if sig:
+                print(f'  ✅ {symbol}: ₹{data["current_level"]:,} | {data["direction"]} | '
+                      f'PCR {data["pcr"]} | {sig["option_name"]} '
+                      f'LTP ₹{sig["premium"]} | Expiry {data["nearest_expiry"]} | '
+                      f'first_seen {data["first_seen"]}')
+            else:
+                print(f'  ✅ {symbol}: ₹{data["current_level"]:,} | {data["direction"]} | '
+                      f'PCR {data["pcr"]} | orb={data["orb_status"]}')
             success = True
         except Exception as e:
             print(f'  ❌ {symbol}: {e}', file=sys.stderr)

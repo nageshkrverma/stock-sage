@@ -233,10 +233,18 @@ function OIHeatmap({ data, title }: { data: OIStrike[]; title: string }) {
 }
 
 // ── Trade Signal Card ────────────────────────────────────────────────────────
-function TradeSignalCard({ signal, timeWindow }: { signal: FNOSignal; timeWindow: string }) {
+function TradeSignalCard({ signal, timeWindow, firstSeen }: { signal: FNOSignal; timeWindow: string; firstSeen?: string }) {
   const isBull = signal.action === 'BUY CALL'
   const accentColor = isBull ? '#00C896' : '#FF4757'
   const isAvoid = timeWindow === 'AVOID'
+
+  const activeSince = firstSeen
+    ? (() => {
+        try {
+          return new Date(firstSeen).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Kolkata' })
+        } catch { return null }
+      })()
+    : null
 
   return (
     <View style={[ts.card, { borderColor: accentColor + '60' }]}>
@@ -245,6 +253,9 @@ function TradeSignalCard({ signal, timeWindow }: { signal: FNOSignal; timeWindow
         <View style={[ts.badge, { backgroundColor: accentColor + '20' }]}>
           <Text style={[ts.badgeText, { color: accentColor }]}>🎯 TRADE SIGNAL</Text>
         </View>
+        {activeSince && (
+          <Text style={ts.activeSince}>Active since {activeSince}</Text>
+        )}
         {isAvoid && (
           <View style={ts.avoidBadge}>
             <Text style={ts.avoidText}>Market Closed</Text>
@@ -363,7 +374,7 @@ function IndexCard({
 
       {/* Trade signal or ORB status */}
       {setup.signal && (setup.signal as any).premium > 0 ? (
-        <TradeSignalCard signal={setup.signal} timeWindow={setup.time_window} />
+        <TradeSignalCard signal={setup.signal} timeWindow={setup.time_window} firstSeen={(setup as any).first_seen} />
       ) : (setup as any).orb_message ? (
         <View style={s.orbBanner}>
           <Text style={s.orbIcon}>
@@ -708,6 +719,7 @@ const ts = StyleSheet.create({
   badgeText: { fontSize: 11, fontWeight: '800', letterSpacing: 0.8 },
   avoidBadge: { backgroundColor: '#FF475720', borderRadius: 6, paddingHorizontal: 8, paddingVertical: 4 },
   avoidText: { color: '#FF4757', fontSize: 10, fontWeight: '700' },
+  activeSince: { color: '#8B8FA8', fontSize: 10, marginLeft: 'auto' },
   optionName: { fontSize: 24, fontWeight: '900', letterSpacing: -0.5, marginBottom: 4 },
   ltpRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 },
   actionLabel: { color: '#8B8FA8', fontSize: 12 },
