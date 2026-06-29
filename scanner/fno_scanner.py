@@ -253,7 +253,8 @@ def run_fno_scan() -> bool:
         return False
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    now_ist = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S+05:30')
+    ist = timezone(timedelta(hours=5, minutes=30))
+    now_ist = datetime.now(ist).strftime('%Y-%m-%dT%H:%M:%S+05:30')
 
     print('F&O Scanner: fetching real NSE data via Upstox API...')
     result  = {'timestamp': now_ist, 'source': 'upstox'}
