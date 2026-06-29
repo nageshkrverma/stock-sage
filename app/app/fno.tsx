@@ -6,7 +6,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Svg, { Rect, Text as SvgText, Line } from 'react-native-svg'
 
-import { FNO_RAW_URL, REFRESH_INTERVAL } from '../constants/config'
+import { FNO_RAW_URL, REFRESH_INTERVAL, GAS_LTP_URL } from '../constants/config'
 const MAX_TRADES_PER_DAY = 2
 const TRADE_KEY = 'fno_trade_count'
 const TRADE_DATE_KEY = 'fno_trade_date'
@@ -233,7 +233,7 @@ function OIHeatmap({ data, title }: { data: OIStrike[]; title: string }) {
 }
 
 // ── Trade Signal Card ────────────────────────────────────────────────────────
-function TradeSignalCard({ signal, timeWindow, firstSeen }: { signal: FNOSignal; timeWindow: string; firstSeen?: string }) {
+function TradeSignalCard({ signal, timeWindow, firstSeen, liveLTP }: { signal: FNOSignal; timeWindow: string; firstSeen?: string; liveLTP?: number | null }) {
   const isBull = signal.action === 'BUY CALL'
   const accentColor = isBull ? '#00C896' : '#FF4757'
   const isAvoid = timeWindow === 'AVOID'
@@ -268,8 +268,8 @@ function TradeSignalCard({ signal, timeWindow, firstSeen }: { signal: FNOSignal;
       <View style={ts.ltpRow}>
         <Text style={ts.actionLabel}>{signal.action} · {signal.expiry} · Lot: {signal.lot_size}</Text>
         <View style={[ts.ltpBadge, { backgroundColor: accentColor + '20', borderColor: accentColor + '60' }]}>
-          <Text style={ts.ltpLabel}>LTP</Text>
-          <Text style={[ts.ltpValue, { color: accentColor }]}>₹{signal.premium}</Text>
+          <Text style={ts.ltpLabel}>{liveLTP ? 'LIVE' : 'LTP'}</Text>
+          <Text style={[ts.ltpValue, { color: liveLTP ? '#00C896' : accentColor }]}>₹{liveLTP ?? signal.premium}</Text>
         </View>
       </View>
 
@@ -331,19 +331,28 @@ function ScoreBar({ label, value, color }: { label: string; value: number; color
 
 // ── Index setup card ─────────────────────────────────────────────────────────
 function IndexCard({
-  name, setup, tradesUsed, onLogTrade, isLive,
+  name, setup, tradesUsed, onLogTrade, isLive, liveLTP, liveIndexPrice,
 }: {
   name: string
   setup: IndexSetup
   tradesUsed: number
   onLogTrade: () => void
   isLive?: boolean
+  liveLTP?: number | null
+  liveIndexPrice?: number | null
 }) {
   const isBull = setup.direction === 'CALL'
   const dirColor = isBull ? '#00C896' : '#FF4757'
   const dirLabel = isBull ? 'CALL SIDE 📈' : 'PUT SIDE 📉'
   const tradesLeft = MAX_TRADES_PER_DAY - tradesUsed
   const timeColor = timeWindowColor(setup.time_window)
+
+  // Client-side signal invalidation: check if live index price is back inside ORB range
+  const orbHigh = (setup as any).orb_high as number | undefined
+  const orbLow  = (setup as any).orb_low  as number | undefined
+  const signalActive = !!(setup as any).signal
+  const signalInvalid = signalActive && liveIndexPrice != null && orbHigh != null && orbLow != null
+    && liveIndexPrice > orbLow && liveIndexPrice < orbHigh
 
   return (
     <View style={s.indexCard}>
@@ -372,9 +381,16 @@ function IndexCard({
         <Text style={[s.dirText, { color: dirColor }]}>{dirLabel}</Text>
       </View>
 
+      {/* Signal invalidation warning */}
+      {signalInvalid && (
+        <View style={s.invalidBanner}>
+          <Text style={s.invalidText}>⚠️ Price back inside ORB range — signal weakening, consider exiting</Text>
+        </View>
+      )}
+
       {/* Trade signal or ORB status */}
       {setup.signal && (setup.signal as any).premium > 0 ? (
-        <TradeSignalCard signal={setup.signal} timeWindow={setup.time_window} firstSeen={(setup as any).first_seen} />
+        <TradeSignalCard signal={setup.signal} timeWindow={setup.time_window} firstSeen={(setup as any).first_seen} liveLTP={liveLTP} />
       ) : (setup as any).orb_message ? (
         <View style={s.orbBanner}>
           <Text style={s.orbIcon}>
@@ -469,6 +485,18 @@ const YAHOO_SYMBOLS: Record<'NIFTY' | 'BANKNIFTY', string> = {
   BANKNIFTY: '%5ENSEBANK',
 }
 
+async function fetchOptionLTP(instrumentKey: string): Promise<number | null> {
+  if (!GAS_LTP_URL) return null
+  try {
+    const res = await fetch(`${GAS_LTP_URL}?instrument_key=${encodeURIComponent(instrumentKey)}`)
+    if (!res.ok) return null
+    const json = await res.json()
+    return json.ltp ?? null
+  } catch {
+    return null
+  }
+}
+
 async function fetchLivePrice(index: 'NIFTY' | 'BANKNIFTY'): Promise<{ price: number; change: number; changePct: number } | null> {
   try {
     const sym = YAHOO_SYMBOLS[index]
@@ -499,6 +527,7 @@ export default function FNOScreen() {
   const [tradesUsed, setTradesUsed] = useState(0)
   const [activeIndex, setActiveIndex] = useState<'NIFTY' | 'BANKNIFTY'>('NIFTY')
   const [livePrice, setLivePrice] = useState<Record<'NIFTY' | 'BANKNIFTY', { price: number; change: number; changePct: number } | null>>({ NIFTY: null, BANKNIFTY: null })
+  const [optionLTP, setOptionLTP] = useState<Record<'NIFTY' | 'BANKNIFTY', number | null>>({ NIFTY: null, BANKNIFTY: null })
 
   async function loadTradeCount() {
     const today = new Date().toISOString().slice(0, 10)
@@ -541,7 +570,7 @@ export default function FNOScreen() {
     }
   }
 
-  // Live price polling every 30 seconds from Yahoo Finance
+  // Live index price + option LTP polling every 30 seconds
   useEffect(() => {
     async function refreshLive() {
       const [n, b] = await Promise.all([fetchLivePrice('NIFTY'), fetchLivePrice('BANKNIFTY')])
@@ -551,6 +580,39 @@ export default function FNOScreen() {
     const id = setInterval(refreshLive, 30_000)
     return () => clearInterval(id)
   }, [])
+
+  // Option LTP polling — only when GAS_LTP_URL is configured and a signal is active
+  useEffect(() => {
+    if (!GAS_LTP_URL || !data) return
+    async function refreshOptionLTP() {
+      const results: Record<'NIFTY' | 'BANKNIFTY', number | null> = { NIFTY: null, BANKNIFTY: null }
+      for (const idx of ['NIFTY', 'BANKNIFTY'] as const) {
+        const setup = idx === 'NIFTY' ? data.nifty : data.banknifty
+        const sig = (setup as any).signal
+        if (sig?.option_name) {
+          // Build instrument key from option_name e.g. "NIFTY 23950 CE" → NSE_FO|...
+          // The scanner sets this — fetch from Upstox using suggested_strike + direction
+          const isBull = sig.action === 'BUY CALL'
+          const strike = (setup as any).suggested_strike
+          const expiry = (setup as any).nearest_expiry // e.g. "03-JUL-2026"
+          // Convert expiry to Upstox instrument key format YYMMDD
+          try {
+            const d = new Date(expiry.replace(/(\d+)-([A-Z]+)-(\d+)/, '$1 $2 $3'))
+            const yy = String(d.getFullYear()).slice(2)
+            const mm = String(d.getMonth() + 1).padStart(2, '0')
+            const dd = String(d.getDate()).padStart(2, '0')
+            const optType = isBull ? 'CE' : 'PE'
+            const key = `NSE_FO|${idx}${yy}${mm}${dd}${strike}${optType}`
+            results[idx] = await fetchOptionLTP(key)
+          } catch { /* ignore */ }
+        }
+      }
+      setOptionLTP(results)
+    }
+    refreshOptionLTP()
+    const id = setInterval(refreshOptionLTP, 30_000)
+    return () => clearInterval(id)
+  }, [data])
 
   useEffect(() => {
     loadTradeCount()
@@ -625,6 +687,8 @@ export default function FNOScreen() {
         tradesUsed={tradesUsed}
         onLogTrade={logTrade}
         isLive={!!live}
+        liveLTP={optionLTP[activeIndex]}
+        liveIndexPrice={live?.price ?? null}
       />
 
       {/* OI Heatmap */}
@@ -720,6 +784,8 @@ const ts = StyleSheet.create({
   avoidBadge: { backgroundColor: '#FF475720', borderRadius: 6, paddingHorizontal: 8, paddingVertical: 4 },
   avoidText: { color: '#FF4757', fontSize: 10, fontWeight: '700' },
   activeSince: { color: '#8B8FA8', fontSize: 10, marginLeft: 'auto' },
+  invalidBanner: { backgroundColor: '#FF475720', borderRadius: 10, padding: 10, marginBottom: 8, borderWidth: 1, borderColor: '#FF4757' },
+  invalidText: { color: '#FF4757', fontSize: 12, fontWeight: '700', textAlign: 'center' },
   optionName: { fontSize: 24, fontWeight: '900', letterSpacing: -0.5, marginBottom: 4 },
   ltpRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 },
   actionLabel: { color: '#8B8FA8', fontSize: 12 },

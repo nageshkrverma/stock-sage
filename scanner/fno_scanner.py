@@ -360,6 +360,9 @@ def analyze(symbol: str, cfg: dict, token: str) -> dict:
     now = datetime.now(ist)
     orb_end = now.replace(hour=10, minute=15, second=0, microsecond=0)
 
+    orb_high = None
+    orb_low  = None
+
     if now < orb_end:
         orb_status   = 'FORMING'
         orb_message  = 'Opening range forming — wait till 10:15 AM'
@@ -377,6 +380,8 @@ def analyze(symbol: str, cfg: dict, token: str) -> dict:
         else:
             ob = check_orb_breakout(key, orb, token)
             orb_status = ob['status']
+            orb_high   = orb['high']
+            orb_low    = orb['low']
 
             if orb_status == 'FORMING':
                 orb_message   = 'Opening range forming — wait till 10:15 AM'
@@ -459,6 +464,8 @@ def analyze(symbol: str, cfg: dict, token: str) -> dict:
         'oi_data':             oi_data,
         'orb_status':          orb_status,
         'orb_message':         orb_message,
+        'orb_high':            orb_high,
+        'orb_low':             orb_low,
         'signal':              signal_out,
     }
 

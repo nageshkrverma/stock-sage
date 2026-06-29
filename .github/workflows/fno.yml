@@ -31,7 +31,7 @@ jobs:
       - name: Run F&O scanner
         run: python scanner/fno_scanner.py
         env:
-          UPSTOX_ACCESS_TOKEN: ${{ secrets.UPSTOX_ACCESS_TOKEN }}
+          UPSTOX_ACCESS_TOKEN: ${{ secrets.UPSTOX_ANALYTICS_TOKEN }}
 
       - name: Commit fno.json
         run: |
