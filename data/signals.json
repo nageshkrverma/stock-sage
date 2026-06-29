@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-29T04:15:55.842311+00:00",
+  "generated_at": "2026-06-29T04:45:56.558809+00:00",
   "market_date": "2026-06-29",
-  "total_signals": 19,
+  "total_signals": 22,
   "total_scanned": 523,
   "errors": 0,
   "signals": [
@@ -12,7 +12,7 @@
       "sector": "Aerospace",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:20:09.879485+00:00",
+      "generated_at": "2026-06-29T04:49:53.615355+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -56,7 +56,7 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.14,
+        "ratio": 0.18,
         "confirmed": false
       },
       "psychology": [
@@ -70,9 +70,9 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.57,
       "disqualifiers": [],
-      "rsi": 31.23,
-      "current_price": 801.05,
-      "day_change_pct": -2.87
+      "rsi": 32.06,
+      "current_price": 805.9,
+      "day_change_pct": -2.29
     },
     {
       "id": "EDELWEISS_20260629_DEMAND_0",
@@ -81,7 +81,7 @@
       "sector": "Financial Services",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:21:39.586618+00:00",
+      "generated_at": "2026-06-29T04:51:19.344004+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -125,16 +125,78 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.09,
+        "ratio": 0.1,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.54,
       "disqualifiers": [],
-      "rsi": 54.17,
-      "current_price": 121.81,
-      "day_change_pct": -0.52
+      "rsi": 54.2,
+      "current_price": 121.82,
+      "day_change_pct": -0.51
+    },
+    {
+      "id": "ZENTEC_20260629_SUPPLY_0",
+      "symbol": "ZENTEC",
+      "name": "Zen Technologies Ltd",
+      "sector": "Defence",
+      "exchange": "NSE",
+      "signal_type": "SELL",
+      "generated_at": "2026-06-29T04:50:02.958587+00:00",
+      "holding_period": "30D",
+      "holding_label": "30 Days",
+      "entry": {
+        "low": 1487.9,
+        "high": 1529.35
+      },
+      "stop_loss": 1575.23,
+      "stop_loss_pct": 4.41,
+      "targets": [
+        {
+          "price": 1387.93,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 1267.24,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": -8.0,
+        "max_pct": -16.0,
+        "label": "-8.0\u2013-16.0%"
+      },
+      "risk_reward": 1.81,
+      "confidence": 43,
+      "zone": {
+        "type": "SUPPLY",
+        "top": 1529.35,
+        "bottom": 1487.9,
+        "strength_score": 40.0,
+        "fresh": false,
+        "origin_date": "2025-04-16",
+        "touches": 147
+      },
+      "trend_bias": "BULLISH",
+      "candlestick_pattern": {
+        "pattern": "Shooting Star",
+        "score": 20.0,
+        "bullish": false
+      },
+      "volume_confirmation": {
+        "ratio": 0.14,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.49,
+      "disqualifiers": [],
+      "rsi": 37.99,
+      "current_price": 1751.7,
+      "day_change_pct": -1.1
     },
     {
       "id": "NIACL_20260629_SUPPLY_1",
@@ -143,7 +205,7 @@
       "sector": "Insurance",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:21:50.222016+00:00",
+      "generated_at": "2026-06-29T04:51:30.746646+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -183,7 +245,7 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.04,
+        "ratio": 0.05,
         "confirmed": false
       },
       "psychology": [
@@ -197,34 +259,34 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.61,
       "disqualifiers": [],
-      "rsi": 53.89,
-      "current_price": 181.79,
-      "day_change_pct": -1.54
+      "rsi": 54.18,
+      "current_price": 182.07,
+      "day_change_pct": -1.39
     },
     {
-      "id": "TATATECH_20260629_SUPPLY_0",
-      "symbol": "TATATECH",
-      "name": "Tata Technologies Ltd",
-      "sector": "IT",
+      "id": "KEI_20260629_SUPPLY_1",
+      "symbol": "KEI",
+      "name": "KEI Industries Ltd",
+      "sector": "Electricals",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:19:23.901091+00:00",
-      "holding_period": "30D",
-      "holding_label": "30 Days",
+      "generated_at": "2026-06-29T04:50:54.963421+00:00",
+      "holding_period": "15D",
+      "holding_label": "15 Days",
       "entry": {
-        "low": 671.98,
-        "high": 684.04
+        "low": 5264.0,
+        "high": 5345.0
       },
-      "stop_loss": 704.57,
-      "stop_loss_pct": 3.92,
+      "stop_loss": 5505.35,
+      "stop_loss_pct": 3.79,
       "targets": [
         {
-          "price": 623.77,
+          "price": 4880.14,
           "pct": 8.0,
           "label": "Target 1"
         },
         {
-          "price": 569.53,
+          "price": 4455.78,
           "pct": 16.0,
           "label": "Target 2"
         }
@@ -234,34 +296,96 @@
         "max_pct": -16.0,
         "label": "-8.0\u2013-16.0%"
       },
-      "risk_reward": 2.04,
+      "risk_reward": 2.11,
       "confidence": 42,
       "zone": {
         "type": "SUPPLY",
-        "top": 684.04,
-        "bottom": 671.98,
+        "top": 5345.0,
+        "bottom": 5264.0,
         "strength_score": 30.0,
         "fresh": false,
-        "origin_date": "2025-08-21",
-        "touches": 94
+        "origin_date": "2026-05-25",
+        "touches": 21
       },
       "trend_bias": "BULLISH",
       "candlestick_pattern": {
-        "pattern": "Shooting Star",
+        "pattern": "Pin Bar / Hammer",
         "score": 20.0,
-        "bullish": false
+        "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.07,
+        "ratio": 0.39,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.56,
+      "fear_greed_position": 0.51,
       "disqualifiers": [],
-      "rsi": 51.93,
-      "current_price": 746.1,
-      "day_change_pct": -0.3
+      "rsi": 38.58,
+      "current_price": 5277.5,
+      "day_change_pct": 0.18
+    },
+    {
+      "id": "RSWM_20260629_SUPPLY_0",
+      "symbol": "RSWM",
+      "name": "RSWM Ltd",
+      "sector": "Textile",
+      "exchange": "NSE",
+      "signal_type": "SELL",
+      "generated_at": "2026-06-29T04:49:08.200149+00:00",
+      "holding_period": "30D",
+      "holding_label": "30 Days",
+      "entry": {
+        "low": 175.0,
+        "high": 180.08
+      },
+      "stop_loss": 185.48,
+      "stop_loss_pct": 4.47,
+      "targets": [
+        {
+          "price": 163.34,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 149.13,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": -8.0,
+        "max_pct": -16.0,
+        "label": "-8.0\u2013-16.0%"
+      },
+      "risk_reward": 1.79,
+      "confidence": 40,
+      "zone": {
+        "type": "SUPPLY",
+        "top": 180.08,
+        "bottom": 175.0,
+        "strength_score": 30.0,
+        "fresh": false,
+        "origin_date": "2025-01-17",
+        "touches": 56
+      },
+      "trend_bias": "BULLISH",
+      "candlestick_pattern": {
+        "pattern": "Pin Bar / Hammer",
+        "score": 20.0,
+        "bullish": true
+      },
+      "volume_confirmation": {
+        "ratio": 0.01,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.58,
+      "disqualifiers": [],
+      "rsi": 47.94,
+      "current_price": 193.6,
+      "day_change_pct": 0.12
     },
     {
       "id": "NOCIL_20260629_DEMAND_0",
@@ -270,7 +394,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:20:37.446664+00:00",
+      "generated_at": "2026-06-29T04:50:19.407890+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -314,41 +438,41 @@
         "bullish": false
       },
       "volume_confirmation": {
-        "ratio": 0.11,
+        "ratio": 0.13,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.59,
+      "fear_greed_position": 0.58,
       "disqualifiers": [],
-      "rsi": 65.14,
-      "current_price": 183.25,
-      "day_change_pct": 0.76
+      "rsi": 63.98,
+      "current_price": 182.09,
+      "day_change_pct": 0.13
     },
     {
-      "id": "INDOCO_20260629_DEMAND_0",
-      "symbol": "INDOCO",
-      "name": "Indoco Remedies Ltd",
-      "sector": "Pharma",
+      "id": "CLEAN_20260629_DEMAND_0",
+      "symbol": "CLEAN",
+      "name": "Clean Science and Technology Ltd",
+      "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:18:29.437554+00:00",
-      "holding_period": "3M",
-      "holding_label": "3 Months",
+      "generated_at": "2026-06-29T04:50:17.064460+00:00",
+      "holding_period": "30D",
+      "holding_label": "30 Days",
       "entry": {
-        "low": 251.7,
-        "high": 256.15
+        "low": 716.0,
+        "high": 729.9
       },
-      "stop_loss": 244.15,
-      "stop_loss_pct": 3.85,
+      "stop_loss": 694.52,
+      "stop_loss_pct": 3.93,
       "targets": [
         {
-          "price": 274.24,
+          "price": 780.79,
           "pct": 8.0,
           "label": "Target 1"
         },
         {
-          "price": 294.55,
+          "price": 838.62,
           "pct": 16.0,
           "label": "Target 2"
         }
@@ -358,96 +482,34 @@
         "max_pct": 16.0,
         "label": "8.0\u201316.0%"
       },
-      "risk_reward": 2.08,
+      "risk_reward": 2.03,
       "confidence": 35,
       "zone": {
         "type": "DEMAND",
-        "top": 256.15,
-        "bottom": 251.7,
-        "strength_score": 20.0,
+        "top": 729.9,
+        "bottom": 716.0,
+        "strength_score": 40.0,
         "fresh": false,
-        "origin_date": "2025-11-24",
-        "touches": 143
+        "origin_date": "2026-02-24",
+        "touches": 27
       },
-      "trend_bias": "NEUTRAL",
-      "candlestick_pattern": {
-        "pattern": "Shooting Star",
-        "score": 20.0,
-        "bullish": false
-      },
-      "volume_confirmation": {
-        "ratio": 0.24,
-        "confirmed": false
-      },
-      "psychology": [],
-      "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.55,
-      "disqualifiers": [],
-      "rsi": 64.75,
-      "current_price": 241.0,
-      "day_change_pct": 4.06
-    },
-    {
-      "id": "MUTHOOTFIN_20260629_SUPPLY_0",
-      "symbol": "MUTHOOTFIN",
-      "name": "Muthoot Finance Ltd",
-      "sector": "NBFC",
-      "exchange": "NSE",
-      "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:17:10.198762+00:00",
-      "holding_period": "15D",
-      "holding_label": "15 Days",
-      "entry": {
-        "low": 2596.05,
-        "high": 2647.51
-      },
-      "stop_loss": 2726.94,
-      "stop_loss_pct": 4.01,
-      "targets": [
-        {
-          "price": 2412.04,
-          "pct": 8.0,
-          "label": "Target 1"
-        },
-        {
-          "price": 2202.3,
-          "pct": 16.0,
-          "label": "Target 2"
-        }
-      ],
-      "expected_profit": {
-        "min_pct": -8.0,
-        "max_pct": -16.0,
-        "label": "-8.0\u2013-16.0%"
-      },
-      "risk_reward": 1.99,
-      "confidence": 33,
-      "zone": {
-        "type": "SUPPLY",
-        "top": 2647.51,
-        "bottom": 2596.05,
-        "strength_score": 20.0,
-        "fresh": false,
-        "origin_date": "2025-06-18",
-        "touches": 246
-      },
-      "trend_bias": "NEUTRAL",
+      "trend_bias": "BEARISH",
       "candlestick_pattern": {
         "pattern": "Pin Bar / Hammer",
         "score": 20.0,
         "bullish": true
       },
       "volume_confirmation": {
-        "ratio": 0.28,
+        "ratio": 0.1,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.35,
+      "fear_greed_position": 0.32,
       "disqualifiers": [],
-      "rsi": 39.86,
-      "current_price": 3042.0,
-      "day_change_pct": 0.54
+      "rsi": 43.22,
+      "current_price": 771.9,
+      "day_change_pct": -0.92
     },
     {
       "id": "BANDHANBNK_20260629_SUPPLY_0",
@@ -456,7 +518,7 @@
       "sector": "Banking",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:17:22.841078+00:00",
+      "generated_at": "2026-06-29T04:47:19.155900+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -500,78 +562,16 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.33,
+        "ratio": 0.52,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.51,
+      "fear_greed_position": 0.5,
       "disqualifiers": [],
-      "rsi": 40.55,
-      "current_price": 201.63,
-      "day_change_pct": -0.06
-    },
-    {
-      "id": "MARKSANS_20260629_DEMAND_1",
-      "symbol": "MARKSANS",
-      "name": "Marksans Pharma Ltd",
-      "sector": "Pharma",
-      "exchange": "NSE",
-      "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:21:23.439065+00:00",
-      "holding_period": "1Y",
-      "holding_label": "1 Year",
-      "entry": {
-        "low": 248.42,
-        "high": 256.79
-      },
-      "stop_loss": 240.97,
-      "stop_loss_pct": 4.61,
-      "targets": [
-        {
-          "price": 272.82,
-          "pct": 8.0,
-          "label": "Target 1"
-        },
-        {
-          "price": 293.03,
-          "pct": 16.0,
-          "label": "Target 2"
-        }
-      ],
-      "expected_profit": {
-        "min_pct": 8.0,
-        "max_pct": 16.0,
-        "label": "8.0\u201316.0%"
-      },
-      "risk_reward": 1.74,
-      "confidence": 33,
-      "zone": {
-        "type": "DEMAND",
-        "top": 256.79,
-        "bottom": 248.42,
-        "strength_score": 40.0,
-        "fresh": false,
-        "origin_date": "2025-06-09",
-        "touches": 255
-      },
-      "trend_bias": "BULLISH",
-      "candlestick_pattern": {
-        "pattern": "Inside Bar",
-        "score": 10.0,
-        "bullish": 1.0
-      },
-      "volume_confirmation": {
-        "ratio": 0.15,
-        "confirmed": false
-      },
-      "psychology": [],
-      "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.66,
-      "disqualifiers": [],
-      "rsi": 61.92,
-      "current_price": 263.25,
-      "day_change_pct": 2.8
+      "rsi": 39.27,
+      "current_price": 200.68,
+      "day_change_pct": -0.54
     },
     {
       "id": "THYROCARE_20260629_SUPPLY_2",
@@ -580,7 +580,7 @@
       "sector": "Healthcare",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:21:30.688414+00:00",
+      "generated_at": "2026-06-29T04:51:10.608253+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -624,16 +624,16 @@
         "bullish": 1.0
       },
       "volume_confirmation": {
-        "ratio": 0.17,
+        "ratio": 0.35,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.61,
       "disqualifiers": [],
-      "rsi": 52.27,
-      "current_price": 533.2,
-      "day_change_pct": 3.09
+      "rsi": 52.92,
+      "current_price": 534.45,
+      "day_change_pct": 3.34
     },
     {
       "id": "ASHOKLEY_20260629_SUPPLY_0",
@@ -642,7 +642,7 @@
       "sector": "Automobile",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:16:39.332145+00:00",
+      "generated_at": "2026-06-29T04:46:38.412632+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -686,16 +686,136 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.31,
+        "ratio": 0.43,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.5,
       "disqualifiers": [],
-      "rsi": 58.53,
-      "current_price": 158.6,
-      "day_change_pct": -1.29
+      "rsi": 59.03,
+      "current_price": 158.81,
+      "day_change_pct": -1.16
+    },
+    {
+      "id": "ASTRAL_20260629_SUPPLY_0",
+      "symbol": "ASTRAL",
+      "name": "Astral Ltd",
+      "sector": "Building Materials",
+      "exchange": "NSE",
+      "signal_type": "SELL",
+      "generated_at": "2026-06-29T04:48:04.761480+00:00",
+      "holding_period": "1Y",
+      "holding_label": "1 Year",
+      "entry": {
+        "low": 1409.35,
+        "high": 1433.63
+      },
+      "stop_loss": 1476.64,
+      "stop_loss_pct": 3.88,
+      "targets": [
+        {
+          "price": 1307.77,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 1194.05,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": -8.0,
+        "max_pct": -16.0,
+        "label": "-8.0\u2013-16.0%"
+      },
+      "risk_reward": 2.06,
+      "confidence": 32,
+      "zone": {
+        "type": "SUPPLY",
+        "top": 1433.63,
+        "bottom": 1409.35,
+        "strength_score": 30.0,
+        "fresh": false,
+        "origin_date": "2025-08-22",
+        "touches": 193
+      },
+      "trend_bias": "NEUTRAL",
+      "candlestick_pattern": null,
+      "volume_confirmation": {
+        "ratio": 1.64,
+        "confirmed": true
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.23,
+      "disqualifiers": [],
+      "rsi": 20.26,
+      "current_price": 1382.7,
+      "day_change_pct": -7.01
+    },
+    {
+      "id": "TATATECH_20260629_SUPPLY_0",
+      "symbol": "TATATECH",
+      "name": "Tata Technologies Ltd",
+      "sector": "IT",
+      "exchange": "NSE",
+      "signal_type": "SELL",
+      "generated_at": "2026-06-29T04:49:11.161098+00:00",
+      "holding_period": "30D",
+      "holding_label": "30 Days",
+      "entry": {
+        "low": 671.98,
+        "high": 684.04
+      },
+      "stop_loss": 704.57,
+      "stop_loss_pct": 3.92,
+      "targets": [
+        {
+          "price": 623.77,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 569.53,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": -8.0,
+        "max_pct": -16.0,
+        "label": "-8.0\u2013-16.0%"
+      },
+      "risk_reward": 2.04,
+      "confidence": 32,
+      "zone": {
+        "type": "SUPPLY",
+        "top": 684.04,
+        "bottom": 671.98,
+        "strength_score": 30.0,
+        "fresh": false,
+        "origin_date": "2025-08-21",
+        "touches": 94
+      },
+      "trend_bias": "BULLISH",
+      "candlestick_pattern": {
+        "pattern": "Inside Bar",
+        "score": 10.0,
+        "bullish": 0.0
+      },
+      "volume_confirmation": {
+        "ratio": 0.08,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.56,
+      "disqualifiers": [],
+      "rsi": 51.21,
+      "current_price": 745.15,
+      "day_change_pct": -0.43
     },
     {
       "id": "RELAXO_20260629_DEMAND_0",
@@ -704,7 +824,7 @@
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:18:14.834408+00:00",
+      "generated_at": "2026-06-29T04:48:09.163283+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -748,16 +868,78 @@
         "bullish": 0.0
       },
       "volume_confirmation": {
-        "ratio": 0.46,
+        "ratio": 0.59,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.62,
+      "fear_greed_position": 0.59,
       "disqualifiers": [],
-      "rsi": 71.56,
-      "current_price": 399.15,
-      "day_change_pct": -3.48
+      "rsi": 67.82,
+      "current_price": 394.0,
+      "day_change_pct": -4.73
+    },
+    {
+      "id": "SPANDANA_20260629_DEMAND_0",
+      "symbol": "SPANDANA",
+      "name": "Spandana Sphoorty Financial Ltd",
+      "sector": "NBFC",
+      "exchange": "NSE",
+      "signal_type": "BUY",
+      "generated_at": "2026-06-29T04:49:27.241940+00:00",
+      "holding_period": "15D",
+      "holding_label": "15 Days",
+      "entry": {
+        "low": 308.0,
+        "high": 324.2
+      },
+      "stop_loss": 298.76,
+      "stop_loss_pct": 5.49,
+      "targets": [
+        {
+          "price": 341.39,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 366.68,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": 8.0,
+        "max_pct": 16.0,
+        "label": "8.0\u201316.0%"
+      },
+      "risk_reward": 1.46,
+      "confidence": 30,
+      "zone": {
+        "type": "DEMAND",
+        "top": 324.2,
+        "bottom": 308.0,
+        "strength_score": 20.0,
+        "fresh": false,
+        "origin_date": "2025-01-24",
+        "touches": 345
+      },
+      "trend_bias": "NEUTRAL",
+      "candlestick_pattern": {
+        "pattern": "Pin Bar / Hammer",
+        "score": 20.0,
+        "bullish": true
+      },
+      "volume_confirmation": {
+        "ratio": 0.15,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.56,
+      "disqualifiers": [],
+      "rsi": 67.08,
+      "current_price": 267.6,
+      "day_change_pct": 0.3
     },
     {
       "id": "NORTHARC_20260629_DEMAND_3",
@@ -766,7 +948,7 @@
       "sector": "NBFC",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:19:47.352676+00:00",
+      "generated_at": "2026-06-29T04:49:32.387885+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -810,16 +992,16 @@
         "bullish": 1.0
       },
       "volume_confirmation": {
-        "ratio": 0.75,
+        "ratio": 1.09,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.64,
+      "fear_greed_position": 0.58,
       "disqualifiers": [],
-      "rsi": 62.49,
-      "current_price": 304.5,
-      "day_change_pct": 5.69
+      "rsi": 55.63,
+      "current_price": 296.65,
+      "day_change_pct": 2.97
     },
     {
       "id": "HINDOILEXP_20260629_DEMAND_0",
@@ -828,7 +1010,7 @@
       "sector": "Oil & Gas",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:22:24.744051+00:00",
+      "generated_at": "2026-06-29T04:52:01.608121+00:00",
       "holding_period": "3M",
       "holding_label": "3 Months",
       "entry": {
@@ -879,9 +1061,67 @@
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.4,
       "disqualifiers": [],
-      "rsi": 39.72,
-      "current_price": 158.75,
-      "day_change_pct": -0.83
+      "rsi": 39.53,
+      "current_price": 158.64,
+      "day_change_pct": -0.9
+    },
+    {
+      "id": "AJANTPHARM_20260629_DEMAND_0",
+      "symbol": "AJANTPHARM",
+      "name": "Ajanta Pharma Ltd",
+      "sector": "Pharma",
+      "exchange": "NSE",
+      "signal_type": "BUY",
+      "generated_at": "2026-06-29T04:47:38.686207+00:00",
+      "holding_period": "1Y",
+      "holding_label": "1 Year",
+      "entry": {
+        "low": 3050.0,
+        "high": 3099.9
+      },
+      "stop_loss": 2958.5,
+      "stop_loss_pct": 3.79,
+      "targets": [
+        {
+          "price": 3320.95,
+          "pct": 8.0,
+          "label": "Target 1"
+        },
+        {
+          "price": 3566.94,
+          "pct": 16.0,
+          "label": "Target 2"
+        }
+      ],
+      "expected_profit": {
+        "min_pct": 8.0,
+        "max_pct": 16.0,
+        "label": "8.0\u201316.0%"
+      },
+      "risk_reward": 2.11,
+      "confidence": 27,
+      "zone": {
+        "type": "DEMAND",
+        "top": 3099.9,
+        "bottom": 3050.0,
+        "strength_score": 50.0,
+        "fresh": false,
+        "origin_date": "2026-06-18",
+        "touches": 1
+      },
+      "trend_bias": "BULLISH",
+      "candlestick_pattern": null,
+      "volume_confirmation": {
+        "ratio": 0.36,
+        "confirmed": false
+      },
+      "psychology": [],
+      "sentiment": "WEAK_BUY",
+      "fear_greed_position": 0.66,
+      "disqualifiers": [],
+      "rsi": 69.35,
+      "current_price": 3267.6,
+      "day_change_pct": 2.74
     },
     {
       "id": "AMBER_20260629_SUPPLY_0",
@@ -890,7 +1130,7 @@
       "sector": "Consumer Durables",
       "exchange": "NSE",
       "signal_type": "SELL",
-      "generated_at": "2026-06-29T04:18:16.403230+00:00",
+      "generated_at": "2026-06-29T04:48:10.645343+00:00",
       "holding_period": "30D",
       "holding_label": "30 Days",
       "entry": {
@@ -930,16 +1170,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.09,
+        "ratio": 0.16,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.43,
+      "fear_greed_position": 0.41,
       "disqualifiers": [],
-      "rsi": 40.58,
-      "current_price": 7590.5,
-      "day_change_pct": -0.89
+      "rsi": 38.11,
+      "current_price": 7536.0,
+      "day_change_pct": -1.61
     },
     {
       "id": "NSLNISP_20260629_DEMAND_0",
@@ -948,7 +1188,7 @@
       "sector": "Metals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:18:56.342240+00:00",
+      "generated_at": "2026-06-29T04:48:46.115558+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -988,16 +1228,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.04,
+        "ratio": 0.05,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.34,
       "disqualifiers": [],
-      "rsi": 25.74,
-      "current_price": 43.48,
-      "day_change_pct": -0.46
+      "rsi": 25.04,
+      "current_price": 43.32,
+      "day_change_pct": -0.82
     },
     {
       "id": "BEL_20260629_DEMAND_0",
@@ -1006,7 +1246,7 @@
       "sector": "Defence",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:20:13.379881+00:00",
+      "generated_at": "2026-06-29T04:49:56.754942+00:00",
       "holding_period": "1Y",
       "holding_label": "1 Year",
       "entry": {
@@ -1046,16 +1286,16 @@
       "trend_bias": "NEUTRAL",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.23,
+        "ratio": 0.34,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.4,
       "disqualifiers": [],
-      "rsi": 40.11,
-      "current_price": 408.45,
-      "day_change_pct": 0.31
+      "rsi": 40.34,
+      "current_price": 408.6,
+      "day_change_pct": 0.34
     },
     {
       "id": "ALKYLAMINE_20260629_DEMAND_0",
@@ -1064,7 +1304,7 @@
       "sector": "Chemicals",
       "exchange": "NSE",
       "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:20:33.162839+00:00",
+      "generated_at": "2026-06-29T04:50:15.101679+00:00",
       "holding_period": "6M",
       "holding_label": "6 Months",
       "entry": {
@@ -1104,78 +1344,16 @@
       "trend_bias": "BULLISH",
       "candlestick_pattern": null,
       "volume_confirmation": {
-        "ratio": 0.09,
+        "ratio": 0.11,
         "confirmed": false
       },
       "psychology": [],
       "sentiment": "WEAK_BUY",
       "fear_greed_position": 0.42,
       "disqualifiers": [],
-      "rsi": 39.04,
-      "current_price": 1734.0,
-      "day_change_pct": -3.06
-    },
-    {
-      "id": "CLEAN_20260629_DEMAND_0",
-      "symbol": "CLEAN",
-      "name": "Clean Science and Technology Ltd",
-      "sector": "Chemicals",
-      "exchange": "NSE",
-      "signal_type": "BUY",
-      "generated_at": "2026-06-29T04:20:35.236498+00:00",
-      "holding_period": "30D",
-      "holding_label": "30 Days",
-      "entry": {
-        "low": 716.0,
-        "high": 729.9
-      },
-      "stop_loss": 694.52,
-      "stop_loss_pct": 3.93,
-      "targets": [
-        {
-          "price": 780.79,
-          "pct": 8.0,
-          "label": "Target 1"
-        },
-        {
-          "price": 838.62,
-          "pct": 16.0,
-          "label": "Target 2"
-        }
-      ],
-      "expected_profit": {
-        "min_pct": 8.0,
-        "max_pct": 16.0,
-        "label": "8.0\u201316.0%"
-      },
-      "risk_reward": 2.03,
-      "confidence": 25,
-      "zone": {
-        "type": "DEMAND",
-        "top": 729.9,
-        "bottom": 716.0,
-        "strength_score": 40.0,
-        "fresh": false,
-        "origin_date": "2026-02-24",
-        "touches": 27
-      },
-      "trend_bias": "BEARISH",
-      "candlestick_pattern": {
-        "pattern": "Inside Bar",
-        "score": 10.0,
-        "bullish": 0.0
-      },
-      "volume_confirmation": {
-        "ratio": 0.07,
-        "confirmed": false
-      },
-      "psychology": [],
-      "sentiment": "WEAK_BUY",
-      "fear_greed_position": 0.31,
-      "disqualifiers": [],
-      "rsi": 41.98,
-      "current_price": 769.05,
-      "day_change_pct": -1.28
+      "rsi": 38.71,
+      "current_price": 1731.9,
+      "day_change_pct": -3.18
     }
   ]
 }
