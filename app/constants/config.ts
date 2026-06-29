@@ -10,4 +10,4 @@ export const SIGNALS_HISTORY_URL =
 export const REFRESH_INTERVAL = 1000 * 60 * 10 // 10 minutes
 
 // GAS proxy for live Upstox option LTP — set after deploying GAS_LTP_PROXY.js
-export const GAS_LTP_URL = ''
+export const GAS_LTP_URL = 'https://script.google.com/macros/s/AKfycbzuE5GCyg9PYBcRyOuN3nY-TRXRfWAEWMjYKx8j5AuXk3yoAcukHo5vqBVQZhQuRpIW_A/exec'
