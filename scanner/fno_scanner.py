@@ -242,3 +242,8 @@ def run_fno_scan() -> bool:
         print(f'  Saved to {FNO_FILE}')
 
     return success
+
+
+if __name__ == '__main__':
+    ok = run_fno_scan()
+    sys.exit(0 if ok else 1)
