@@ -3,10 +3,12 @@ import {
   View, Text, FlatList, TouchableOpacity, StyleSheet,
   RefreshControl, ActivityIndicator,
 } from 'react-native'
+import { useRouter } from 'expo-router'
 import { useSignals, filterSignals } from '../hooks/useSignals'
 import { Signal } from '../types/signal'
 import SignalCard from '../components/SignalCard'
 import { formatRelativeTime } from '../utils/formatters'
+import { useAuth } from '../context/AuthContext'
 
 const HOLDING_FILTERS = [
   { key: 'ALL',    label: 'All',     periods: [] },
@@ -36,22 +38,36 @@ function sortSignals(signals: Signal[], key: SortKey): Signal[] {
 }
 
 export default function HomeScreen() {
-  const { signals, isLoading, error, refetch, lastUpdated } = useSignals()
+  const router = useRouter()
+  const { profile, daysLeftInTrial, isTrialActive, isAdmin } = useAuth()
+  const { signals, isLoading, error, refetch, lastUpdated, isFromHistory } = useSignals()
   const [activeFilter, setActiveFilter] = useState('ALL')
   const [activeSort, setActiveSort] = useState<SortKey>('confidence')
   const [refreshing, setRefreshing] = useState(false)
   const [showSort, setShowSort] = useState(false)
+  const [signalFilter, setSignalFilter] = useState<'ALL' | 'BUY' | 'SHORT'>('ALL')
 
   const filtered = useMemo(() => {
     const tab = HOLDING_FILTERS.find((f) => f.key === activeFilter)
     const f = filterSignals(signals, {
       holding: tab?.periods.length ? tab.periods : undefined,
     })
-    return sortSignals(f, activeSort)
-  }, [signals, activeFilter, activeSort])
+    const byType = signalFilter === 'ALL' ? f : f.filter((s) => s.signal_type === (signalFilter === 'SHORT' ? 'SELL' : signalFilter))
+    return sortSignals(byType, activeSort)
+  }, [signals, activeFilter, activeSort, signalFilter])
 
-  const buyCount  = filtered.filter((s) => s.signal_type === 'BUY').length
-  const sellCount = filtered.filter((s) => s.signal_type === 'SELL').length
+  const allCount  = useMemo(() => {
+    const tab = HOLDING_FILTERS.find((f) => f.key === activeFilter)
+    return filterSignals(signals, { holding: tab?.periods.length ? tab.periods : undefined }).length
+  }, [signals, activeFilter])
+  const buyCount  = useMemo(() => {
+    const tab = HOLDING_FILTERS.find((f) => f.key === activeFilter)
+    return filterSignals(signals, { holding: tab?.periods.length ? tab.periods : undefined }).filter((s) => s.signal_type === 'BUY').length
+  }, [signals, activeFilter])
+  const sellCount = useMemo(() => {
+    const tab = HOLDING_FILTERS.find((f) => f.key === activeFilter)
+    return filterSignals(signals, { holding: tab?.periods.length ? tab.periods : undefined }).filter((s) => s.signal_type === 'SELL').length
+  }, [signals, activeFilter])
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true)
@@ -63,17 +79,41 @@ export default function HomeScreen() {
   const keyExtractor = useCallback((item: Signal) => item.id, [])
   const activeSortLabel = SORT_OPTIONS.find((s) => s.key === activeSort)?.label ?? 'Sort'
 
+  const daysLeft = daysLeftInTrial()
+  const trialActive = isTrialActive()
+
   return (
     <View style={styles.container}>
+      {/* Trial warning banner */}
+      {profile && !trialActive && (
+        <TouchableOpacity style={styles.trialExpiredBar} onPress={() => router.push('/paywall' as any)}>
+          <Text style={styles.trialExpiredText}>⚠️ Trial expired — tap to subscribe ₹499/month</Text>
+        </TouchableOpacity>
+      )}
+      {profile && trialActive && daysLeft <= 5 && (
+        <TouchableOpacity style={styles.trialWarnBar} onPress={() => router.push('/paywall' as any)}>
+          <Text style={styles.trialWarnText}>⏳ {daysLeft} days left in trial — tap to subscribe</Text>
+        </TouchableOpacity>
+      )}
+
       {/* Summary bar */}
       <View style={styles.summaryBar}>
-        <SummaryChip label="Total" value={filtered.length} color="#6C63FF" />
-        <SummaryChip label="BUY"   value={buyCount}        color="#00C896" />
-        <SummaryChip label="SHORT" value={sellCount}       color="#FF4757" />
+        <SummaryChip label="Total" value={allCount}  color="#6C63FF" active={signalFilter === 'ALL'}   onPress={() => setSignalFilter('ALL')} />
+        <SummaryChip label="BUY"   value={buyCount}  color="#00C896" active={signalFilter === 'BUY'}   onPress={() => setSignalFilter('BUY')} />
+        <SummaryChip label="SHORT" value={sellCount} color="#FF4757" active={signalFilter === 'SHORT'} onPress={() => setSignalFilter('SHORT')} />
         {lastUpdated && (
           <Text style={styles.updated}>🕐 {formatRelativeTime(lastUpdated)}</Text>
         )}
       </View>
+
+      {/* History fallback banner */}
+      {isFromHistory && (
+        <View style={styles.historyBanner}>
+          <Text style={styles.historyBannerText}>
+            📊 Price moved away from zones — showing last valid signals. New signals appear when price returns to a zone.
+          </Text>
+        </View>
+      )}
 
       {/* Holding filter chips — all 5 fit in one row */}
       <View style={styles.filterRow}>
@@ -152,12 +192,16 @@ export default function HomeScreen() {
   )
 }
 
-function SummaryChip({ label, value, color }: { label: string; value: number; color: string }) {
+function SummaryChip({ label, value, color, active, onPress }: { label: string; value: number; color: string; active: boolean; onPress: () => void }) {
   return (
-    <View style={[chip.wrap, { borderColor: color + '30' }]}>
+    <TouchableOpacity
+      style={[chip.wrap, { borderColor: active ? color : color + '30', backgroundColor: active ? color + '20' : 'transparent' }]}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
       <Text style={[chip.value, { color }]}>{value}</Text>
       <Text style={chip.label}>{label}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -169,8 +213,14 @@ const chip = StyleSheet.create({
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0A0A0F' },
+  trialExpiredBar: { backgroundColor: '#FF475720', paddingHorizontal: 16, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: '#FF4757' },
+  trialExpiredText: { color: '#FF4757', fontSize: 12, fontWeight: '700', textAlign: 'center' },
+  trialWarnBar: { backgroundColor: '#FF990020', paddingHorizontal: 16, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: '#FF9900' },
+  trialWarnText: { color: '#FF9900', fontSize: 12, fontWeight: '700', textAlign: 'center' },
   summaryBar: { flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 12, paddingBottom: 8, alignItems: 'center' },
   updated: { flex: 1, color: '#8B8FA8', fontSize: 10, textAlign: 'right' },
+  historyBanner: { marginHorizontal: 16, marginBottom: 8, backgroundColor: '#1A1A2E', borderRadius: 10, padding: 10, borderWidth: 1, borderColor: '#6C63FF40' },
+  historyBannerText: { color: '#A0A0C0', fontSize: 12, lineHeight: 18 },
   filterRow: {
     flexDirection: 'row', paddingHorizontal: 12, gap: 6,
     alignItems: 'center', paddingVertical: 6, marginBottom: 2,

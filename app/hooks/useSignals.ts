@@ -1,16 +1,47 @@
 import { useQuery } from '@tanstack/react-query'
 import { Signal, SignalFilters, SignalsResponse } from '../types/signal'
-import { GITHUB_RAW_URL, REFRESH_INTERVAL } from '../constants/config'
+import { GITHUB_RAW_URL, SIGNALS_HISTORY_URL, REFRESH_INTERVAL } from '../constants/config'
 
-async function fetchSignals(): Promise<SignalsResponse> {
-  const url = `${GITHUB_RAW_URL}?t=${Date.now()}`
-  const res = await fetch(url)
+async function fetchSignals(): Promise<SignalsResponse & { isFromHistory?: boolean }> {
+  const res = await fetch(`${GITHUB_RAW_URL}?t=${Date.now()}`, {
+    headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+  })
   if (!res.ok) throw new Error(`Failed to fetch signals: ${res.status}`)
-  return res.json()
+  const data: SignalsResponse = await res.json()
+
+  // If no current signals, fall back to most recent signals from history
+  if (!data.signals || data.signals.length === 0) {
+    try {
+      const hres = await fetch(`${SIGNALS_HISTORY_URL}?t=${Date.now()}`, {
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      })
+      if (hres.ok) {
+        const history: Signal[] = await hres.json()
+        if (Array.isArray(history) && history.length > 0) {
+          // Get the most recent batch — signals from the latest generated_at date
+          const sorted = [...history].sort((a, b) =>
+            new Date(b.generated_at).getTime() - new Date(a.generated_at).getTime()
+          )
+          const latestDate = sorted[0].generated_at.slice(0, 10)
+          const latest = sorted.filter(s => s.generated_at.slice(0, 10) === latestDate)
+          // Deduplicate by symbol, keep highest confidence
+          const seen = new Set<string>()
+          const deduped = latest.filter(s => {
+            if (seen.has(s.symbol)) return false
+            seen.add(s.symbol)
+            return true
+          })
+          return { ...data, signals: deduped, isFromHistory: true }
+        }
+      }
+    } catch (_) {}
+  }
+
+  return data
 }
 
 export function useSignals() {
-  const query = useQuery<SignalsResponse, Error>({
+  const query = useQuery<SignalsResponse & { isFromHistory?: boolean }, Error>({
     queryKey: ['signals'],
     queryFn: fetchSignals,
     staleTime: REFRESH_INTERVAL,
@@ -27,6 +58,7 @@ export function useSignals() {
     lastUpdated: query.data?.generated_at ?? null,
     marketDate: query.data?.market_date ?? null,
     totalSignals: query.data?.total_signals ?? 0,
+    isFromHistory: query.data?.isFromHistory ?? false,
   }
 }
 

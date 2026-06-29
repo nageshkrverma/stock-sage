@@ -4,4 +4,7 @@ export const GITHUB_RAW_URL =
 export const FNO_RAW_URL =
   'https://raw.githubusercontent.com/nageshkrverma/stock-sage/main/data/fno.json'
 
+export const SIGNALS_HISTORY_URL =
+  'https://raw.githubusercontent.com/nageshkrverma/stock-sage/main/data/signals_history.json'
+
 export const REFRESH_INTERVAL = 1000 * 60 * 10 // 10 minutes
