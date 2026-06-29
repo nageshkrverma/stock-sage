@@ -6,6 +6,8 @@ from pathlib import Path
 
 from data_fetcher import get_nse_stock_list
 from signal_generator import generate_signals_for_stock
+from sheet_logger import log_signals_to_sheet, update_signal_statuses
+from fno_scanner import run_fno_scan
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 SIGNALS_FILE = DATA_DIR / "signals.json"
@@ -87,6 +89,26 @@ def main():
     with open(SIGNALS_FILE, "w") as f:
         json.dump(output, f, indent=2)
     print(f"\nSaved {len(all_signals)} signals to {SIGNALS_FILE}")
+
+    # F&O scan — real NSE option chain data
+    print("\nRunning F&O scan...")
+    try:
+        run_fno_scan()
+    except Exception as e:
+        print(f"  F&O scan skipped: {e}", file=sys.stderr)
+
+    # Log to Google Sheet and update existing signal statuses
+    print("\nLogging to Google Sheet...")
+    try:
+        sheet_logged = log_signals_to_sheet(all_signals)
+        print(f"  Logged {sheet_logged} new signals to tracker sheet")
+    except Exception as e:
+        print(f"  Sheet logging skipped: {e}", file=sys.stderr)
+
+    try:
+        update_signal_statuses()
+    except Exception as e:
+        print(f"  Status update skipped: {e}", file=sys.stderr)
 
     # Update history
     history = load_history()

@@ -70,7 +70,7 @@ jobs:
           git reset --hard origin/main
           cp /tmp/signals.json data/signals.json
           cp /tmp/signals_history.json data/signals_history.json
-          git add data/signals.json data/signals_history.json
+          git add data/signals.json data/signals_history.json data/fno.json
           git diff --cached --quiet || (git commit -m "signals: $(date +'%Y-%m-%d %H:%M IST')" && echo "SIGNALS_UPDATED=true" >> $GITHUB_ENV)
           git push origin main
         env:
