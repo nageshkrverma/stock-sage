@@ -1,0 +1,87 @@
+name: F&O Scanner — Every 10 Minutes
+
+on:
+  schedule:
+    # Every 10 min from 9:00 AM to 3:40 PM IST (3:30–10:10 UTC), Mon–Fri
+    - cron: '30 3 * * 1-5'
+    - cron: '40 3 * * 1-5'
+    - cron: '50 3 * * 1-5'
+    - cron: '0 4 * * 1-5'
+    - cron: '10 4 * * 1-5'
+    - cron: '20 4 * * 1-5'
+    - cron: '30 4 * * 1-5'
+    - cron: '40 4 * * 1-5'
+    - cron: '50 4 * * 1-5'
+    - cron: '0 5 * * 1-5'
+    - cron: '10 5 * * 1-5'
+    - cron: '20 5 * * 1-5'
+    - cron: '30 5 * * 1-5'
+    - cron: '40 5 * * 1-5'
+    - cron: '50 5 * * 1-5'
+    - cron: '0 6 * * 1-5'
+    - cron: '10 6 * * 1-5'
+    - cron: '20 6 * * 1-5'
+    - cron: '30 6 * * 1-5'
+    - cron: '40 6 * * 1-5'
+    - cron: '50 6 * * 1-5'
+    - cron: '0 7 * * 1-5'
+    - cron: '10 7 * * 1-5'
+    - cron: '20 7 * * 1-5'
+    - cron: '30 7 * * 1-5'
+    - cron: '40 7 * * 1-5'
+    - cron: '50 7 * * 1-5'
+    - cron: '0 8 * * 1-5'
+    - cron: '10 8 * * 1-5'
+    - cron: '20 8 * * 1-5'
+    - cron: '30 8 * * 1-5'
+    - cron: '40 8 * * 1-5'
+    - cron: '50 8 * * 1-5'
+    - cron: '0 9 * * 1-5'
+    - cron: '10 9 * * 1-5'
+    - cron: '20 9 * * 1-5'
+    - cron: '30 9 * * 1-5'
+    - cron: '40 9 * * 1-5'
+    - cron: '50 9 * * 1-5'
+    - cron: '0 10 * * 1-5'
+    - cron: '10 10 * * 1-5'
+  workflow_dispatch:
+
+concurrency:
+  group: fno-scanner
+  cancel-in-progress: true
+
+jobs:
+  fno:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run F&O scanner
+        run: python scanner/fno_scanner.py
+
+      - name: Commit fno.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          cp data/fno.json /tmp/fno.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/fno.json data/fno.json
+          git add data/fno.json
+          git diff --cached --quiet || git commit -m "fno: $(date +'%H:%M IST')"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
