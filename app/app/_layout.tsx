@@ -90,7 +90,12 @@ function AppTabs() {
                 tabBarIcon: ({ color, focused }) => <TabIcon icon="📊" color={color} focused={focused} />,
                 headerShown: true,
                 headerLeft: () => <PerformanceHeaderButton />,
-                headerRight: () => <ProfileHeaderButton />,
+                headerRight: () => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, paddingRight: 4 }}>
+                    <GearHeaderButton />
+                    <ProfileHeaderButton />
+                  </View>
+                ),
               }}
             />
             <Tabs.Screen
@@ -134,6 +139,7 @@ function AppTabs() {
             <Tabs.Screen name="profile" options={{ href: null, headerShown: false, title: 'My Profile', tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="paywall" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="disclaimer" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="settings" options={{ href: null, headerShown: true, title: 'Settings', tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="onboarding" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="legal" options={{ href: null, headerShown: true, title: 'Legal & About', tabBarStyle: { display: 'none' } }} />
     </Tabs>
@@ -213,6 +219,15 @@ function PerformanceHeaderButton() {
   return (
     <TouchableOpacity onPress={() => router.push('/performance' as any)} style={{ paddingLeft: 16, paddingVertical: 4 }}>
       <Text style={{ fontSize: 20 }}>📈</Text>
+    </TouchableOpacity>
+  )
+}
+
+function GearHeaderButton() {
+  const router = useRouter()
+  return (
+    <TouchableOpacity onPress={() => router.push('/settings' as any)} style={{ paddingHorizontal: 8, paddingVertical: 4 }}>
+      <Text style={{ fontSize: 18 }}>⚙️</Text>
     </TouchableOpacity>
   )
 }

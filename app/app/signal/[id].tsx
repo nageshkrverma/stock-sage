@@ -21,6 +21,16 @@ import PsychologyBadge from '../../components/PsychologyBadge'
 import SentimentGauge from '../../components/SentimentGauge'
 import ZoneChart from '../../components/ZoneChart'
 import { formatINR, formatPct, rsiLabel } from '../../utils/formatters'
+import { getUrgency } from '../../components/SignalCard'
+
+const ZONE_STATUS_CONFIG = {
+  IN_ZONE:     { label: '🔥 Price is IN the entry zone — Act now', color: '#FF9800', bg: '#FF980020', border: '#FF980050' },
+  NEAR_ZONE:   { label: '👀 Price is NEAR the zone — Watch closely', color: '#FFD32A', bg: '#FFD32A15', border: '#FFD32A40' },
+  WAITING:     { label: '⏳ Waiting for price to reach zone', color: '#6C63FF', bg: '#6C63FF15', border: '#6C63FF40' },
+  ZONE_PASSED: { label: '✅ Zone was passed — signal may be invalid', color: '#8B8FA8', bg: '#8B8FA815', border: '#8B8FA830' },
+}
+
+const FG_EMOJIS = ['😱', '😨', '😐', '😊', '🤑'] // Extreme Fear → Extreme Greed
 
 export default function SignalDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
@@ -33,6 +43,7 @@ export default function SignalDetailScreen() {
   const [entryPrice, setEntryPrice] = useState('')
   const [quantity, setQuantity] = useState('')
   const [notes, setNotes] = useState('')
+  const [psychExpanded, setPsychExpanded] = useState(false)
 
   if (!signal) {
     return (
@@ -48,6 +59,14 @@ export default function SignalDetailScreen() {
   const isBuy = signal.signal_type === 'BUY'
   const entryMid = (signal.entry.low + signal.entry.high) / 2
   const [tradeType, setTradeType] = useState<'BUY' | 'SHORT'>(isBuy ? 'BUY' : 'SHORT')
+
+  const urgency = getUrgency(signal)
+  const zoneConf = ZONE_STATUS_CONFIG[urgency]
+  const currentPrice = signal.current_price ?? 0
+  const lossIfHold = isBuy
+    ? ((currentPrice - signal.stop_loss) / currentPrice) * 100
+    : ((signal.stop_loss - currentPrice) / currentPrice) * 100
+  const fgIndex = Math.min(4, Math.max(0, Math.floor((signal.fear_greed_position ?? 50) / 20)))
 
   async function handleShare() {
     const t1 = signal.targets[0]
@@ -114,6 +133,11 @@ export default function SignalDetailScreen() {
             <Text style={styles.shareBtnText}>↗ Share</Text>
           </TouchableOpacity>
         </View>
+      </View>
+
+      {/* Zone Status Box */}
+      <View style={[styles.zoneStatusBox, { backgroundColor: zoneConf.bg, borderColor: zoneConf.border }]}>
+        <Text style={[styles.zoneStatusText, { color: zoneConf.color }]}>{zoneConf.label}</Text>
       </View>
 
       {/* SECTION 1 — Header */}
@@ -187,14 +211,65 @@ export default function SignalDetailScreen() {
       {/* SECTION 4 — Psychology */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Market Psychology</Text>
-        <SentimentGauge position={signal.fear_greed_position} />
+
+        {/* Fear Greed 5-emoji track */}
+        <View style={styles.fgTrack}>
+          {FG_EMOJIS.map((em, i) => (
+            <View key={i} style={[styles.fgEmoji, i === fgIndex && styles.fgEmojiActive]}>
+              <Text style={{ fontSize: i === fgIndex ? 24 : 18 }}>{em}</Text>
+            </View>
+          ))}
+        </View>
+        <Text style={styles.fgLabel}>
+          {['Extreme Fear', 'Fear', 'Neutral', 'Greed', 'Extreme Greed'][fgIndex]}
+        </Text>
+
         <View style={{ height: 12 }} />
-        {signal.psychology.map((p, i) => (
-          <PsychologyBadge key={i} psychology={p} />
-        ))}
-        {signal.psychology.length === 0 && (
+
+        {/* Psychology inline — one-liner always visible, tap to expand */}
+        {signal.psychology.length > 0 ? (
+          <TouchableOpacity
+            style={styles.psychCard}
+            onPress={() => setPsychExpanded(!psychExpanded)}
+            activeOpacity={0.8}
+          >
+            <View style={styles.psychRow}>
+              <Text style={styles.psychIcon}>{signal.psychology[0]?.icon ?? '🧠'}</Text>
+              <Text style={styles.psychInline} numberOfLines={psychExpanded ? undefined : 2}>
+                {signal.psychology[0]?.explanation ?? signal.psychology[0]?.label}
+              </Text>
+              <Text style={styles.psychChevron}>{psychExpanded ? '▲' : '▼'}</Text>
+            </View>
+            {psychExpanded && signal.psychology.slice(1).map((p, i) => (
+              <PsychologyBadge key={i} psychology={p} />
+            ))}
+          </TouchableOpacity>
+        ) : (
           <Text style={styles.noneText}>No specific psychology pattern detected</Text>
         )}
+      </View>
+
+      {/* SECTION 4b — What If I Hold */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>What If I Hold?</Text>
+        <View style={styles.holdCard}>
+          <View style={styles.holdRow}>
+            <Text style={styles.holdLabel}>Current price vs Stop Loss</Text>
+            <Text style={[styles.holdValue, { color: lossIfHold < 0 ? '#FF4757' : '#00C896' }]}>
+              {lossIfHold >= 0 ? `+${lossIfHold.toFixed(1)}%` : `${lossIfHold.toFixed(1)}%`} risk
+            </Text>
+          </View>
+          <View style={styles.holdDivider} />
+          <Text style={styles.holdVerdict}>
+            {urgency === 'IN_ZONE'
+              ? '✅ Price is in zone — wait for your entry before trading'
+              : urgency === 'ZONE_PASSED'
+              ? '🚫 Zone was passed. EXIT the trade if you are holding — do not average down.'
+              : urgency === 'NEAR_ZONE'
+              ? '⏳ Price approaching zone — be ready, entry may trigger soon'
+              : '📊 Zone not yet reached. Stay patient, set a price alert.'}
+          </Text>
+        </View>
       </View>
 
       {/* SECTION 5 — Technical Confirmation */}
@@ -622,4 +697,39 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
+  zoneStatusBox: {
+    marginHorizontal: 16,
+    marginTop: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    padding: 12,
+  },
+  zoneStatusText: { fontSize: 13, fontWeight: '700' },
+
+  fgTrack: {
+    flexDirection: 'row', justifyContent: 'center', gap: 8, marginBottom: 4,
+  },
+  fgEmoji: { padding: 4, borderRadius: 8 },
+  fgEmojiActive: { backgroundColor: '#1E1E2E' },
+  fgLabel: { color: '#8B8FA8', fontSize: 12, textAlign: 'center', marginBottom: 8 },
+
+  psychCard: {
+    backgroundColor: '#13131A', borderRadius: 12,
+    borderWidth: 1, borderColor: '#1E1E2E', padding: 12,
+  },
+  psychRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
+  psychIcon: { fontSize: 18, marginTop: 1 },
+  psychInline: { flex: 1, color: '#C0C0D8', fontSize: 13, lineHeight: 20 },
+  psychChevron: { color: '#555566', fontSize: 12, marginTop: 3 },
+
+  holdCard: {
+    backgroundColor: '#13131A', borderRadius: 12,
+    borderWidth: 1, borderColor: '#1E1E2E', padding: 14,
+  },
+  holdRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
+  holdLabel: { color: '#8B8FA8', fontSize: 13 },
+  holdValue: { fontSize: 14, fontWeight: '800' },
+  holdDivider: { height: 1, backgroundColor: '#1E1E2E', marginBottom: 10 },
+  holdVerdict: { color: '#C0C0D8', fontSize: 13, lineHeight: 20 },
 })

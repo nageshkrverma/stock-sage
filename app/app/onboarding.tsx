@@ -10,20 +10,20 @@ const { width } = Dimensions.get('window')
 const SLIDES = [
   {
     emoji: '📊',
-    title: 'Smart Trade Signals',
-    body: 'Get daily buy & sell signals based on demand/supply zones, volume analysis, and market psychology — all in one place.',
+    title: '1800 NSE Stocks.\nScanned Daily.',
+    body: 'Every listed stock analysed against demand/supply zones. Only the best setups surface — so you never miss an opportunity.',
     accent: '#6C63FF',
   },
   {
-    emoji: '⚡',
-    title: 'F&O Setups & Live Premium',
-    body: 'Track NIFTY and BANKNIFTY breakout setups with live option premium pricing. Know exactly when a setup is active.',
-    accent: '#FFD32A',
+    emoji: '🧠',
+    title: 'Know What Smart\nMoney Is Doing',
+    body: 'See where institutions are buying and selling. Zone signals, volume spikes, and OI buildup — all explained in plain English.',
+    accent: '#FF9800',
   },
   {
-    emoji: '🔔',
-    title: 'Stay Ahead with Alerts',
-    body: 'Get notified when price enters your zone, hits a target, or a setup is invalidated. Never miss an opportunity.',
+    emoji: '💼',
+    title: 'Already Own Stocks?\nWe Have You Covered.',
+    body: 'Add your holdings and get live EXIT / ADD MORE / HOLD verdicts with alerts when it matters most.',
     accent: '#00C896',
   },
 ]

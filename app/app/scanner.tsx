@@ -3,6 +3,7 @@ import {
   View, Text, TextInput, TouchableOpacity, StyleSheet,
   ActivityIndicator, Modal, Alert, ScrollView, KeyboardAvoidingView, Platform,
 } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useSignals } from '../hooks/useSignals'
 import { useTrades } from '../hooks/useTrades'
 import { Signal } from '../types/signal'
@@ -99,6 +100,15 @@ export default function ScannerScreen() {
   const [query, setQuery] = useState('')
   const [suggestions, setSuggestions] = useState<StockSuggestion[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [recentSearches, setRecentSearches] = useState<string[]>([])
+
+  const RECENT_KEY = 'tradingbabaji_recent_searches'
+
+  useEffect(() => {
+    AsyncStorage.getItem(RECENT_KEY).then((v) => {
+      if (v) setRecentSearches(JSON.parse(v))
+    })
+  }, [])
 
   const [quote, setQuote] = useState<StockQuote | null>(null)
   const [quoteLoading, setQuoteLoading] = useState(false)
@@ -124,11 +134,23 @@ export default function ScannerScreen() {
     setShowSuggestions(results.length > 0)
   }
 
+  function saveToRecent(symbol: string) {
+    const updated = [symbol, ...recentSearches.filter((s) => s !== symbol)].slice(0, 8)
+    setRecentSearches(updated)
+    AsyncStorage.setItem(RECENT_KEY, JSON.stringify(updated))
+  }
+
   function selectStock(symbol: string, _name: string) {
+    saveToRecent(symbol.toUpperCase())
     setQuery('')
     setShowSuggestions(false)
     setSuggestions([])
     router.push(`/stock/${symbol.toUpperCase()}` as any)
+  }
+
+  function clearRecent() {
+    setRecentSearches([])
+    AsyncStorage.removeItem(RECENT_KEY)
   }
 
   const isUp = (quote?.regularMarketChangePercent ?? 0) >= 0
@@ -215,6 +237,27 @@ export default function ScannerScreen() {
           <Text style={styles.emptyIcon}>📊</Text>
           <Text style={styles.emptyTitle}>Search any NSE Stock</Text>
           <Text style={styles.emptySub}>Get live price, day change, 52W range{'\n'}and today's signal if available</Text>
+
+          {/* Recent Searches */}
+          {recentSearches.length > 0 && (
+            <>
+              <View style={styles.recentHeader}>
+                <Text style={styles.recentTitle}>Recent</Text>
+                <TouchableOpacity onPress={clearRecent}>
+                  <Text style={styles.recentClear}>Clear</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.chipsRow}>
+                {recentSearches.map((s) => (
+                  <TouchableOpacity key={s} style={[styles.chip, styles.recentChip]} onPress={() => selectStock(s, s)}>
+                    <Text style={styles.chipText}>🕐 {s}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </>
+          )}
+
+          <Text style={[styles.recentTitle, { alignSelf: 'flex-start', marginTop: 16, marginBottom: 6 }]}>Popular</Text>
           <View style={styles.chipsRow}>
             {['RELIANCE', 'TCS', 'INFY', 'HDFCBANK', 'TATAMOTORS', 'ADANIENT'].map((s) => (
               <TouchableOpacity key={s} style={styles.chip} onPress={() => selectStock(s, s)}>
@@ -489,6 +532,10 @@ const styles = StyleSheet.create({
   chipsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, justifyContent: 'center' },
   chip: { backgroundColor: '#13131A', borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8, borderWidth: 1, borderColor: '#6C63FF40' },
   chipText: { color: '#6C63FF', fontSize: 13, fontWeight: '700' },
+  recentChip: { borderColor: '#333344', backgroundColor: '#0D0D14' },
+  recentHeader: { flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 8 },
+  recentTitle: { color: '#555566', fontSize: 11, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
+  recentClear: { color: '#6C63FF', fontSize: 11, fontWeight: '600' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
   loadingText: { color: '#8B8FA8', fontSize: 14 },
   notFoundIcon: { fontSize: 36 },

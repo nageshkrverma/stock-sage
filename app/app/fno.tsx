@@ -195,8 +195,9 @@ function OIHeatmap({ data, title }: { data: OIStrike[]; title: string }) {
     <View style={s.heatmapWrap}>
       <Text style={s.heatmapTitle}>{title} — OI Heatmap</Text>
       <View style={s.heatmapLegend}>
-        <View style={[s.legendDot, { backgroundColor: '#FF4757' }]} /><Text style={s.legendText}>Calls OI</Text>
-        <View style={[s.legendDot, { backgroundColor: '#00C896' }]} /><Text style={s.legendText}>Puts OI</Text>
+        <View style={[s.legendDot, { backgroundColor: '#FF4757' }]} /><Text style={s.legendText}>🔴 Call OI = resistance</Text>
+        <View style={[s.legendDot, { backgroundColor: '#00C896' }]} /><Text style={s.legendText}>🟢 Put OI = support</Text>
+        <Text style={s.legendText}>⭐ Max Pain</Text>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <Svg width={W} height={H}>
@@ -537,11 +538,14 @@ function getISTDateStr(): string {
 
 function getTimeBanner(): { text: string; color: string; bg: string } {
   const h = getISTHour()
-  if (h < 9.25)  return { text: '🌅 Pre-market — setups not yet valid for today', color: '#8B8FA8', bg: '#1E1E2E' }
-  if (h < 10.25) return { text: '⏳ ORB forming (9:15–10:15 AM) — wait for breakout confirmation', color: '#FFD32A', bg: '#FFD32A15' }
-  if (h < 15.0)  return { text: '🟢 Prime trading window — F&O setups are active', color: '#00C896', bg: '#00C89615' }
-  if (h < 15.25) return { text: '⏰ Exit window — close all positions before 3:15 PM IST!', color: '#FF4757', bg: '#FF475720' }
-  return { text: '🌙 Market closed — next setups post after 4 PM IST', color: '#6C63FF', bg: '#6C63FF15' }
+  if (h < 9.25)  return { text: '🌅 Pre-market — setups loading, market opens 9:15 AM', color: '#8B8FA8', bg: '#1E1E2E' }
+  if (h < 9.50)  return { text: '⚠️ Opening bell (9:15–9:30) — high volatility, wait for direction', color: '#FF9800', bg: '#FF980015' }
+  if (h < 11.50) return { text: '🟢 Prime window (9:30–11:30 AM) — best time for F&O entries', color: '#00C896', bg: '#00C89615' }
+  if (h < 13.0)  return { text: '🌤 Lunch slowdown (11:30–1:00 PM) — reduced liquidity, be cautious', color: '#FFD32A', bg: '#FFD32A15' }
+  if (h < 14.50) return { text: '🟢 Second window (1:00–2:30 PM) — afternoon trend setups', color: '#00C896', bg: '#00C89615' }
+  if (h < 15.25) return { text: '⚠️ Theta burning (2:30–3:15 PM) — exit or tight SL only', color: '#FF9800', bg: '#FF980015' }
+  if (h < 15.50) return { text: '🔴 Last 15 min — exit ALL positions NOW, close before 3:30 PM!', color: '#FF4757', bg: '#FF475720' }
+  return { text: '🌙 Market closed — next setups available after 4 PM IST', color: '#555566', bg: '#13131A' }
 }
 
 // ── Main screen ───────────────────────────────────────────────────────────────
@@ -556,6 +560,18 @@ export default function FNOScreen() {
   const [optionLTP, setOptionLTP] = useState<Record<'NIFTY' | 'BANKNIFTY', number | null>>({ NIFTY: null, BANKNIFTY: null })
   const [simpleView, setSimpleView] = useState(false)
   const timeBanner = getTimeBanner()
+
+  useEffect(() => {
+    AsyncStorage.getItem('tradingbabaji_fno_view_mode').then((v) => {
+      if (v === 'simple') setSimpleView(true)
+    })
+  }, [])
+
+  function toggleView() {
+    const next = !simpleView
+    setSimpleView(next)
+    AsyncStorage.setItem('tradingbabaji_fno_view_mode', next ? 'simple' : 'detailed')
+  }
 
   async function loadTradeCount() {
     const today = getISTDateStr()
@@ -678,9 +694,20 @@ export default function FNOScreen() {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6C63FF" colors={['#6C63FF']} />}
     >
-      {/* Time-of-day banner */}
-      <View style={[s.timeBanner, { backgroundColor: timeBanner.bg }]}>
-        <Text style={[s.timeBannerText, { color: timeBanner.color }]}>{timeBanner.text}</Text>
+      {/* Time-of-day banner + trade counter */}
+      <View style={s.timeBannerRow}>
+        <View style={[s.timeBanner, { backgroundColor: timeBanner.bg, flex: 1 }]}>
+          <Text style={[s.timeBannerText, { color: timeBanner.color }]}>{timeBanner.text}</Text>
+        </View>
+        <View style={[
+          s.tradeCountPill,
+          { backgroundColor: tradesUsed === 0 ? '#00C89620' : tradesUsed === 1 ? '#FFD32A20' : '#FF475720',
+            borderColor: tradesUsed === 0 ? '#00C896' : tradesUsed === 1 ? '#FFD32A' : '#FF4757' }
+        ]}>
+          <Text style={[s.tradeCountPillText, {
+            color: tradesUsed === 0 ? '#00C896' : tradesUsed === 1 ? '#FFD32A' : '#FF4757',
+          }]}>{tradesUsed}/{MAX_TRADES_PER_DAY}</Text>
+        </View>
       </View>
 
       {/* Index selector + Simple/Detailed toggle */}
@@ -696,7 +723,7 @@ export default function FNOScreen() {
             </TouchableOpacity>
           ))}
         </View>
-        <TouchableOpacity style={s.viewToggle} onPress={() => setSimpleView((v) => !v)}>
+        <TouchableOpacity style={s.viewToggle} onPress={toggleView}>
           <Text style={s.viewToggleText}>{simpleView ? '📊 Detailed' : '📋 Simple'}</Text>
         </TouchableOpacity>
       </View>
@@ -748,8 +775,11 @@ const s = StyleSheet.create({
   retryBtn: { backgroundColor: '#6C63FF', borderRadius: 10, paddingHorizontal: 24, paddingVertical: 12 },
   retryText: { color: '#FFFFFF', fontWeight: '700', fontSize: 15 },
 
-  timeBanner: { marginHorizontal: 16, marginTop: 12, marginBottom: 4, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 9 },
+  timeBannerRow: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 16, marginTop: 12, marginBottom: 4, gap: 8 },
+  timeBanner: { borderRadius: 10, paddingHorizontal: 14, paddingVertical: 9 },
   timeBannerText: { fontSize: 12, fontWeight: '700', textAlign: 'center' },
+  tradeCountPill: { borderRadius: 20, borderWidth: 1.5, paddingHorizontal: 10, paddingVertical: 6, alignItems: 'center' },
+  tradeCountPillText: { fontSize: 13, fontWeight: '900' },
   topControlRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 8, gap: 8 },
   indexToggle: { flex: 1, flexDirection: 'row', backgroundColor: '#13131A', borderRadius: 12, padding: 4, borderWidth: 1, borderColor: '#1E1E2E' },
   indexToggleBtn: { flex: 1, paddingVertical: 10, alignItems: 'center', borderRadius: 10 },
