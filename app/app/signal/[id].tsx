@@ -10,6 +10,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Share,
 } from 'react-native'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useSignals } from '../../hooks/useSignals'
@@ -48,6 +49,25 @@ export default function SignalDetailScreen() {
   const entryMid = (signal.entry.low + signal.entry.high) / 2
   const [tradeType, setTradeType] = useState<'BUY' | 'SHORT'>(isBuy ? 'BUY' : 'SHORT')
 
+  async function handleShare() {
+    const t1 = signal.targets[0]
+    await Share.share({
+      message: [
+        `📊 ${signal.signal_type} Signal — ${signal.symbol}`,
+        `${signal.name}`,
+        ``,
+        `📍 Entry Zone: ₹${signal.entry.low} – ₹${signal.entry.high}`,
+        `🛡 Stop Loss: ₹${signal.stop_loss} (${signal.stop_loss_pct.toFixed(1)}%)`,
+        t1 ? `🎯 Target 1: ₹${t1.price} (+${t1.pct.toFixed(1)}%)` : '',
+        ``,
+        `Confidence: ${signal.confidence}% · Expected: ${signal.expected_profit.label}`,
+        ``,
+        `📲 TradingBabaji — Research by SEBI RA`,
+      ].filter(Boolean).join('\n'),
+      title: `${signal.symbol} ${signal.signal_type} Signal`,
+    })
+  }
+
   async function handleAddTrade() {
     const price = parseFloat(entryPrice)
     const qty = parseInt(quantity)
@@ -73,8 +93,29 @@ export default function SignalDetailScreen() {
     Alert.alert('Trade Added', `${signal.symbol} added to My Trades`)
   }
 
+  const dayUp = (signal.day_change_pct ?? 0) >= 0
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* Sticky live price bar */}
+      <View style={styles.livePriceBar}>
+        <View>
+          <Text style={styles.livePriceSymbol}>{signal.symbol}</Text>
+          <Text style={styles.livePriceName} numberOfLines={1}>{signal.name}</Text>
+        </View>
+        <View style={styles.livePriceRight}>
+          <Text style={styles.livePriceValue}>{formatINR(signal.current_price ?? 0)}</Text>
+          <View style={[styles.liveChangeBadge, { backgroundColor: dayUp ? '#00C89620' : '#FF475720' }]}>
+            <Text style={[styles.liveChangeText, { color: dayUp ? '#00C896' : '#FF4757' }]}>
+              {dayUp ? '▲' : '▼'} {Math.abs(signal.day_change_pct ?? 0).toFixed(2)}%
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.shareBtn} onPress={handleShare}>
+            <Text style={styles.shareBtnText}>↗ Share</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       {/* SECTION 1 — Header */}
       <View style={styles.section}>
         <View style={styles.headerRow}>
@@ -87,7 +128,7 @@ export default function SignalDetailScreen() {
                 { borderColor: isBuy ? '#00C896' : '#FF4757', backgroundColor: isBuy ? '#00C89615' : '#FF475715' }
               ]}>
                 <Text style={[styles.signalBadgeText, { color: isBuy ? '#00C896' : '#FF4757' }]}>
-                  {signal.signal_type}
+                  {isBuy ? 'BUY' : 'SELL'}
                 </Text>
               </View>
               <HoldingBadge period={signal.holding_period} label={signal.holding_label} />
@@ -102,7 +143,7 @@ export default function SignalDetailScreen() {
 
       {/* SECTION 2 — Trade Setup */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Trade Setup</Text>
+        <Text style={styles.sectionTitle}>Zone Setup</Text>
         <View style={styles.setupCard}>
           <View style={[styles.setupRow, styles.entryRow]}>
             <Text style={styles.setupLabel}>Entry Zone</Text>
@@ -117,7 +158,7 @@ export default function SignalDetailScreen() {
           </View>
           {signal.targets.map((t, i) => (
             <View key={i} style={styles.setupRow}>
-              <Text style={styles.setupLabel}>{t.label}</Text>
+              <Text style={styles.setupLabel}>{i === 0 ? 'Target 1' : 'Target 2'}</Text>
               <Text style={[styles.setupValue, { color: '#00C896' }]}>
                 {formatINR(t.price)} ({formatPct(t.pct)})
               </Text>
@@ -130,7 +171,7 @@ export default function SignalDetailScreen() {
               <Text style={styles.rrValue}>1 : {signal.risk_reward.toFixed(1)}</Text>
             </View>
             <View style={styles.rrItem}>
-              <Text style={styles.rrLabel}>Expected Profit</Text>
+              <Text style={styles.rrLabel}>Expected Move</Text>
               <Text style={[styles.rrValue, { color: '#00C896' }]}>{signal.expected_profit.label}</Text>
             </View>
           </View>
@@ -186,7 +227,7 @@ export default function SignalDetailScreen() {
           />
           <TechRow
             label="Zone"
-            value={signal.zone.fresh ? 'Fresh — Never Tested ✅' : `Tested ${signal.zone.touches}× ⚠️`}
+            value={signal.zone.fresh ? 'Fresh Zone — Never Tested ✅' : `Zone Tested Once ⚠️`}
             color={signal.zone.fresh ? '#00C896' : '#FFD32A'}
             icon={signal.zone.fresh ? '🆕' : '🔄'}
             last
@@ -338,6 +379,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#0A0A0F',
   },
+  livePriceBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#13131A',
+    borderBottomWidth: 1,
+    borderBottomColor: '#1E1E2E',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  livePriceSymbol: { color: '#FFFFFF', fontSize: 16, fontWeight: '800' },
+  livePriceName: { color: '#8B8FA8', fontSize: 11, marginTop: 1, maxWidth: 180 },
+  livePriceRight: { alignItems: 'flex-end', gap: 4 },
+  livePriceValue: { color: '#FFFFFF', fontSize: 22, fontWeight: '900', letterSpacing: -0.5 },
+  liveChangeBadge: { borderRadius: 6, paddingHorizontal: 8, paddingVertical: 3 },
+  liveChangeText: { fontSize: 13, fontWeight: '700' },
+  shareBtn: { backgroundColor: '#6C63FF20', borderRadius: 6, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: '#6C63FF40' },
+  shareBtnText: { color: '#6C63FF', fontSize: 11, fontWeight: '700' },
   center: {
     flex: 1,
     alignItems: 'center',

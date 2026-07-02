@@ -1,14 +1,30 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import {
   View, Text, FlatList, TouchableOpacity, StyleSheet,
-  RefreshControl, ActivityIndicator,
+  RefreshControl, ActivityIndicator, ScrollView,
 } from 'react-native'
 import { useRouter } from 'expo-router'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useSignals, filterSignals } from '../hooks/useSignals'
 import { Signal } from '../types/signal'
 import SignalCard from '../components/SignalCard'
-import { formatRelativeTime } from '../utils/formatters'
+import { formatINR, formatRelativeTime } from '../utils/formatters'
 import { useAuth } from '../context/AuthContext'
+
+type UrgencyLevel = 'IN_ZONE' | 'NEAR_ZONE' | 'WAITING' | 'ZONE_PASSED'
+
+function getUrgency(signal: Signal): UrgencyLevel {
+  const price = signal.current_price ?? 0
+  const { low, high } = signal.entry
+  const isBuy = signal.signal_type === 'BUY'
+  if (price >= low && price <= high) return 'IN_ZONE'
+  if (price >= low * 0.98 && price <= high * 1.02) return 'NEAR_ZONE'
+  if (isBuy && price > high * 1.05) return 'ZONE_PASSED'
+  if (!isBuy && price < low * 0.95) return 'ZONE_PASSED'
+  return 'WAITING'
+}
+
+const URGENCY_ORDER: Record<UrgencyLevel, number> = { IN_ZONE: 0, NEAR_ZONE: 1, WAITING: 2, ZONE_PASSED: 3 }
 
 const HOLDING_FILTERS = [
   { key: 'ALL',    label: 'All',     periods: [] },
@@ -18,9 +34,10 @@ const HOLDING_FILTERS = [
   { key: '6M-1Y',  label: '6M-1Y',   periods: ['6M', '1Y'] },
 ]
 
-type SortKey = 'confidence' | 'day_change' | 'price_asc' | 'price_desc'
+type SortKey = 'confidence' | 'day_change' | 'price_asc' | 'price_desc' | 'urgency'
 
 const SORT_OPTIONS: { key: SortKey; label: string }[] = [
+  { key: 'urgency',    label: '🎯 Zone Urgency' },
   { key: 'confidence', label: '% Probability' },
   { key: 'day_change', label: '% Day Change' },
   { key: 'price_asc',  label: 'Price: Low → High' },
@@ -29,6 +46,7 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
 
 function sortSignals(signals: Signal[], key: SortKey): Signal[] {
   return [...signals].sort((a, b) => {
+    if (key === 'urgency') return URGENCY_ORDER[getUrgency(a)] - URGENCY_ORDER[getUrgency(b)]
     if (key === 'confidence') return b.confidence - a.confidence
     if (key === 'day_change') return Math.abs(b.day_change_pct ?? 0) - Math.abs(a.day_change_pct ?? 0)
     if (key === 'price_asc') return (a.current_price ?? 0) - (b.current_price ?? 0)
@@ -37,15 +55,25 @@ function sortSignals(signals: Signal[], key: SortKey): Signal[] {
   })
 }
 
+const FILTER_KEY = 'tradingbabaji_last_filter'
+const SORT_KEY = 'tradingbabaji_last_sort'
+
 export default function HomeScreen() {
   const router = useRouter()
   const { profile, daysLeftInTrial, isTrialActive, isAdmin } = useAuth()
   const { signals, isLoading, error, refetch, lastUpdated, isFromHistory } = useSignals()
   const [activeFilter, setActiveFilter] = useState('ALL')
-  const [activeSort, setActiveSort] = useState<SortKey>('confidence')
+  const [activeSort, setActiveSort] = useState<SortKey>('urgency')
   const [refreshing, setRefreshing] = useState(false)
   const [showSort, setShowSort] = useState(false)
   const [signalFilter, setSignalFilter] = useState<'ALL' | 'BUY' | 'SHORT'>('ALL')
+
+  useEffect(() => {
+    Promise.all([AsyncStorage.getItem(FILTER_KEY), AsyncStorage.getItem(SORT_KEY)]).then(([f, s]) => {
+      if (f) setActiveFilter(f)
+      if (s) setActiveSort(s as SortKey)
+    })
+  }, [])
 
   const filtered = useMemo(() => {
     const tab = HOLDING_FILTERS.find((f) => f.key === activeFilter)
@@ -68,6 +96,22 @@ export default function HomeScreen() {
     const tab = HOLDING_FILTERS.find((f) => f.key === activeFilter)
     return filterSignals(signals, { holding: tab?.periods.length ? tab.periods : undefined }).filter((s) => s.signal_type === 'SELL').length
   }, [signals, activeFilter])
+
+  const topPicks = useMemo(() => {
+    return [...signals]
+      .filter((s) => getUrgency(s) === 'IN_ZONE' || getUrgency(s) === 'NEAR_ZONE')
+      .sort((a, b) => b.confidence - a.confidence)
+      .slice(0, 3)
+  }, [signals])
+
+  function changeFilter(f: string) {
+    setActiveFilter(f)
+    AsyncStorage.setItem(FILTER_KEY, f)
+  }
+  function changeSort(s: SortKey) {
+    setActiveSort(s)
+    AsyncStorage.setItem(SORT_KEY, s)
+  }
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true)
@@ -115,13 +159,42 @@ export default function HomeScreen() {
         </View>
       )}
 
+      {/* Top Picks horizontal scroll */}
+      {topPicks.length > 0 && (
+        <View style={styles.topPicksSection}>
+          <Text style={styles.topPicksTitle}>🔥 Top Picks — In or Near Zone</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.topPicksRow}>
+            {topPicks.map((s) => (
+              <TouchableOpacity
+                key={s.id}
+                style={[styles.topPickCard, { borderColor: s.signal_type === 'BUY' ? '#00C89650' : '#FF475750' }]}
+                onPress={() => router.push(`/signal/${s.id}` as any)}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.topPickSymbol}>{s.symbol}</Text>
+                <Text style={[styles.topPickType, { color: s.signal_type === 'BUY' ? '#00C896' : '#FF4757' }]}>
+                  {s.signal_type}
+                </Text>
+                <Text style={styles.topPickPrice}>{formatINR(s.current_price ?? 0)}</Text>
+                <View style={[styles.topPickBadge, { backgroundColor: getUrgency(s) === 'IN_ZONE' ? '#00C89620' : '#FFD32A20' }]}>
+                  <Text style={[styles.topPickBadgeText, { color: getUrgency(s) === 'IN_ZONE' ? '#00C896' : '#FFD32A' }]}>
+                    {getUrgency(s) === 'IN_ZONE' ? '🎯 IN ZONE' : '⚡ NEAR'}
+                  </Text>
+                </View>
+                <Text style={styles.topPickConf}>{s.confidence}% conf</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      )}
+
       {/* Holding filter chips — all 5 fit in one row */}
       <View style={styles.filterRow}>
         {HOLDING_FILTERS.map((item) => (
           <TouchableOpacity
             key={item.key}
             style={[styles.filterChip, activeFilter === item.key && styles.filterChipActive]}
-            onPress={() => setActiveFilter(item.key)}
+            onPress={() => changeFilter(item.key)}
           >
             <Text style={[styles.filterChipText, activeFilter === item.key && styles.filterChipTextActive]}>
               {item.label}
@@ -144,7 +217,7 @@ export default function HomeScreen() {
             <TouchableOpacity
               key={opt.key}
               style={[styles.sortOption, activeSort === opt.key && styles.sortOptionActive]}
-              onPress={() => { setActiveSort(opt.key); setShowSort(false) }}
+              onPress={() => { changeSort(opt.key); setShowSort(false) }}
             >
               <Text style={[styles.sortOptionText, activeSort === opt.key && styles.sortOptionActive && { color: '#6C63FF', fontWeight: '700' }]}>
                 {activeSort === opt.key ? '✓  ' : '    '}{opt.label}
@@ -247,6 +320,19 @@ const styles = StyleSheet.create({
   sortOption: { paddingHorizontal: 16, paddingVertical: 13, borderBottomWidth: 1, borderBottomColor: '#1E1E2E' },
   sortOptionActive: { backgroundColor: '#6C63FF12' },
   sortOptionText: { color: '#FFFFFF', fontSize: 13 },
+  topPicksSection: { paddingBottom: 8 },
+  topPicksTitle: { color: '#8B8FA8', fontSize: 11, fontWeight: '700', paddingHorizontal: 16, marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.5 },
+  topPicksRow: { paddingHorizontal: 16, gap: 10 },
+  topPickCard: {
+    backgroundColor: '#13131A', borderRadius: 12, borderWidth: 1,
+    padding: 12, width: 130,
+  },
+  topPickSymbol: { color: '#FFFFFF', fontSize: 14, fontWeight: '800', marginBottom: 2 },
+  topPickType: { fontSize: 10, fontWeight: '700', marginBottom: 4 },
+  topPickPrice: { color: '#FFFFFF', fontSize: 13, fontWeight: '700', marginBottom: 4 },
+  topPickBadge: { borderRadius: 5, paddingHorizontal: 6, paddingVertical: 2, marginBottom: 4, alignSelf: 'flex-start' },
+  topPickBadgeText: { fontSize: 9, fontWeight: '800' },
+  topPickConf: { color: '#8B8FA8', fontSize: 10 },
   list: { paddingTop: 6, paddingBottom: 32 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32 },
   loadingText: { color: '#8B8FA8', marginTop: 12, fontSize: 14 },

@@ -1,151 +1,204 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  Share,
 } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import PatternVisual from '../components/PatternVisual'
+
+const LEARN_PROGRESS_KEY = 'tradingbabaji_learn_read'
 
 const PSYCHOLOGY_PATTERNS = [
   {
     type: 'LIQUIDITY_GRAB',
     icon: '🎯',
-    title: 'Liquidity Grab',
-    tagline: 'Smart money hunts retail stop-losses before reversing',
+    title: 'Possible Stop Hunt',
+    tagline: 'Price may have dipped to trigger stops before a possible reversal',
     color: '#6C63FF',
     whatHappened:
-      'The price dips below a key support level, triggering stop-loss orders from retail traders who placed stops just below support. It then quickly reverses and closes back above that level.',
+      'Price briefly dipped below a key support level then snapped back up quickly.',
     whatItMeans:
-      'Institutional traders deliberately pushed the price down to fill their own buy orders cheaply, using retail stop-losses as liquidity. The fast snapback above support shows strong buying conviction.',
+      'This can be a pattern where large players pushed price down to trigger stop losses before the real move begins. Historically this type of move has been followed by upward price action — can be a possible buy opportunity on the snapback.',
     action:
-      'This is one of the highest-probability buy setups in trading. Look to enter on the next candle if it confirms bullish direction. Place your stop-loss below the wick low — not below support where everyone else had theirs.',
+      'This can be worth watching as a possible buy setup. Look for the next candle to confirm direction before considering any entry. Can be a higher-probability possible zone if volume confirms.',
     diagram:
-      '↓ Price sweeps below support → Long wick forms → Price closes back above support → Rally begins',
+      '↓ Price sweeps below support → Long wick forms → Price closes back above support → Possible rally begins',
   },
   {
     type: 'CAPITULATION',
     icon: '😨',
-    title: 'Capitulation',
-    tagline: 'Mass panic selling creates the final low',
+    title: 'Possible Panic Selling',
+    tagline: 'Mass selling may have created a possible demand zone',
     color: '#FF4757',
     whatHappened:
-      'A sudden surge in selling volume creates a dramatic drop with a long lower wick on the candle. Scared holders dump their positions all at once.',
+      'A large number of traders may have sold in panic — visible from the unusually high volume and long lower wick on the candle.',
     whatItMeans:
-      'When everyone who wanted to sell has sold in panic, there are simply no more sellers left. This exhaustion point often marks the lowest price in a down move — institutions are on the other side buying.',
+      'Historically this type of panic selling near a demand zone has been followed by price recovery as buyers absorb the selling. Can be a possible buy zone forming here.',
     action:
-      'Wait for the panic candle to close, then look for the next candle to confirm a green bounce. Entering during the panic wick is risky — wait for confirmation first.',
-    diagram: '📉 Large red candle + massive volume → Long lower wick → Next candle closes green → Accumulation begins',
+      'Can be worth watching for a possible bounce. Historically waiting for the next candle to confirm green may offer a better possible entry than entering during the wick.',
+    diagram: '📉 Large red candle + high volume → Long lower wick → Next candle may close green → Possible recovery',
   },
   {
     type: 'SMART_MONEY_ACCUMULATION',
     icon: '🐋',
-    title: 'Institutional Accumulation',
-    tagline: 'Big players quietly building positions',
+    title: 'Possible Quiet Accumulation',
+    tagline: 'Large players may be slowly building positions near this zone',
     color: '#00C896',
     whatHappened:
-      'The price moves in an unusually tight range for several days near a demand zone. Volume in delivery (not intraday) is elevated, but the price barely moves.',
+      'Price has been moving sideways in a tight range near a demand zone with above average buying activity.',
     whatItMeans:
-      'Large institutions want to buy a huge quantity without moving the price against themselves. They slowly absorb supply at a fixed range. Once they finish accumulating, they let the price run.',
+      'This can be a pattern where large players are slowly building positions. Historically this type of quiet accumulation near a zone has preceded upward moves — can be worth watching for a possible buy opportunity.',
     action:
-      'This is a patient setup — the breakout from the accumulation range can be explosive. Enter near the range bottom, place stop below the zone. Hold for the full target.',
-    diagram: '━━ Tight range 10 days + high delivery volume → Small upward drift in closes → Breakout bar →  🚀',
+      'This can be a patient possible setup. Historically a breakout from the accumulation range can be significant — can be worth watching for a possible entry near the zone bottom.',
+    diagram: '━━ Tight range + above-average volume → Small upward drift → Possible breakout bar → 🚀 Possible move',
   },
   {
     type: 'DISTRIBUTION',
     icon: '📤',
-    title: 'Distribution',
-    tagline: 'Big players offloading to retail buyers',
+    title: 'Possible Selling Pressure',
+    tagline: 'Large players may be reducing positions near this supply zone',
     color: '#FF8C42',
     whatHappened:
-      'Price is stuck in a range near resistance. Upper wicks (rejection at highs) are appearing repeatedly, and volume is declining on up-moves.',
+      'Price has been unable to move higher and may be showing repeated rejection near a supply zone.',
     whatItMeans:
-      'Institutions are selling their positions into the demand created by retail buyers who see a "consolidation before breakout." The repeated rejections show sellers overwhelming buyers at resistance.',
+      'This can be a pattern where large players are slowly reducing positions. Historically this type of distribution near a supply zone has preceded downward moves — can be worth watching as a possible sell zone.',
     action:
-      'Avoid buying near this range. If you hold the stock, consider taking partial profits. A breakdown from this range typically falls fast because buyers are already trapped.',
-    diagram: '↑ Up to resistance → Upper wick rejection → Declining volume on up days → 📉 Breakdown',
+      'Can be worth avoiding new buys near this area. If you hold the stock, can be worth considering partial profit-taking. Historically breakdowns from this type of range can move quickly.',
+    diagram: '↑ Up to possible resistance → Upper wick rejection → Volume declining on up days → 📉 Possible breakdown',
   },
   {
     type: 'BULL_TRAP',
     icon: '⚠️',
-    title: 'Bull Trap',
-    tagline: 'False breakout traps eager buyers',
+    title: 'Possible False Breakout',
+    tagline: 'Breakout may have failed — possible trap for buyers',
     color: '#FFD32A',
     whatHappened:
-      'The price broke above a key resistance level, which attracted many buyers hoping for a breakout. But it quickly fell back below resistance — the breakout was on weak volume and didn\'t hold.',
+      'Price broke above resistance but quickly fell back below it on weak volume.',
     whatItMeans:
-      'Retail traders who bought the breakout are now trapped with positions above resistance. When they eventually cut losses, their selling adds more downward pressure. The setup favors the short side.',
+      'This can be a bull trap — a situation where traders who bought the breakout may now be stuck. Historically this pattern has been followed by downward movement. Can be worth watching for a possible sell opportunity on the breakdown.',
     action:
-      'Do not buy a breakout that fails to hold for more than 1-2 days. If you\'re already in, set a tight stop at the high of the failed breakout bar.',
-    diagram: '→ Resistance line → Price breaks above (weak volume) → Returns below resistance → Trapped longs sell →  📉',
+      'Can be worth avoiding buying breakouts that fail to hold. Historically waiting 1-2 days for confirmation may help identify whether a breakout is valid or possibly a trap.',
+    diagram: '→ Possible resistance → Price breaks above (weak volume) → Returns below → Possible trapped longs → 📉',
   },
   {
     type: 'BEAR_TRAP',
     icon: '⚠️',
-    title: 'Bear Trap',
-    tagline: 'False breakdown squeezes shorts upward',
+    title: 'Possible False Breakdown',
+    tagline: 'Breakdown may have failed — possible trap for sellers',
     color: '#FFD32A',
     whatHappened:
-      'The price broke below a key support level, triggering short-sellers to enter bearish positions. But it then quickly reversed back above support — the breakdown was also on weak volume.',
+      'Price broke below support but quickly recovered above it on weak volume.',
     whatItMeans:
-      'Short sellers are now trapped below support. As price rises back above, they are forced to buy back (cover) their losing shorts, which creates additional buying pressure — a "short squeeze."',
+      'This can be a bear trap — a situation where traders who sold the breakdown may now be stuck. Historically this pattern has been followed by upward movement. Can be worth watching for a possible buy opportunity on the recovery.',
     action:
-      'This is a bullish reversal signal. Enter long with a stop-loss below the trap wick low. The short-covering rally can be rapid and significant.',
-    diagram: '→ Support line → Price breaks below (weak volume) → Returns above support → Shorts cover → 🚀 Rally',
+      'Can be worth watching as a possible bullish reversal zone. Historically a recovery above the broken level with increasing volume may signal a possible upward move from here.',
+    diagram: '→ Possible support → Price breaks below (weak volume) → Recovers above → Possible short squeeze → 🚀',
   },
   {
     type: 'FOMO_ZONE',
     icon: '🚫',
-    title: 'FOMO Risk Zone',
-    tagline: 'Too late — chasing leads to losses',
+    title: 'Price May Be Extended',
+    tagline: 'Price may be far from its zone — can be worth waiting for a better possible entry',
     color: '#FF4757',
     whatHappened:
-      'The stock has already run up significantly from its demand zone. RSI is elevated (above 72), price is far above the nearest support, and volume is actually declining — fewer buyers are participating.',
+      'Price has moved far from the nearest demand zone and momentum may be at elevated levels.',
     whatItMeans:
-      'The move is overextended. "Fear of Missing Out" is driving new buyers in at the top, while informed traders are starting to sell. The risk/reward ratio is extremely unfavorable here.',
+      'Historically entering when price is this far extended from its zone has offered less favourable risk compared to waiting for a possible pullback to the zone. Can be worth waiting for a better possible entry zone.',
     action:
-      'Do NOT enter. Missing a move is much better than buying at the top and holding a loss. Wait patiently for price to pull back to a fresh demand zone before considering entry.',
-    diagram: '📈 Strong rally from zone → Price extends far from zone → RSI overbought → Volume fades → 🚫 Avoid',
+      'Can be worth waiting for a possible pullback to the zone rather than chasing price here. Historically missing a move may be better than entering at an extended level with unfavourable zone risk.',
+    diagram: '📈 Possible rally from zone → Price extends far from zone → Momentum elevated → 🚫 Can be worth waiting',
   },
   {
     type: 'EUPHORIA',
     icon: '🤑',
-    title: 'Euphoria Zone',
-    tagline: 'Extreme greed — the smart money exit',
+    title: 'Possible Extreme Greed',
+    tagline: 'Price may be well above average near a possible supply zone',
     color: '#FF4757',
     whatHappened:
-      'The price is dramatically above its 200-day average, RSI shows extreme readings above 78, and the stock is near or above a known supply zone where sellers have previously stepped in.',
+      'Price may be well above its average levels and near a supply zone with momentum at high readings.',
     whatItMeans:
-      'Euphoria means almost everyone who wants to buy has already bought. There are very few new buyers left to push the price higher, while sellers are lined up in significant quantities overhead.',
+      'Historically this combination near supply zones has preceded possible pullbacks or reversals. Can be a zone where selling pressure may appear.',
     action:
-      'Absolutely avoid new entries. If you already hold the stock, this is the time to consider taking profits, not adding more. The downside risk from euphoria levels is historically severe.',
-    diagram: '🚀 Extended rally → 200 EMA far below → RSI > 78 → Supply zone overhead → 📉 Sharp correction',
+      'Can be worth avoiding new entries at this level. Historically if you already hold the stock, this area near supply can be worth watching for a possible exit or partial profit-taking.',
+    diagram: '🚀 Possible extended rally → Far above average → Momentum high → Possible supply zone overhead → 📉',
   },
 ]
 
 export default function LearnScreen() {
   const [expanded, setExpanded] = useState<string | null>(null)
+  const [readSet, setReadSet] = useState<Set<string>>(new Set())
+
+  useEffect(() => {
+    AsyncStorage.getItem(LEARN_PROGRESS_KEY).then((val) => {
+      if (val) {
+        try { setReadSet(new Set(JSON.parse(val))) } catch {}
+      }
+    })
+  }, [])
+
+  async function markRead(type: string) {
+    const next = new Set(readSet)
+    next.add(type)
+    setReadSet(next)
+    await AsyncStorage.setItem(LEARN_PROGRESS_KEY, JSON.stringify([...next]))
+  }
+
+  function handleExpand(type: string) {
+    const isOpen = expanded === type
+    setExpanded(isOpen ? null : type)
+    if (!isOpen && !readSet.has(type)) markRead(type)
+  }
+
+  async function handleShare(pattern: typeof PSYCHOLOGY_PATTERNS[0]) {
+    await Share.share({
+      message: `📊 ${pattern.title}\n\n${pattern.tagline}\n\n${pattern.whatItMeans}\n\nLearn more on TradingBabaji`,
+      title: pattern.title,
+    })
+  }
+
+  const readCount = readSet.size
+  const total = PSYCHOLOGY_PATTERNS.length
+  const progressPct = Math.round((readCount / total) * 100)
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <Text style={styles.title}>Market Psychology Guide</Text>
-        <Text style={styles.subtitle}>Why prices move the way they do</Text>
+        <Text style={styles.title}>Understanding What The Market May Be Doing</Text>
+        <Text style={styles.subtitle}>Learn to read possible market signals and zone behaviour — so you can make more informed decisions yourself</Text>
+
+        {/* Progress bar */}
+        <View style={styles.progressWrap}>
+          <View style={styles.progressRow}>
+            <Text style={styles.progressLabel}>{readCount}/{total} concepts read</Text>
+            <Text style={styles.progressPct}>{progressPct}%</Text>
+          </View>
+          <View style={styles.progressTrack}>
+            <View style={[styles.progressFill, { width: `${progressPct}%` as any }]} />
+          </View>
+        </View>
       </View>
 
       {PSYCHOLOGY_PATTERNS.map((pattern) => {
         const isOpen = expanded === pattern.type
+        const isRead = readSet.has(pattern.type)
         return (
           <TouchableOpacity
             key={pattern.type}
             style={[styles.card, { borderColor: isOpen ? pattern.color + '60' : '#1E1E2E' }]}
-            onPress={() => setExpanded(isOpen ? null : pattern.type)}
+            onPress={() => handleExpand(pattern.type)}
             activeOpacity={0.8}
           >
             <View style={styles.cardHeader}>
               <Text style={styles.cardIcon}>{pattern.icon}</Text>
               <View style={styles.cardHeaderText}>
-                <Text style={[styles.cardTitle, { color: pattern.color }]}>{pattern.title}</Text>
+                <View style={styles.cardTitleRow}>
+                  <Text style={[styles.cardTitle, { color: pattern.color }]}>{pattern.title}</Text>
+                  {isRead && <Text style={styles.readBadge}>✓ Read</Text>}
+                </View>
                 <Text style={styles.cardTagline}>{pattern.tagline}</Text>
               </View>
               <Text style={[styles.chevron, { color: pattern.color }]}>{isOpen ? '▲' : '▼'}</Text>
@@ -155,25 +208,23 @@ export default function LearnScreen() {
               <View style={styles.cardBody}>
                 <View style={styles.divider} />
 
+                <PatternVisual type={pattern.type} />
+
                 <View style={[styles.diagramBox, { borderColor: pattern.color + '40' }]}>
                   <Text style={[styles.diagramText, { color: pattern.color }]}>{pattern.diagram}</Text>
                 </View>
 
-                <SectionBlock
-                  label="What happened"
-                  color="#FFD32A"
-                  text={pattern.whatHappened}
-                />
-                <SectionBlock
-                  label="What it means"
-                  color="#6C63FF"
-                  text={pattern.whatItMeans}
-                />
-                <SectionBlock
-                  label="Your action"
-                  color="#00C896"
-                  text={pattern.action}
-                />
+                <SectionBlock label="What happened" color="#FFD32A" text={pattern.whatHappened} />
+                <SectionBlock label="What it means" color="#6C63FF" text={pattern.whatItMeans} />
+                <SectionBlock label="Zone analysis shows" color="#00C896" text={pattern.action} />
+
+                {/* Share button */}
+                <TouchableOpacity
+                  style={[styles.shareBtn, { borderColor: pattern.color + '50' }]}
+                  onPress={(e) => { e.stopPropagation?.(); handleShare(pattern) }}
+                >
+                  <Text style={[styles.shareBtnText, { color: pattern.color }]}>Share this insight ↗</Text>
+                </TouchableOpacity>
               </View>
             )}
           </TouchableOpacity>
@@ -265,6 +316,60 @@ const styles = StyleSheet.create({
   },
   chevron: {
     fontSize: 11,
+  },
+  progressWrap: {
+    marginTop: 12,
+  },
+  progressRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+  },
+  progressLabel: {
+    color: '#8B8FA8',
+    fontSize: 12,
+  },
+  progressPct: {
+    color: '#6C63FF',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  progressTrack: {
+    height: 6,
+    backgroundColor: '#1E1E2E',
+    borderRadius: 3,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: 6,
+    backgroundColor: '#6C63FF',
+    borderRadius: 3,
+  },
+  cardTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    flexWrap: 'wrap',
+  },
+  readBadge: {
+    color: '#00C896',
+    fontSize: 10,
+    fontWeight: '700',
+    backgroundColor: '#00C89615',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+  shareBtn: {
+    marginTop: 12,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  shareBtnText: {
+    fontSize: 13,
+    fontWeight: '700',
   },
   cardBody: {
     paddingHorizontal: 14,

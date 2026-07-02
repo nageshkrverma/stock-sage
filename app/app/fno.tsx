@@ -331,7 +331,7 @@ function ScoreBar({ label, value, color }: { label: string; value: number; color
 
 // ── Index setup card ─────────────────────────────────────────────────────────
 function IndexCard({
-  name, setup, tradesUsed, onLogTrade, isLive, liveLTP, liveIndexPrice,
+  name, setup, tradesUsed, onLogTrade, isLive, liveLTP, liveIndexPrice, simpleView,
 }: {
   name: string
   setup: IndexSetup
@@ -340,6 +340,7 @@ function IndexCard({
   isLive?: boolean
   liveLTP?: number | null
   liveIndexPrice?: number | null
+  simpleView?: boolean
 }) {
   const isBull = setup.direction === 'CALL'
   const dirColor = isBull ? '#00C896' : '#FF4757'
@@ -427,29 +428,34 @@ function IndexCard({
         </Text>
       </View>
 
-      {/* Confluence breakdown */}
-      <Text style={s.sectionTitle}>Confluence Breakdown</Text>
-      <ScoreBar label="Zone Strength"       value={setup.zone_strength}        color="#6C63FF" />
-      <ScoreBar label="Timeframe Alignment" value={setup.timeframe_alignment}   color="#00C896" />
-      <ScoreBar label="Overall Probability" value={setup.probability}           color={dirColor} />
+      {/* Detailed sections */}
+      {!simpleView && (
+        <>
+          {/* Confluence breakdown */}
+          <Text style={s.sectionTitle}>Confluence Breakdown</Text>
+          <ScoreBar label="Zone Strength"       value={setup.zone_strength}        color="#6C63FF" />
+          <ScoreBar label="Timeframe Alignment" value={setup.timeframe_alignment}   color="#00C896" />
+          <ScoreBar label="Overall Probability" value={setup.probability}           color={dirColor} />
 
-      {/* OI analysis */}
-      {setup.oi_analysis ? (
-        <View style={s.oiNote}>
-          <Text style={s.oiNoteTitle}>OI Reading</Text>
-          <Text style={s.oiNoteText}>{setup.oi_analysis}</Text>
-        </View>
-      ) : null}
-
-      {/* Psychology signals */}
-      {setup.psychology_signals?.length > 0 && (
-        <View style={s.psyWrap}>
-          {setup.psychology_signals.map((p) => (
-            <View key={p} style={s.psyChip}>
-              <Text style={s.psyChipText}>{p.replace(/_/g, ' ')}</Text>
+          {/* OI analysis */}
+          {setup.oi_analysis ? (
+            <View style={s.oiNote}>
+              <Text style={s.oiNoteTitle}>OI Reading</Text>
+              <Text style={s.oiNoteText}>{setup.oi_analysis}</Text>
             </View>
-          ))}
-        </View>
+          ) : null}
+
+          {/* Psychology signals */}
+          {setup.psychology_signals?.length > 0 && (
+            <View style={s.psyWrap}>
+              {setup.psychology_signals.map((p) => (
+                <View key={p} style={s.psyChip}>
+                  <Text style={s.psyChipText}>{p.replace(/_/g, ' ')}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+        </>
       )}
 
       {/* Trade counter */}
@@ -518,6 +524,26 @@ async function fetchLivePrice(index: 'NIFTY' | 'BANKNIFTY'): Promise<{ price: nu
   }
 }
 
+function getISTHour(): number {
+  const now = new Date()
+  const ist = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }))
+  return ist.getHours() + ist.getMinutes() / 60
+}
+
+function getISTDateStr(): string {
+  const now = new Date()
+  return now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' })
+}
+
+function getTimeBanner(): { text: string; color: string; bg: string } {
+  const h = getISTHour()
+  if (h < 9.25)  return { text: '🌅 Pre-market — setups not yet valid for today', color: '#8B8FA8', bg: '#1E1E2E' }
+  if (h < 10.25) return { text: '⏳ ORB forming (9:15–10:15 AM) — wait for breakout confirmation', color: '#FFD32A', bg: '#FFD32A15' }
+  if (h < 15.0)  return { text: '🟢 Prime trading window — F&O setups are active', color: '#00C896', bg: '#00C89615' }
+  if (h < 15.25) return { text: '⏰ Exit window — close all positions before 3:15 PM IST!', color: '#FF4757', bg: '#FF475720' }
+  return { text: '🌙 Market closed — next setups post after 4 PM IST', color: '#6C63FF', bg: '#6C63FF15' }
+}
+
 // ── Main screen ───────────────────────────────────────────────────────────────
 export default function FNOScreen() {
   const [data, setData] = useState<FNOData | null>(null)
@@ -528,9 +554,11 @@ export default function FNOScreen() {
   const [activeIndex, setActiveIndex] = useState<'NIFTY' | 'BANKNIFTY'>('NIFTY')
   const [livePrice, setLivePrice] = useState<Record<'NIFTY' | 'BANKNIFTY', { price: number; change: number; changePct: number } | null>>({ NIFTY: null, BANKNIFTY: null })
   const [optionLTP, setOptionLTP] = useState<Record<'NIFTY' | 'BANKNIFTY', number | null>>({ NIFTY: null, BANKNIFTY: null })
+  const [simpleView, setSimpleView] = useState(false)
+  const timeBanner = getTimeBanner()
 
   async function loadTradeCount() {
-    const today = new Date().toISOString().slice(0, 10)
+    const today = getISTDateStr()
     const savedDate = await AsyncStorage.getItem(TRADE_DATE_KEY)
     if (savedDate !== today) {
       await AsyncStorage.setItem(TRADE_DATE_KEY, today)
@@ -650,17 +678,27 @@ export default function FNOScreen() {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6C63FF" colors={['#6C63FF']} />}
     >
-      {/* Index selector */}
-      <View style={s.indexToggle}>
-        {(['NIFTY', 'BANKNIFTY'] as const).map((idx) => (
-          <TouchableOpacity
-            key={idx}
-            style={[s.indexToggleBtn, activeIndex === idx && s.indexToggleBtnActive]}
-            onPress={() => setActiveIndex(idx)}
-          >
-            <Text style={[s.indexToggleText, activeIndex === idx && s.indexToggleTextActive]}>{idx}</Text>
-          </TouchableOpacity>
-        ))}
+      {/* Time-of-day banner */}
+      <View style={[s.timeBanner, { backgroundColor: timeBanner.bg }]}>
+        <Text style={[s.timeBannerText, { color: timeBanner.color }]}>{timeBanner.text}</Text>
+      </View>
+
+      {/* Index selector + Simple/Detailed toggle */}
+      <View style={s.topControlRow}>
+        <View style={s.indexToggle}>
+          {(['NIFTY', 'BANKNIFTY'] as const).map((idx) => (
+            <TouchableOpacity
+              key={idx}
+              style={[s.indexToggleBtn, activeIndex === idx && s.indexToggleBtnActive]}
+              onPress={() => setActiveIndex(idx)}
+            >
+              <Text style={[s.indexToggleText, activeIndex === idx && s.indexToggleTextActive]}>{idx}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <TouchableOpacity style={s.viewToggle} onPress={() => setSimpleView((v) => !v)}>
+          <Text style={s.viewToggleText}>{simpleView ? '📊 Detailed' : '📋 Simple'}</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Demo banner */}
@@ -689,10 +727,11 @@ export default function FNOScreen() {
         isLive={!!live}
         liveLTP={optionLTP[activeIndex]}
         liveIndexPrice={live?.price ?? null}
+        simpleView={simpleView}
       />
 
-      {/* OI Heatmap */}
-      {setup.oi_data?.length > 0 && (
+      {/* OI Heatmap — only in detailed view */}
+      {!simpleView && setup.oi_data?.length > 0 && (
         <OIHeatmap data={setup.oi_data} title={activeIndex} />
       )}
 
@@ -709,11 +748,16 @@ const s = StyleSheet.create({
   retryBtn: { backgroundColor: '#6C63FF', borderRadius: 10, paddingHorizontal: 24, paddingVertical: 12 },
   retryText: { color: '#FFFFFF', fontWeight: '700', fontSize: 15 },
 
-  indexToggle: { flexDirection: 'row', margin: 16, backgroundColor: '#13131A', borderRadius: 12, padding: 4, borderWidth: 1, borderColor: '#1E1E2E' },
+  timeBanner: { marginHorizontal: 16, marginTop: 12, marginBottom: 4, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 9 },
+  timeBannerText: { fontSize: 12, fontWeight: '700', textAlign: 'center' },
+  topControlRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 8, gap: 8 },
+  indexToggle: { flex: 1, flexDirection: 'row', backgroundColor: '#13131A', borderRadius: 12, padding: 4, borderWidth: 1, borderColor: '#1E1E2E' },
   indexToggleBtn: { flex: 1, paddingVertical: 10, alignItems: 'center', borderRadius: 10 },
   indexToggleBtnActive: { backgroundColor: '#6C63FF' },
   indexToggleText: { color: '#8B8FA8', fontWeight: '700', fontSize: 15 },
   indexToggleTextActive: { color: '#FFFFFF' },
+  viewToggle: { backgroundColor: '#1E1E2E', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 10, borderWidth: 1, borderColor: '#2A2A4A' },
+  viewToggleText: { color: '#6C63FF', fontSize: 12, fontWeight: '700' },
 
   demoBanner: { backgroundColor: '#FFD32A20', borderWidth: 1, borderColor: '#FFD32A40', marginHorizontal: 16, marginBottom: 10, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8 },
   demoBannerText: { color: '#FFD32A', fontSize: 12, fontWeight: '600', textAlign: 'center' },

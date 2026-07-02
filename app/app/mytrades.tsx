@@ -19,7 +19,7 @@ const VERDICT_CONFIG: Record<VerdictType, { color: string; bg: string; emoji: st
   HOLD:         { color: '#6C63FF', bg: '#6C63FF20', emoji: '🤝', label: 'HOLD' },
   EXIT:         { color: '#FF4757', bg: '#FF475720', emoji: '🚪', label: 'EXIT' },
   ADD_MORE:     { color: '#00C896', bg: '#00C89620', emoji: '➕', label: 'ADD MORE' },
-  PARTIAL_EXIT: { color: '#FFD32A', bg: '#FFD32A20', emoji: '📤', label: 'PARTIAL EXIT' },
+  PARTIAL_EXIT: { color: '#FFD32A', bg: '#FFD32A20', emoji: '📤', label: 'BOOK PARTIAL' },
 }
 
 interface PositionLiveData {
@@ -132,6 +132,14 @@ export default function MyTradesScreen() {
   const displayPnl = Object.keys(livePnlMap).length > 0 ? totalLivePnl : portfolioSummary.totalPnl
   const displayPnlPct = Object.keys(livePnlMap).length > 0 ? livePnlPct : portfolioSummary.totalPnlPct
   const pnlPositive = displayPnl >= 0
+
+  // Portfolio — sort positions: EXIT first, then PARTIAL_EXIT, HOLD, ADD_MORE, no verdict last
+  const VERDICT_SORT_ORDER: Record<VerdictType | 'NONE', number> = { EXIT: 0, PARTIAL_EXIT: 1, HOLD: 2, ADD_MORE: 3, NONE: 4 }
+  const sortedPositions = [...positions].sort((a, b) => {
+    const va = (liveDataMap[a.id]?.verdict?.verdict ?? 'NONE') as VerdictType | 'NONE'
+    const vb = (liveDataMap[b.id]?.verdict?.verdict ?? 'NONE') as VerdictType | 'NONE'
+    return (VERDICT_SORT_ORDER[va] ?? 4) - (VERDICT_SORT_ORDER[vb] ?? 4)
+  })
 
   // Portfolio summary
   const portfolioTotalInvested = positions.reduce((s, p) => s + p.entryPrice * p.quantity, 0)
@@ -278,18 +286,19 @@ export default function MyTradesScreen() {
               <Text style={s.emptySub}>Add stocks you own to track performance{'\n'}and get personalised verdicts</Text>
             </View>
           ) : (
-            positions.map((pos) => {
+            sortedPositions.map((pos) => {
               const live = liveDataMap[pos.id]
               const currentPrice = live?.price ?? pos.entryPrice
               const pnl = (currentPrice - pos.entryPrice) * pos.quantity
               const pnlPct = ((currentPrice - pos.entryPrice) / pos.entryPrice) * 100
               const invested = pos.entryPrice * pos.quantity
               const verdict = live?.verdict
+              const borderColor = verdict ? VERDICT_CONFIG[verdict.verdict].color : '#1E1E2E'
 
               return (
                 <TouchableOpacity
                   key={pos.id}
-                  style={[s.posCard, verdict && { borderColor: VERDICT_CONFIG[verdict.verdict].color + '40' }]}
+                  style={[s.posCard, { borderColor: borderColor + '50', borderLeftColor: borderColor, borderLeftWidth: 4 }]}
                   onPress={() => router.push(`/stock/${pos.symbol}?entry=${pos.entryPrice}&qty=${pos.quantity}` as any)}
                 >
                   <View style={s.posHeader}>
