@@ -134,6 +134,7 @@ function AppTabs() {
             <Tabs.Screen name="profile" options={{ href: null, headerShown: false, title: 'My Profile', tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="paywall" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="disclaimer" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
+            <Tabs.Screen name="onboarding" options={{ href: null, headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Tabs.Screen name="legal" options={{ href: null, headerShown: true, title: 'Legal & About', tabBarStyle: { display: 'none' } }} />
     </Tabs>
     <View style={miniStyles.footer}>
