@@ -1,374 +1,359 @@
 {
-  "timestamp": "2026-09-02T17:49:41+05:30",
+  "timestamp": "2026-09-03T13:26:42+05:30",
   "source": "upstox",
   "nifty": {
-    "current_level": 23914.45,
+    "current_level": 23908.55,
     "direction": "PUT",
-    "probability": 47,
+    "probability": 49,
     "demand_zone": {
       "low": 22950,
       "high": 23050
     },
     "supply_zone": {
-      "low": 24150,
-      "high": 24250
+      "low": 23950,
+      "high": 24050
     },
-    "stop_loss": 24300,
+    "stop_loss": 24100,
     "target": 23050,
     "suggested_strike": 23900,
     "strike_type": "ATM",
-    "iv_rank": 0,
+    "iv_rank": 1,
     "iv_label": "CHEAP",
-    "pcr": 0.73,
+    "pcr": 0.66,
     "pcr_label": "BEARISH",
-    "max_pain": 24000,
+    "max_pain": 23950,
     "nearest_expiry": "08-SEP-2026",
     "time_window": "GOOD",
-    "zone_strength": 68,
+    "zone_strength": 70,
     "psychology_signals": [],
-    "timeframe_alignment": 44,
-    "oi_analysis": "Max CALL OI at 24,200 (resistance). Max PUT OI at 23,000 (support). PCR 0.73 \u2014 heavy CALL writing, bearish bias. Max Pain: 24,000",
+    "timeframe_alignment": 47,
+    "oi_analysis": "Max CALL OI at 24,000 (resistance). Max PUT OI at 23,000 (support). PCR 0.66 \u2014 heavy CALL writing, bearish bias. Max Pain: 23,950",
     "change": 0.0,
     "change_pct": 0.0,
     "oi_data": [
       {
         "strike": 22500,
         "calls_oi": 15925,
-        "puts_oi": 4819230
+        "puts_oi": 5706090
       },
       {
         "strike": 22550,
         "calls_oi": 0,
-        "puts_oi": 192270
+        "puts_oi": 244400
       },
       {
         "strike": 22600,
         "calls_oi": 0,
-        "puts_oi": 1095705
+        "puts_oi": 1372475
       },
       {
         "strike": 22650,
         "calls_oi": 0,
-        "puts_oi": 187980
+        "puts_oi": 312520
       },
       {
         "strike": 22700,
         "calls_oi": 0,
-        "puts_oi": 1395225
+        "puts_oi": 1726335
       },
       {
         "strike": 22750,
         "calls_oi": 0,
-        "puts_oi": 388570
+        "puts_oi": 367575
       },
       {
         "strike": 22800,
         "calls_oi": 0,
-        "puts_oi": 2332460
+        "puts_oi": 2235025
       },
       {
         "strike": 22850,
         "calls_oi": 0,
-        "puts_oi": 501345
+        "puts_oi": 394030
       },
       {
         "strike": 22900,
         "calls_oi": 65,
-        "puts_oi": 1295775
+        "puts_oi": 1943825
       },
       {
         "strike": 22950,
         "calls_oi": 65,
-        "puts_oi": 613015
+        "puts_oi": 719030
       },
       {
         "strike": 23000,
-        "calls_oi": 78845,
-        "puts_oi": 8341515
+        "calls_oi": 77610,
+        "puts_oi": 10043410
       },
       {
         "strike": 23050,
         "calls_oi": 0,
-        "puts_oi": 898885
+        "puts_oi": 765895
       },
       {
         "strike": 23100,
-        "calls_oi": 4810,
-        "puts_oi": 2180815
+        "calls_oi": 4225,
+        "puts_oi": 2535585
       },
       {
         "strike": 23150,
         "calls_oi": 715,
-        "puts_oi": 790660
+        "puts_oi": 1189695
       },
       {
         "strike": 23200,
-        "calls_oi": 17940,
-        "puts_oi": 3387930
+        "calls_oi": 17030,
+        "puts_oi": 3848715
       },
       {
         "strike": 23250,
         "calls_oi": 0,
-        "puts_oi": 1088880
+        "puts_oi": 1671670
       },
       {
         "strike": 23300,
-        "calls_oi": 31980,
-        "puts_oi": 3239210
+        "calls_oi": 28925,
+        "puts_oi": 3380325
       },
       {
         "strike": 23350,
-        "calls_oi": 7085,
-        "puts_oi": 1959750
+        "calls_oi": 7670,
+        "puts_oi": 1729910
       },
       {
         "strike": 23400,
-        "calls_oi": 65650,
-        "puts_oi": 3402100
+        "calls_oi": 63245,
+        "puts_oi": 4171570
       },
       {
         "strike": 23450,
-        "calls_oi": 44330,
-        "puts_oi": 2015455
+        "calls_oi": 42640,
+        "puts_oi": 2272335
       },
       {
         "strike": 23500,
-        "calls_oi": 388310,
-        "puts_oi": 7814300
+        "calls_oi": 423930,
+        "puts_oi": 9579440
       },
       {
         "strike": 23550,
-        "calls_oi": 55640,
-        "puts_oi": 1313455
+        "calls_oi": 47710,
+        "puts_oi": 2109380
       },
       {
         "strike": 23600,
-        "calls_oi": 310050,
-        "puts_oi": 6828510
+        "calls_oi": 302965,
+        "puts_oi": 7803185
       },
       {
         "strike": 23650,
-        "calls_oi": 116155,
-        "puts_oi": 1758835
+        "calls_oi": 137150,
+        "puts_oi": 2892890
       },
       {
         "strike": 23700,
-        "calls_oi": 487175,
-        "puts_oi": 4480710
+        "calls_oi": 657345,
+        "puts_oi": 5771350
       },
       {
         "strike": 23750,
-        "calls_oi": 384800,
-        "puts_oi": 2499705
+        "calls_oi": 441935,
+        "puts_oi": 3237260
       },
       {
         "strike": 23800,
-        "calls_oi": 2687295,
-        "puts_oi": 7894510
+        "calls_oi": 3193710,
+        "puts_oi": 8311810
       },
       {
         "strike": 23850,
-        "calls_oi": 2169895,
-        "puts_oi": 3821025
+        "calls_oi": 1803490,
+        "puts_oi": 4799210
       },
       {
         "strike": 23900,
-        "calls_oi": 6284070,
-        "puts_oi": 5951140
+        "calls_oi": 8209045,
+        "puts_oi": 8724625
       },
       {
         "strike": 23950,
-        "calls_oi": 2452580,
-        "puts_oi": 1240720
+        "calls_oi": 8393710,
+        "puts_oi": 4581395
       },
       {
         "strike": 24000,
-        "calls_oi": 8949655,
-        "puts_oi": 4370535
+        "calls_oi": 22163505,
+        "puts_oi": 9829040
       },
       {
         "strike": 24050,
-        "calls_oi": 3937310,
-        "puts_oi": 654160
+        "calls_oi": 8430240,
+        "puts_oi": 1816490
       },
       {
         "strike": 24100,
-        "calls_oi": 8057075,
-        "puts_oi": 2537340
+        "calls_oi": 12465505,
+        "puts_oi": 3631680
       },
       {
         "strike": 24150,
-        "calls_oi": 4429295,
-        "puts_oi": 560235
+        "calls_oi": 7719855,
+        "puts_oi": 838955
       },
       {
         "strike": 24200,
-        "calls_oi": 10137075,
-        "puts_oi": 2760290
+        "calls_oi": 13697905,
+        "puts_oi": 2786160
       },
       {
         "strike": 24250,
-        "calls_oi": 4141475,
-        "puts_oi": 504140
+        "calls_oi": 4998630,
+        "puts_oi": 514410
       },
       {
         "strike": 24300,
-        "calls_oi": 7442240,
-        "puts_oi": 1259180
+        "calls_oi": 9100455,
+        "puts_oi": 1191255
       },
       {
         "strike": 24350,
-        "calls_oi": 2770560,
-        "puts_oi": 183170
+        "calls_oi": 4296305,
+        "puts_oi": 192140
       },
       {
         "strike": 24400,
-        "calls_oi": 6030960,
-        "puts_oi": 546520
+        "calls_oi": 7790185,
+        "puts_oi": 561860
       },
       {
         "strike": 24450,
-        "calls_oi": 2818855,
-        "puts_oi": 91715
+        "calls_oi": 3683745,
+        "puts_oi": 86515
       },
       {
         "strike": 24500,
-        "calls_oi": 7680660,
-        "puts_oi": 953875
+        "calls_oi": 9455680,
+        "puts_oi": 977275
       },
       {
         "strike": 24550,
-        "calls_oi": 1418755,
-        "puts_oi": 64545
+        "calls_oi": 2795975,
+        "puts_oi": 58825
       },
       {
         "strike": 24600,
-        "calls_oi": 5309785,
-        "puts_oi": 257725
+        "calls_oi": 6791590,
+        "puts_oi": 259090
       },
       {
         "strike": 24650,
-        "calls_oi": 1284140,
-        "puts_oi": 40235
+        "calls_oi": 2396095,
+        "puts_oi": 39715
       },
       {
         "strike": 24700,
-        "calls_oi": 5458180,
-        "puts_oi": 132275
+        "calls_oi": 5183880,
+        "puts_oi": 130195
       },
       {
         "strike": 24750,
-        "calls_oi": 1412905,
-        "puts_oi": 14430
+        "calls_oi": 1820260,
+        "puts_oi": 14300
       },
       {
         "strike": 24800,
-        "calls_oi": 6024395,
-        "puts_oi": 84825
+        "calls_oi": 6481865,
+        "puts_oi": 84695
       },
       {
         "strike": 24850,
-        "calls_oi": 1044615,
-        "puts_oi": 2925
+        "calls_oi": 1214135,
+        "puts_oi": 2535
       },
       {
         "strike": 24900,
-        "calls_oi": 2638545,
-        "puts_oi": 27365
+        "calls_oi": 3013400,
+        "puts_oi": 27495
       },
       {
         "strike": 24950,
-        "calls_oi": 663780,
+        "calls_oi": 742625,
         "puts_oi": 1235
       },
       {
         "strike": 25000,
-        "calls_oi": 9124895,
-        "puts_oi": 217620
+        "calls_oi": 14410695,
+        "puts_oi": 212680
       },
       {
         "strike": 25050,
-        "calls_oi": 971555,
+        "calls_oi": 1007435,
         "puts_oi": 780
       },
       {
         "strike": 25100,
-        "calls_oi": 2694510,
-        "puts_oi": 15860
+        "calls_oi": 3599050,
+        "puts_oi": 16380
       },
       {
         "strike": 25150,
-        "calls_oi": 460265,
-        "puts_oi": 650
+        "calls_oi": 533845,
+        "puts_oi": 780
       },
       {
         "strike": 25200,
-        "calls_oi": 3787680,
-        "puts_oi": 15405
+        "calls_oi": 4297475,
+        "puts_oi": 15015
       },
       {
         "strike": 25250,
-        "calls_oi": 286780,
+        "calls_oi": 337285,
         "puts_oi": 65
       },
       {
         "strike": 25300,
-        "calls_oi": 3196310,
+        "calls_oi": 3768180,
         "puts_oi": 2210
       }
     ],
-    "orb_status": "FALSE_BREAKOUT",
-    "orb_message": "False breakout detected \u2014 watching for liquidity sweep",
-    "orb_high": 23882.95,
-    "orb_low": 23786.8,
+    "orb_status": "INSIDE_RANGE",
+    "orb_message": "Market range-bound \u2014 no breakout yet, avoid buying options",
+    "orb_high": 24025.4,
+    "orb_low": 23955.35,
     "signal": null,
-    "first_seen": "2026-09-02T13:18:18+05:30"
+    "first_seen": "2026-09-03T13:26:42+05:30"
   },
   "banknifty": {
-    "current_level": 57172.0,
+    "current_level": 57509.6,
     "direction": "CALL",
     "probability": 45,
     "demand_zone": {
-      "low": 56900,
-      "high": 57100
-    },
-    "supply_zone": {
       "low": 57400,
       "high": 57600
     },
-    "stop_loss": 56800,
-    "target": 57400,
-    "suggested_strike": 57200,
+    "supply_zone": {
+      "low": 57900,
+      "high": 58100
+    },
+    "stop_loss": 57300,
+    "target": 57900,
+    "suggested_strike": 57500,
     "strike_type": "ATM",
-    "iv_rank": 5,
+    "iv_rank": 4,
     "iv_label": "CHEAP",
     "pcr": 1.06,
     "pcr_label": "BULLISH",
-    "max_pain": 57500,
+    "max_pain": 57600,
     "nearest_expiry": "29-SEP-2026",
     "time_window": "GOOD",
     "zone_strength": 61,
     "psychology_signals": [],
     "timeframe_alignment": 37,
-    "oi_analysis": "Max CALL OI at 57,500 (resistance). Max PUT OI at 57,500 (support). PCR 1.06 \u2014 neutral, watch price action. Max Pain: 57,500",
+    "oi_analysis": "Max CALL OI at 57,500 (resistance). Max PUT OI at 57,500 (support). PCR 1.06 \u2014 neutral, watch price action. Max Pain: 57,600",
     "change": 0.0,
     "change_pct": 0.0,
     "oi_data": [
-      {
-        "strike": 53800,
-        "calls_oi": 0,
-        "puts_oi": 0
-      },
-      {
-        "strike": 53900,
-        "calls_oi": 0,
-        "puts_oi": 0
-      },
-      {
-        "strike": 54000,
-        "calls_oi": 62850,
-        "puts_oi": 605340
-      },
       {
         "strike": 54100,
         "calls_oi": 0,
@@ -387,324 +372,339 @@
       {
         "strike": 54400,
         "calls_oi": 0,
-        "puts_oi": 61290
+        "puts_oi": 54630
       },
       {
         "strike": 54500,
         "calls_oi": 4200,
-        "puts_oi": 244680
+        "puts_oi": 233550
       },
       {
         "strike": 54600,
-        "calls_oi": 0,
-        "puts_oi": 11970
+        "calls_oi": 30,
+        "puts_oi": 17310
       },
       {
         "strike": 54700,
         "calls_oi": 0,
-        "puts_oi": 9480
+        "puts_oi": 11160
       },
       {
         "strike": 54800,
         "calls_oi": 0,
-        "puts_oi": 69870
+        "puts_oi": 45360
       },
       {
         "strike": 54900,
         "calls_oi": 0,
-        "puts_oi": 0
+        "puts_oi": 1290
       },
       {
         "strike": 55000,
-        "calls_oi": 61980,
-        "puts_oi": 696480
+        "calls_oi": 79710,
+        "puts_oi": 570240
       },
       {
         "strike": 55100,
         "calls_oi": 330,
-        "puts_oi": 11730
+        "puts_oi": 10380
       },
       {
         "strike": 55200,
         "calls_oi": 0,
-        "puts_oi": 93090
+        "puts_oi": 119760
       },
       {
         "strike": 55300,
         "calls_oi": 0,
-        "puts_oi": 14310
+        "puts_oi": 20670
       },
       {
         "strike": 55400,
         "calls_oi": 30,
-        "puts_oi": 43230
+        "puts_oi": 58500
       },
       {
         "strike": 55500,
-        "calls_oi": 15210,
-        "puts_oi": 523020
+        "calls_oi": 15060,
+        "puts_oi": 434220
       },
       {
         "strike": 55600,
         "calls_oi": 0,
-        "puts_oi": 18540
+        "puts_oi": 30030
       },
       {
         "strike": 55700,
         "calls_oi": 390,
-        "puts_oi": 29820
+        "puts_oi": 28590
       },
       {
         "strike": 55800,
         "calls_oi": 750,
-        "puts_oi": 90720
+        "puts_oi": 82650
       },
       {
         "strike": 55900,
-        "calls_oi": 420,
-        "puts_oi": 31380
+        "calls_oi": 450,
+        "puts_oi": 31080
       },
       {
         "strike": 56000,
-        "calls_oi": 63900,
-        "puts_oi": 715800
+        "calls_oi": 62430,
+        "puts_oi": 729510
       },
       {
         "strike": 56100,
-        "calls_oi": 1110,
-        "puts_oi": 26820
+        "calls_oi": 1650,
+        "puts_oi": 28470
       },
       {
         "strike": 56200,
-        "calls_oi": 3000,
-        "puts_oi": 63840
+        "calls_oi": 3360,
+        "puts_oi": 66090
       },
       {
         "strike": 56300,
-        "calls_oi": 1440,
-        "puts_oi": 41370
+        "calls_oi": 2580,
+        "puts_oi": 50100
       },
       {
         "strike": 56400,
-        "calls_oi": 3060,
-        "puts_oi": 53280
+        "calls_oi": 3210,
+        "puts_oi": 59730
       },
       {
         "strike": 56500,
-        "calls_oi": 68160,
-        "puts_oi": 486510
+        "calls_oi": 57690,
+        "puts_oi": 506070
       },
       {
         "strike": 56600,
-        "calls_oi": 5220,
-        "puts_oi": 61590
+        "calls_oi": 4260,
+        "puts_oi": 51870
       },
       {
         "strike": 56700,
-        "calls_oi": 25830,
-        "puts_oi": 63210
+        "calls_oi": 89100,
+        "puts_oi": 67350
       },
       {
         "strike": 56800,
-        "calls_oi": 15270,
-        "puts_oi": 85740
+        "calls_oi": 13230,
+        "puts_oi": 90840
       },
       {
         "strike": 56900,
-        "calls_oi": 30930,
-        "puts_oi": 108600
+        "calls_oi": 23610,
+        "puts_oi": 97290
       },
       {
         "strike": 57000,
-        "calls_oi": 388620,
-        "puts_oi": 951150
+        "calls_oi": 314850,
+        "puts_oi": 830610
       },
       {
         "strike": 57100,
-        "calls_oi": 79140,
-        "puts_oi": 104730
+        "calls_oi": 51540,
+        "puts_oi": 89610
       },
       {
         "strike": 57200,
-        "calls_oi": 149850,
-        "puts_oi": 206400
+        "calls_oi": 89220,
+        "puts_oi": 195000
       },
       {
         "strike": 57300,
-        "calls_oi": 147600,
-        "puts_oi": 331230
+        "calls_oi": 107010,
+        "puts_oi": 329850
       },
       {
         "strike": 57400,
-        "calls_oi": 181740,
-        "puts_oi": 278010
+        "calls_oi": 123030,
+        "puts_oi": 289200
       },
       {
         "strike": 57500,
-        "calls_oi": 1954770,
-        "puts_oi": 1935360
+        "calls_oi": 1942800,
+        "puts_oi": 1921110
       },
       {
         "strike": 57600,
-        "calls_oi": 251940,
-        "puts_oi": 147540
+        "calls_oi": 279990,
+        "puts_oi": 174330
       },
       {
         "strike": 57700,
-        "calls_oi": 307470,
-        "puts_oi": 198270
+        "calls_oi": 325350,
+        "puts_oi": 201240
       },
       {
         "strike": 57800,
-        "calls_oi": 279540,
-        "puts_oi": 203340
+        "calls_oi": 298020,
+        "puts_oi": 209220
       },
       {
         "strike": 57900,
-        "calls_oi": 210570,
-        "puts_oi": 139050
+        "calls_oi": 202920,
+        "puts_oi": 182040
       },
       {
         "strike": 58000,
-        "calls_oi": 1345080,
-        "puts_oi": 954330
+        "calls_oi": 1327500,
+        "puts_oi": 1067910
       },
       {
         "strike": 58100,
-        "calls_oi": 126690,
-        "puts_oi": 59670
+        "calls_oi": 125370,
+        "puts_oi": 79620
       },
       {
         "strike": 58200,
-        "calls_oi": 125820,
-        "puts_oi": 76980
+        "calls_oi": 139770,
+        "puts_oi": 93090
       },
       {
         "strike": 58300,
-        "calls_oi": 150240,
-        "puts_oi": 53850
+        "calls_oi": 163020,
+        "puts_oi": 124560
       },
       {
         "strike": 58400,
-        "calls_oi": 100800,
-        "puts_oi": 31230
+        "calls_oi": 115470,
+        "puts_oi": 38460
       },
       {
         "strike": 58500,
-        "calls_oi": 622230,
-        "puts_oi": 248580
+        "calls_oi": 688740,
+        "puts_oi": 238410
       },
       {
         "strike": 58600,
-        "calls_oi": 80400,
-        "puts_oi": 32400
+        "calls_oi": 86700,
+        "puts_oi": 29460
       },
       {
         "strike": 58700,
-        "calls_oi": 57570,
-        "puts_oi": 11550
+        "calls_oi": 67350,
+        "puts_oi": 10470
       },
       {
         "strike": 58800,
-        "calls_oi": 120300,
-        "puts_oi": 23040
+        "calls_oi": 129450,
+        "puts_oi": 15480
       },
       {
         "strike": 58900,
-        "calls_oi": 51300,
-        "puts_oi": 16950
+        "calls_oi": 55590,
+        "puts_oi": 16290
       },
       {
         "strike": 59000,
-        "calls_oi": 948030,
-        "puts_oi": 280290
+        "calls_oi": 931710,
+        "puts_oi": 272970
       },
       {
         "strike": 59100,
-        "calls_oi": 32940,
-        "puts_oi": 3780
+        "calls_oi": 38670,
+        "puts_oi": 4200
       },
       {
         "strike": 59200,
-        "calls_oi": 73230,
-        "puts_oi": 1500
+        "calls_oi": 76470,
+        "puts_oi": 1620
       },
       {
         "strike": 59300,
-        "calls_oi": 32850,
+        "calls_oi": 41070,
         "puts_oi": 1140
       },
       {
         "strike": 59400,
-        "calls_oi": 37980,
-        "puts_oi": 3660
+        "calls_oi": 36480,
+        "puts_oi": 3540
       },
       {
         "strike": 59500,
-        "calls_oi": 525750,
-        "puts_oi": 38490
+        "calls_oi": 512160,
+        "puts_oi": 37050
       },
       {
         "strike": 59600,
-        "calls_oi": 49320,
-        "puts_oi": 120
+        "calls_oi": 50460,
+        "puts_oi": 420
       },
       {
         "strike": 59700,
-        "calls_oi": 37620,
+        "calls_oi": 35850,
         "puts_oi": 450
       },
       {
         "strike": 59800,
-        "calls_oi": 168750,
+        "calls_oi": 187320,
         "puts_oi": 210
       },
       {
         "strike": 59900,
-        "calls_oi": 46440,
+        "calls_oi": 44010,
         "puts_oi": 540
       },
       {
         "strike": 60000,
-        "calls_oi": 966810,
-        "puts_oi": 346500
+        "calls_oi": 941460,
+        "puts_oi": 338880
       },
       {
         "strike": 60100,
-        "calls_oi": 32310,
+        "calls_oi": 35400,
         "puts_oi": 270
       },
       {
         "strike": 60200,
-        "calls_oi": 17970,
+        "calls_oi": 20550,
         "puts_oi": 210
       },
       {
         "strike": 60300,
-        "calls_oi": 16860,
+        "calls_oi": 14010,
         "puts_oi": 0
       },
       {
         "strike": 60400,
-        "calls_oi": 40140,
+        "calls_oi": 40320,
         "puts_oi": 0
       },
       {
         "strike": 60500,
-        "calls_oi": 407400,
-        "puts_oi": 9540
+        "calls_oi": 412320,
+        "puts_oi": 9570
       },
       {
         "strike": 60600,
         "calls_oi": 0,
         "puts_oi": 0
+      },
+      {
+        "strike": 60700,
+        "calls_oi": 10260,
+        "puts_oi": 0
+      },
+      {
+        "strike": 60800,
+        "calls_oi": 0,
+        "puts_oi": 0
+      },
+      {
+        "strike": 60900,
+        "calls_oi": 0,
+        "puts_oi": 0
       }
     ],
-    "orb_status": "FALSE_BREAKOUT",
-    "orb_message": "False breakout detected \u2014 watching for liquidity sweep",
-    "orb_high": 57128.6,
-    "orb_low": 56823.2,
+    "orb_status": "INSIDE_RANGE",
+    "orb_message": "Market range-bound \u2014 no breakout yet, avoid buying options",
+    "orb_high": 57753.6,
+    "orb_low": 57467.05,
     "signal": null,
-    "first_seen": "2026-09-02T13:18:18+05:30"
+    "first_seen": "2026-09-03T13:26:42+05:30"
   }
 }
