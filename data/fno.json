@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-01T22:29:48+05:30",
+  "timestamp": "2026-10-02T15:04:46+05:30",
   "source": "upstox",
   "nifty": {
     "current_level": 22421.95,
@@ -302,12 +302,12 @@
         "puts_oi": 4420
       }
     ],
-    "orb_status": "INSIDE_RANGE",
-    "orb_message": "Market range-bound \u2014 no breakout yet, avoid buying options",
-    "orb_high": 22610.6,
-    "orb_low": 22508.05,
+    "orb_status": "FORMING",
+    "orb_message": "Opening range forming \u2014 wait till 10:15 AM",
+    "orb_high": null,
+    "orb_low": null,
     "signal": null,
-    "first_seen": "2026-10-01T15:28:43+05:30"
+    "first_seen": "2026-10-02T15:04:46+05:30"
   },
   "banknifty": {
     "current_level": 54450.75,
@@ -670,11 +670,11 @@
         "puts_oi": 2820
       }
     ],
-    "orb_status": "CHOPPY",
-    "orb_message": "Both sides swept \u2014 market choppy, avoid options buying",
-    "orb_high": 54985.25,
-    "orb_low": 54555.1,
+    "orb_status": "FORMING",
+    "orb_message": "Opening range forming \u2014 wait till 10:15 AM",
+    "orb_high": null,
+    "orb_low": null,
     "signal": null,
-    "first_seen": "2026-10-01T15:28:43+05:30"
+    "first_seen": "2026-10-02T15:04:46+05:30"
   }
 }
