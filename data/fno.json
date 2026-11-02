@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-11-02T16:19:48+05:30",
+  "timestamp": "2026-11-03T02:05:01+05:30",
   "source": "upstox",
   "nifty": {
     "current_level": 23440.8,
     "direction": "CALL",
-    "probability": 72,
+    "probability": 57,
     "demand_zone": {
       "low": 22950,
       "high": 23050
@@ -312,26 +312,12 @@
         "puts_oi": 2340
       }
     ],
-    "orb_status": "LIQUIDITY_SWEEP",
-    "orb_message": "Liquidity Sweep \u2014 Strong Signal",
-    "orb_high": 23330.7,
-    "orb_low": 23211.8,
-    "signal": {
-      "option_name": "NIFTY 23450 CE",
-      "action": "BUY CALL",
-      "expiry": "03-NOV-2026",
-      "lot_size": 75,
-      "premium": 34.2,
-      "entry_low": 32.5,
-      "entry_high": 35.9,
-      "sl": 23.9,
-      "target": 54.7,
-      "risk_per_lot": 773,
-      "reward_per_lot": 1538,
-      "rr_ratio": "1:2",
-      "signal_type": "Liquidity Sweep \u2014 Strong Signal"
-    },
-    "first_seen": "2026-11-02T16:19:48+05:30"
+    "orb_status": "FORMING",
+    "orb_message": "Opening range forming \u2014 wait till 10:15 AM",
+    "orb_high": null,
+    "orb_low": null,
+    "signal": null,
+    "first_seen": "2026-11-03T02:05:01+05:30"
   },
   "banknifty": {
     "current_level": 55002.2,
@@ -694,11 +680,11 @@
         "puts_oi": 1770
       }
     ],
-    "orb_status": "FALSE_BREAKOUT",
-    "orb_message": "False breakout detected \u2014 watching for liquidity sweep",
-    "orb_high": 55046.35,
-    "orb_low": 54834.85,
+    "orb_status": "FORMING",
+    "orb_message": "Opening range forming \u2014 wait till 10:15 AM",
+    "orb_high": null,
+    "orb_low": null,
     "signal": null,
-    "first_seen": "2026-11-02T16:19:48+05:30"
+    "first_seen": "2026-11-03T02:05:01+05:30"
   }
 }
